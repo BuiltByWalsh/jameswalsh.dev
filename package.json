@@ -97,7 +97,7 @@
     "remark-gfm": "^3.0.1",
     "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.3.3",
+    "typescript": "5.7.2",
     "vite-tsconfig-paths": "^5.1.2",
     "vitest": "^2.1.3"
   }
