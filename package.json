@@ -89,7 +89,7 @@
     "husky": "^8.0.3",
     "postcss": "^8.4.38",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.6",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "rehype": "^13.0.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-pretty-code": "^0.10.2",
