@@ -19,7 +19,7 @@ jobs:
           version: 9.10.0 # match package.json:packageManager version.
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: 'pnpm'
       - run: pnpm i --frozen-lockfile
       - run: pnpm test:unit:ci
