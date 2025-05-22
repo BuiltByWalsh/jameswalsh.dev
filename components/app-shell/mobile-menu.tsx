@@ -34,7 +34,7 @@ export function MobileMenu() {
     <Sheet>
       <SheetTrigger asChild>
         <Menu
-          className="absolute right-0 mb-4 mr-6 mt-6 h-10 w-10 cursor-pointer md:hidden"
+          className="absolute right-0 mt-6 mr-6 mb-4 h-10 w-10 cursor-pointer md:hidden"
           data-testid="mobile-menu-trigger"
         />
       </SheetTrigger>

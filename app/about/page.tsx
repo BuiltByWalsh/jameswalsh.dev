@@ -23,18 +23,18 @@ export default function AboutPage() {
       <div className="mt-8 grid grid-cols-12 gap-10">
         <div className="col-span-12 flex flex-col justify-start md:col-span-7">
           <TypographyH1>
-            <span className="inline-block bg-gradient-to-r from-primary via-fuchsia-600 to-red-400 bg-clip-text text-5xl text-transparent">
+            <span className="from-primary inline-block bg-linear-to-r via-fuchsia-600 to-red-400 bg-clip-text text-5xl text-transparent">
               Hey 👋🏻
             </span>
             &nbsp;I&apos;m James
           </TypographyH1>
-          <TypographyP className="my-3 break-normal text-xl">
+          <TypographyP className="my-3 text-xl break-normal">
             I live in Utah where I write software & enjoy the outdoors.
           </TypographyP>
-          <TypographyP className="my-3 break-normal text-xl">
+          <TypographyP className="my-3 text-xl break-normal">
             In my free-time I love tinkering with home automations, riding my mountain bike & playing video games.
           </TypographyP>
-          <TypographyP className="my-3 break-normal text-xl">
+          <TypographyP className="my-3 text-xl break-normal">
             I&apos;m a coffee nut. From Espresso, French-Press, to Pour Over, some of my favorite moments in life are
             looking out at a crisp morning with a hot cup in my hand.
           </TypographyP>
@@ -44,7 +44,7 @@ export default function AboutPage() {
           alt="Picture of James Side Profile"
           width={416}
           height={416}
-          className="col-span-12 mb-8 mr-auto rounded-lg shadow-xl md:col-span-5 md:rotate-3"
+          className="col-span-12 mr-auto mb-8 rounded-lg shadow-xl md:col-span-5 md:rotate-3"
           priority
         />
         <section className="col-span-12 flex flex-col gap-8 md:col-span-7">

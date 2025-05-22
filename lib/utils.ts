@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from 'clsx'
+import { clsx, type ClassValue } from 'clsx'
 import { isFuture } from 'date-fns'
 import { twMerge } from 'tailwind-merge'
 
