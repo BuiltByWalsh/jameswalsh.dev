@@ -25,6 +25,6 @@ describe('components/app-shell/footer', () => {
   it('displays copyright timestamp', () => {
     render(<Footer />)
 
-    expect(screen.getByText(/© 2024 James Walsh/i)).toBeInTheDocument()
+    expect(screen.getByText(/© 2025 James Walsh/i)).toBeInTheDocument()
   })
 })
