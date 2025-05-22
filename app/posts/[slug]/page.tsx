@@ -24,8 +24,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export const generateMetadata = async ({ params }: { params: { slug: string } }): Promise<Metadata> => {
-  const post = await fetchPostBySlug(params.slug)
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
 
   return {
     title: post.title,
@@ -46,13 +47,10 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
   }
 }
 
-export interface PostPageProps {
-  params: { slug: string }
-}
-
-export default async function PostPage({ params }: PostPageProps) {
-  const post = await fetchPostBySlug(params.slug)
-  const previousPost = await fetchPreviousPost(params.slug)
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await fetchPostBySlug(slug)
+  const previousPost = await fetchPreviousPost(slug)
 
   return (
     <div className="py-10">
