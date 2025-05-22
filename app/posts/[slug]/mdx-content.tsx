@@ -5,7 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import { HighlighterOptions, getHighlighter } from 'shiki'
+import { HighlighterCoreOptions, getSingletonHighlighter } from 'shiki'
 
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyBlockquote, TypographyH1, TypographyH2, TypographyH3, TypographyP } from '@/components/ui/typography'
@@ -47,8 +47,8 @@ const options: MDXRemoteProps['options'] = {
         {
           theme: 'one-dark-pro',
           keepBackground: false,
-          getHighlighter: (options: HighlighterOptions) => {
-            return getHighlighter({
+          getHighlighter: (options: HighlighterCoreOptions) => {
+            return getSingletonHighlighter({
               ...options,
               themes: ['one-dark-pro'],
               langs: ['js', 'ts', 'jsx', 'tsx', 'json', 'json5', 'shell', 'bash', 'astro', 'markdown'],
