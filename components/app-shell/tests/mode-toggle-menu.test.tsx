@@ -1,4 +1,4 @@
-import { render, screen, waitFor, act } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { useTheme } from 'next-themes'
 
@@ -8,6 +8,7 @@ const mockSetTheme = vi.fn()
 
 vi.mock('next-themes', () => ({
   useTheme: vi.fn(),
+  setTheme: vi.fn(),
 }))
 
 describe('components/app-shell/ModeToggleMenu', () => {
@@ -48,7 +49,7 @@ describe('components/app-shell/ModeToggleMenu', () => {
       screen.getByRole('menu')
     })
 
-    await act(async () => await user.click(screen.getByRole('menuitem', { name: input })))
+    await user.click(screen.getByRole('menuitem', { name: input }))
 
     expect(mockSetTheme).toHaveBeenCalledOnce()
     expect(mockSetTheme).toHaveBeenCalledWith(expected)
