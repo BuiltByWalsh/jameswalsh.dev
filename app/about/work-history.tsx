@@ -18,12 +18,27 @@ export interface CVItem {
 export const cvItems: CVItem[] = [
   {
     image: (
+      <Image
+        src="/logos/employers/schoolai.jpg"
+        width={32}
+        height={32}
+        alt="SchoolAI company logo"
+        className="rounded-full"
+      />
+    ),
+    company: 'SchoolAI',
+    role: 'Senior Software Engineer',
+    startDate: '2025',
+    endDate: 'Present',
+  },
+  {
+    image: (
       <Image src="/logos/employers/tomo.webp" width={32} height={32} alt="Tomo company logo" className="rounded-full" />
     ),
     company: 'Tomo',
     role: 'Senior Software Engineer',
     startDate: '2024',
-    endDate: 'Present',
+    endDate: '2024',
   },
   {
     image: (

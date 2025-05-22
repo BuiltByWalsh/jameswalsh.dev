@@ -2,6 +2,24 @@ import { Project } from './types'
 
 export const projectsCollection: Project[] = [
   {
+    title: 'SchoolAI Chrome Extension',
+    description: `One of the founding team members behind SchoolAI's chrome Extension. Seamlessly integrates with your browser, meeting educators where they are.`,
+    externalLink: {
+      title: 'schoolai.com/chrome-extension',
+      href: 'https://schoolai.com/chrome-extension',
+    },
+    imageLink: '/logos/employers/schoolai.jpg',
+  },
+  {
+    title: 'Tomo TrueRate',
+    description: `Early stage contributor to what would become TrueRate. TrueRate helps you compare lenders with numbers that speak for themselves.`,
+    externalLink: {
+      title: 'tomo.com/mortgage',
+      href: 'https://tomo.com/mortgage/interest-rates-today',
+    },
+    imageLink: '/logos/employers/tomo.webp',
+  },
+  {
     title: 'Vasion Automate',
     description: `Integrating workflow, form capture, signature, & content management within 1 single SaaS solution powered by Single SPA & TurboRepo.`,
     externalLink: {
@@ -11,28 +29,19 @@ export const projectsCollection: Project[] = [
     imageLink: '/logos/employers/vasion.webp',
   },
   {
-    title: 'Brickyard',
+    title: 'Podium Design System',
     description: `Beautiful, composable, fully accessible React Design System with theming & dark mode support. Publicly available with Storybook.`,
     externalLink: {
-      title: 'Brickyard Design System',
+      title: 'brickyarddesign.com',
       href: 'https://brickyarddesign.com',
     },
     imageLink: '/logos/employers/podium.webp',
   },
   {
-    title: 'Advanced Analytics',
-    description: `Leverage real-time stream processing to power data analytics that help development teams track DORA & flow metrics.`,
+    title: 'Pluralsight Channels',
+    description: `Organize content to meet your goals. For team development or to share learning journeys with the world.`,
     externalLink: {
-      title: 'Pluralsight Advanced Analytics',
-      href: 'https://www.pluralsight.com/product/advanced-analytics',
-    },
-    imageLink: '/logos/employers/pluralsight.webp',
-  },
-  {
-    title: 'Channels',
-    description: `Create channels to curate content for your own learning, for team development or to share learning journeys with the world.`,
-    externalLink: {
-      title: 'Pluralsight Channels',
+      title: 'pluralsight.com',
       href: 'https://www.pluralsight.com/product/channels',
     },
     imageLink: '/logos/employers/pluralsight.webp',
