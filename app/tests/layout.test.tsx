@@ -31,12 +31,6 @@ const TestComponent = () => {
 }
 
 describe('RootLayout', () => {
-  beforeAll(() => {
-    // ? NOTE: This is here because of `validateDOMNesting` warnings that come from testing layout.tsx files. @see https://github.com/testing-library/react-testing-library/issues/1250.
-    // ? NOTE: Should be able to fix for this in RTL + React 19.
-    vi.stubGlobal('console', { ...console, warn: vi.fn(), log: vi.fn(), error: vi.fn() })
-  })
-
   beforeEach(() => {
     vi.mocked(usePathname).mockReturnValueOnce('/')
   })
@@ -45,25 +39,22 @@ describe('RootLayout', () => {
     vi.clearAllMocks()
   })
 
-  afterAll(() => {
-    vi.unstubAllGlobals()
-  })
-
   it('displays the TopNavBar', async () => {
-    render(await RootLayout({ children: <TestComponent /> }))
+    render(await RootLayout({ children: <TestComponent /> }), { container: document })
 
     expect(screen.getByRole('navigation')).toBeInTheDocument()
   })
 
   it('displays the footer', async () => {
-    render(await RootLayout({ children: <TestComponent /> }))
+    render(await RootLayout({ children: <TestComponent /> }), { container: document })
 
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
   it('includes ahrefs site verification', async () => {
-    const { container } = render(await RootLayout({ children: <TestComponent /> }))
+    const { container } = render(await RootLayout({ children: <TestComponent /> }), { container: document })
 
-    expect(container.querySelector('meta[name="ahrefs-site-verification"]')).toBeInTheDocument()
+    const ahrefsMetaTag = container.querySelector('meta[name="ahrefs-site-verification"]')
+    expect(ahrefsMetaTag).toBeInTheDocument()
   })
 })
