@@ -18,7 +18,7 @@ describe('about/WorkHistory', () => {
     vi.useRealTimers()
   })
 
-  it.each(['Tomo', 'Vasion', 'Podium', 'Pluralsight', 'Maersk'])(
+  it.each(['SchoolAI', 'Tomo', 'Vasion', 'Podium', 'Pluralsight', 'Maersk'])(
     'displays logo images for %s',
     (companyName: string) => {
       render(<WorkflowHistory />)
