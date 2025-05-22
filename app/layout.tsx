@@ -3,12 +3,7 @@ import './globals.css'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { type PropsWithChildren } from 'react'
-
-const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
-  ssr: false,
-})
 
 import { AnalyticsProvider, ThemeProvider } from './providers'
 
@@ -46,7 +41,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <AnalyticsProvider>
         <body className="flex flex-col md:items-center">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <PostHogPageView />
             <TopNavbar />
             <main className="mt-4 flex flex-col px-6 py-10 sm:px-4 md:w-[768px]">{children}</main>
             <Footer />
