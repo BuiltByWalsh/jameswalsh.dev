@@ -38,7 +38,7 @@ describe('/posts/[slug]/actions', () => {
       }
 
       it('will redirect using next/navigation notFound()', async () => {
-        const serializedNextNotFound = 'NEXT_NOT_FOUND'
+        const serializedNextNotFound = 'NEXT_HTTP_ERROR_FALLBACK;404'
 
         vi.mocked(mdx.getPostFromMDX).mockRejectedValue(new MockFileNotFoundError())
 

@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
-  transpilePackages: ['geist'], // TODO: should be removed during @see https://linear.app/jdub/issue/JDUB-28/upgrade-to-nextjs-15
+  transpilePackages: ['next-mdx-remote'],
   async rewrites() {
     return [
       {

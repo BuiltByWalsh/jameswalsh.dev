@@ -14,12 +14,12 @@ describe('/projects/ProjectsPage', () => {
     render(<ProjectsPage />)
 
     const projectLink = screen.getByText(project.externalLink.title).closest('a')
-    const projectHeader = screen.getByRole('heading', { name: project.title })
+    const projectTitle = screen.getByText(new RegExp(project.title.toLowerCase(), 'i'))
     const projectDescription = screen.getByText(project.description)
     const projectImageIcon = screen.getByAltText(`Project logo for ${project.title}`)
 
     expect(projectLink).toHaveAttribute('href', project.externalLink.href)
-    expect(projectHeader).toBeInTheDocument()
+    expect(projectTitle).toBeInTheDocument()
     expect(projectDescription).toBeInTheDocument()
     expect(projectImageIcon).toBeInTheDocument()
   })

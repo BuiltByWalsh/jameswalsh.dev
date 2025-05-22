@@ -18,7 +18,7 @@ export default function ProjectsPage() {
     <>
       <TypographyH1 className="w-prose">
         Things I&apos;ve Helped Build That&nbsp;
-        <span className="inline-block bg-gradient-to-r from-fuchsia-600 via-red-400 to-primary bg-clip-text text-5xl text-transparent">
+        <span className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
           Make Me Smile
         </span>
       </TypographyH1>

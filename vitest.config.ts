@@ -25,7 +25,7 @@ export default defineConfig({
         ...coverageConfigDefaults.exclude,
       ],
     },
-    setupFiles: './vitest-setup.ts',
+    setupFiles: './test/setup.ts',
     environment: 'happy-dom',
     exclude: ['e2e/**', 'node_modules/**', '.next/**'],
   },

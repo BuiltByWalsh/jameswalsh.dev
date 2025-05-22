@@ -34,7 +34,7 @@ export const socialLinks: SocialLink[] = [
 
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col justify-between border-t border-border px-10 py-4 sm:grid-cols-1 md:flex-row">
+    <footer className="border-border flex w-full flex-col justify-between border-t px-10 py-4 sm:grid-cols-1 md:flex-row">
       <div className="my-4 flex flex-col-reverse items-center justify-center gap-6 md:flex-col md:items-start">
         <div className="flex flex-row gap-6">
           {socialLinks.map(({ name, href, ariaLabel, icon }) => (

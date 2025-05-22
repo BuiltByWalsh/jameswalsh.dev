@@ -45,7 +45,7 @@ describe('posts/[slug]/PostPage', () => {
   it('renders H1 for blog post', async () => {
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     expect(screen.getByRole('heading', { name: mockPost.title })).toBeInTheDocument()
   })
@@ -53,7 +53,7 @@ describe('posts/[slug]/PostPage', () => {
   it('renders the blog thumbnail image', async () => {
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
     const articleImage = screen.getByAltText('Article cover image')
     const encodedThumbnailSrc = encodeURIComponent(mockPost.thumbnail)
 
@@ -64,7 +64,7 @@ describe('posts/[slug]/PostPage', () => {
   it('renders all the blog tags', async () => {
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     tags.forEach((tag) => {
       expect(screen.getByText(`#${tag}`)).toBeInTheDocument()
@@ -76,7 +76,7 @@ describe('posts/[slug]/PostPage', () => {
     vi.mocked(dateFnsFormat.formatDate).mockReturnValue('Oct 31, 2024')
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     expect(screen.getByText('Oct 31, 2024')).toHaveAttribute('datetime', '2024-10-31')
     expect(screen.getByText(/1 min read/i)).toBeInTheDocument()
@@ -86,7 +86,7 @@ describe('posts/[slug]/PostPage', () => {
   it('renders a link to all posts', async () => {
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     expect(screen.getByRole('link', { name: /all posts/i })).toBeInTheDocument()
   })
@@ -97,7 +97,7 @@ describe('posts/[slug]/PostPage', () => {
     vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
     vi.mocked(slugPageActions.fetchPreviousPost).mockResolvedValue(mockPreviousPost)
 
-    render(await PostPage({ params: { slug: mockSlug } }))
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     const linkToPreviousPost = screen.getByRole('link', { name: /next/i })
 
@@ -107,7 +107,7 @@ describe('posts/[slug]/PostPage', () => {
 
   describe('generateMetadata', () => {
     it('generates page metadata based on current post slug', async () => {
-      const metadata = await generateMetadata({ params: { slug: mockSlug } })
+      const metadata = await generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })
 
       expect(metadata).toEqual({
         title: mockPost.title,
