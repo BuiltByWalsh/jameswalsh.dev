@@ -21,7 +21,7 @@ export default async function HomePage() {
           <TypographyP className="my-3 text-lg">
             I&apos;m a full-stack Software Engineer, UI/UX enthusiast, tinkerer, & self-proclaimed developer advocate.
             I&apos;m currently dedicated to enhancing personalized learning for every student at{' '}
-            <Link href="https://schoolai.com" className="mr-0.5 text-primary hover:underline">
+            <Link href="https://schoolai.com" className="text-primary mr-0.5 hover:underline">
               SchoolAI
             </Link>
             .
@@ -47,7 +47,7 @@ export default async function HomePage() {
                 <CardTitle>{post.title}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
-                <span className="flex items-center text-muted-foreground">
+                <span className="text-muted-foreground flex items-center">
                   <Clock width={16} height={16} />
                   &nbsp;
                   {calculateTimeToRead(post.source)}&nbsp;min read
