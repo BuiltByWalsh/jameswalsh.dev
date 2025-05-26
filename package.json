@@ -76,7 +76,7 @@
     "@types/react-dom": "19.1.5",
     "@types/rss": "0.0.32",
     "@typescript-eslint/parser": "8.32.1",
-    "@vitejs/plugin-react": "4.4.1",
+    "@vitejs/plugin-react": "4.5.0",
     "@vitest/coverage-istanbul": "3.1.4",
     "commitlint": "19.6.0",
     "cspell": "8.15.1",
