@@ -29,7 +29,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html
       lang="en"
-      className={cn(`${GeistSans.variable} ${GeistMono.variable}`, 'scroll-smooth')}
+      className={cn(`${GeistSans.className} ${GeistMono.className}`, 'scroll-smooth')}
       suppressHydrationWarning // @see https://ui.shadcn.com/docs/dark-mode/next
     >
       <meta charSet="utf-8" />
