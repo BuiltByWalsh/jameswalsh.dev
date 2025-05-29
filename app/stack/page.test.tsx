@@ -10,7 +10,7 @@ describe('stack/StackPage', () => {
   it('displays page heading', () => {
     render(<StackPage />)
 
-    expect(screen.getByRole('heading', { name: /technology tools i recommend & use/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /skills/i })).toBeInTheDocument()
   })
 
   it.each(stackCollectionKeys)('renders a list with all content present for %s', (stackCollectionKey) => {

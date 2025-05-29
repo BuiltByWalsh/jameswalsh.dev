@@ -23,7 +23,7 @@ export default function StackPage() {
 
   return (
     <>
-      <TypographyH1>Technology Tools I Recommend & Use</TypographyH1>
+      <TypographyH1>Skills</TypographyH1>
       <Timeline>
         {Object.entries(stackCollection).map(([key, items]) => (
           <TimelineItem key={key}>

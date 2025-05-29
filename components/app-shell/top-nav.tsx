@@ -14,12 +14,13 @@ import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 const topNavVariants = cva(
-  'flex items-center px-5 w-18 mx-1 transition opacity-80 transition-colors duration-200 h-full border-b-2 border-transparent',
+  'inline-block border-transparent mx-1 h-8 border-b-2 px-5 text-center opacity-80 transition-colors duration-200',
   {
     variants: {
       variant: {
-        default: '',
+        default: 'hover:border-b-2 hover:border-muted-foreground transition duration-300 ease-in',
         current: 'border-b-2 border-primary opacity-100',
+        ghost: '',
       },
     },
     defaultVariants: {
@@ -33,8 +34,8 @@ export function TopNavbar() {
   return (
     <>
       <nav className="pointer-events-auto mt-8 hidden h-12 md:flex md:flex-row md:justify-between md:gap-6">
-        <ul className="flex items-center text-sm font-medium">
-          <li className="h-full">
+        <ul className="flex flex-row items-center text-sm font-medium">
+          <li>
             <Link href="/" className={cn(topNavVariants({ variant: pathname === '/' ? 'current' : 'default' }))}>
               Home
             </Link>
@@ -43,7 +44,7 @@ export function TopNavbar() {
             const variant = pathname.includes(item.href) ? 'current' : 'default'
 
             return (
-              <li key={item.href} className="h-full" data-testid={`${item.value.toLowerCase()}-nav-item`}>
+              <li key={item.href} data-testid={`${item.value.toLowerCase()}-nav-item`}>
                 <Link href={item.href} className={cn(topNavVariants({ variant }))}>
                   {item.value}
                 </Link>
@@ -55,8 +56,8 @@ export function TopNavbar() {
           <li data-testid="mode-toggle-menu">
             <ModeToggleMenu />
           </li>
-          <li className="h-full" data-testid="rss-feed-nav-item">
-            <Link href="/rss.xml" className={cn(topNavVariants({ variant: 'default' }))}>
+          <li data-testid="rss-feed-nav-item">
+            <Link href="/rss.xml" className={cn(topNavVariants({ variant: 'ghost' }))}>
               <TooltipProvider>
                 <Tooltip delayDuration={250}>
                   <TooltipTrigger className="hover:cursor-pointer">
