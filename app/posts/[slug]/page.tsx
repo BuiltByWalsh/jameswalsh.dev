@@ -69,13 +69,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <article className="mt-8">
         <MDXContent source={post.source} />
       </article>
-      <div className="border-color mt-8 flex w-full flex-row justify-between gap-6 border-t pt-8">
-        <Link href="/posts" className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}>
+      <div className="border-color mt-8 flex w-full flex-row justify-center gap-4 border-t pt-8">
+        <Link href="/posts" className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}>
           <ChevronLeft width={16} height={16} />
           &nbsp;All posts
         </Link>
         {!!previousPost && (
-          <Link href={`/posts/${previousPost.slug}`} className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}>
+          <Link
+            href={`/posts/${previousPost.slug}`}
+            className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}
+          >
             <ChevronRight width={16} height={16} />
             &nbsp;Next
           </Link>
