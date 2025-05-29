@@ -32,8 +32,8 @@ export function TopNavbar() {
 
   return (
     <>
-      <nav className="pointer-events-auto mt-8 hidden md:flex md:flex-row md:justify-between md:gap-6">
-        <ul className="flex h-12 items-center text-sm font-medium">
+      <nav className="pointer-events-auto mt-8 hidden h-12 md:flex md:flex-row md:justify-between md:gap-6">
+        <ul className="flex items-center text-sm font-medium">
           <li className="h-full">
             <Link href="/" className={cn(topNavVariants({ variant: pathname === '/' ? 'current' : 'default' }))}>
               Home
@@ -50,14 +50,16 @@ export function TopNavbar() {
               </li>
             )
           })}
+        </ul>
+        <ul className="flex items-center text-sm font-medium">
           <li data-testid="mode-toggle-menu">
             <ModeToggleMenu />
           </li>
           <li className="h-full" data-testid="rss-feed-nav-item">
             <Link href="/rss.xml" className={cn(topNavVariants({ variant: 'default' }))}>
               <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
+                <Tooltip delayDuration={250}>
+                  <TooltipTrigger className="hover:cursor-pointer">
                     <RssIcon />
                   </TooltipTrigger>
                   <TooltipContent side="bottom">
