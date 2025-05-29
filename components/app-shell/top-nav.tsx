@@ -33,7 +33,7 @@ export function TopNavbar() {
 
   return (
     <>
-      <nav className="pointer-events-auto mt-8 hidden h-12 md:flex md:flex-row md:justify-between md:gap-6">
+      <nav className="pointer-events-auto mt-8 hidden h-12 md:flex md:flex-row md:justify-between md:gap-8">
         <ul className="flex flex-row items-center text-sm font-medium">
           <li>
             <Link href="/" className={cn(topNavVariants({ variant: pathname === '/' ? 'current' : 'default' }))}>
@@ -53,7 +53,7 @@ export function TopNavbar() {
           })}
         </ul>
         <ul className="flex items-center text-sm font-medium">
-          <li data-testid="mode-toggle-menu">
+          <li data-testid="mode-toggle-menu" className="h-full">
             <ModeToggleMenu />
           </li>
           <li data-testid="rss-feed-nav-item">
