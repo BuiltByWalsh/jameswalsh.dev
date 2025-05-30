@@ -1,5 +1,9 @@
 name: Type Check
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   - pull_request
 
@@ -14,7 +18,7 @@ jobs:
           node-version: 22
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.10.0 # match package.json:packageManager version.
+          version: 10.11.0 # match package.json:packageManager version.
 
       - name: Get pnpm store directory
         shell: bash
