@@ -6,7 +6,7 @@
     "node": ">=v22.15.0"
   },
   "type": "module",
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@10.11.0",
   "config": {
     "commitizen": {
       "path": "./node_modules/git-cz"
