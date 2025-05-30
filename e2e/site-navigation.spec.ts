@@ -16,7 +16,7 @@ test.describe('when navigating the top nav bar', () => {
 
     await expect(page).toHaveURL('/posts')
     await expect(page).toHaveTitle('Articles - James Walsh')
-    await expect(page.getByText('Latest Blog Posts')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Latest Blog Posts' })).toBeVisible()
   })
 
   test('navigates to /about', async ({ page, isMobile }) => {
@@ -42,7 +42,7 @@ test.describe('when navigating the top nav bar', () => {
 
     await expect(page).toHaveURL('/stack')
     await expect(page).toHaveTitle('Stack - James Walsh')
-    await expect(page.getByText(`Technology Tools I Recommend & Use`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Skills' })).toBeVisible()
   })
 
   test('navigates to /projects', async ({ page, isMobile }) => {
@@ -55,7 +55,7 @@ test.describe('when navigating the top nav bar', () => {
 
     await expect(page).toHaveURL('/projects')
     await expect(page).toHaveTitle('Projects - James Walsh')
-    await expect(page.getByText(`Things I've Helped Build That`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: `Things I've Helped Build That` })).toBeVisible()
   })
 })
 
@@ -65,7 +65,7 @@ test.describe('when navigating the footer', () => {
 
     await expect(page).toHaveURL('/posts')
     await expect(page).toHaveTitle('Articles - James Walsh')
-    await expect(page.getByText('Latest Blog Posts')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Latest Blog Posts' })).toBeVisible()
   })
 
   test('navigates to /about', async ({ page }) => {
@@ -81,7 +81,7 @@ test.describe('when navigating the footer', () => {
 
     await expect(page).toHaveURL('/stack')
     await expect(page).toHaveTitle('Stack - James Walsh')
-    await expect(page.getByText(`Technology Tools I Recommend & Use`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Skills' })).toBeVisible()
   })
 
   test('navigates to /projects', async ({ page }) => {
@@ -89,6 +89,6 @@ test.describe('when navigating the footer', () => {
 
     await expect(page).toHaveURL('/projects')
     await expect(page).toHaveTitle('Projects - James Walsh')
-    await expect(page.getByText(`Things I've Helped Build That`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: `Things I've Helped Build That` })).toBeVisible()
   })
 })
