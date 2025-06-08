@@ -2,8 +2,8 @@ import path from 'path'
 
 import * as fm from 'front-matter'
 
-import { getPostFromMDX } from '../mdx'
-import { PostFrontmatter } from '../types'
+import { getPostFromMDX } from './mdx'
+import { PostFrontmatter } from './types'
 
 import { getMockFrontmatter } from '@/test/mocks/frontmatter'
 import { getMockSource } from '@/test/mocks/source'

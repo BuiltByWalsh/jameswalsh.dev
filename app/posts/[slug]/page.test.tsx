@@ -1,23 +1,24 @@
 import { render, screen } from '@testing-library/react'
 import * as dateFns from 'date-fns'
 import * as dateFnsFormat from 'date-fns/format'
-import { PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
-import { fetchPublishedPosts } from '../../actions'
-import * as slugPageActions from '../actions'
-import PostPage, { generateMetadata, generateStaticParams } from '../page'
+import { fetchPublishedPosts } from '../actions'
+
+import { fetchPostBySlug, fetchPreviousPost } from './actions'
+import PostPage, { generateMetadata, generateStaticParams } from './page'
 
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
 import { getMockPost } from '@/test/mocks/post'
 
 vi.mock('../actions', () => ({
+  fetchPublishedPosts: vi.fn(() => Promise.resolve([])),
+}))
+vi.mock('./actions', () => ({
   fetchPostBySlug: vi.fn(),
   fetchPreviousPost: vi.fn(() => Promise.resolve(undefined)),
 }))
-vi.mock('../../actions', () => ({
-  fetchPublishedPosts: vi.fn(() => Promise.resolve([])),
-}))
-vi.mock('../mdx-content', () => ({
+vi.mock('./mdx-content', () => ({
   __esModule: true,
   default: vi.fn(({ children }: PropsWithChildren) => <div>{children}</div>),
 }))
@@ -40,10 +41,11 @@ describe('posts/[slug]/PostPage', () => {
 
   afterEach(() => {
     vi.useRealTimers()
+    vi.restoreAllMocks()
   })
 
   it('renders H1 for blog post', async () => {
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -51,7 +53,7 @@ describe('posts/[slug]/PostPage', () => {
   })
 
   it('renders the blog thumbnail image', async () => {
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
     const articleImage = screen.getByAltText('Article cover image')
@@ -62,7 +64,7 @@ describe('posts/[slug]/PostPage', () => {
   })
 
   it('renders all the blog tags', async () => {
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -74,7 +76,7 @@ describe('posts/[slug]/PostPage', () => {
   it('renders blog time information', async () => {
     vi.mocked(dateFns.formatDistanceToNow).mockReturnValue('1 month')
     vi.mocked(dateFnsFormat.formatDate).mockReturnValue('Oct 31, 2024')
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -84,7 +86,7 @@ describe('posts/[slug]/PostPage', () => {
   })
 
   it('renders a link to all posts', async () => {
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -94,8 +96,8 @@ describe('posts/[slug]/PostPage', () => {
   it('renders a link to the previous blog post', async () => {
     const mockPreviousPostSlug = 'previous-post-slug'
     const mockPreviousPost = getMockPost({ slug: mockPreviousPostSlug })
-    vi.mocked(slugPageActions.fetchPostBySlug).mockResolvedValue(mockPost)
-    vi.mocked(slugPageActions.fetchPreviousPost).mockResolvedValue(mockPreviousPost)
+    vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
+    vi.mocked(fetchPreviousPost).mockResolvedValue(mockPreviousPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -107,6 +109,7 @@ describe('posts/[slug]/PostPage', () => {
 
   describe('generateMetadata', () => {
     it('generates page metadata based on current post slug', async () => {
+      vi.mocked(fetchPostBySlug).mockResolvedValue(mockPost)
       const metadata = await generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })
 
       expect(metadata).toEqual({

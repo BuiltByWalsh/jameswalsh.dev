@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Footer, { socialLinks } from '../footer'
+import Footer, { socialLinks } from './footer'
 
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 

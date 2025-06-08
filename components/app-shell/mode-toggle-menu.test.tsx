@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { useTheme } from 'next-themes'
 
-import { ModeToggleMenu } from '../mode-toggle-menu'
+import { ModeToggleMenu } from './mode-toggle-menu'
 
 const mockSetTheme = vi.fn()
 

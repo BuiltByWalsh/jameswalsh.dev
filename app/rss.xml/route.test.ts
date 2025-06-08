@@ -1,5 +1,5 @@
-import { SITE_MAP_CATEGORIES } from '../constants'
-import { GET } from '../route'
+import { SITE_MAP_CATEGORIES } from './constants'
+import { GET } from './route'
 
 import { fetchPublishedPosts } from '@/app/posts/actions'
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'

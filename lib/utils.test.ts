@@ -1,4 +1,4 @@
-import { calculateTimeToRead, isPostReleased } from '../utils'
+import { calculateTimeToRead, isPostReleased } from './utils'
 
 describe('lib/utils', () => {
   describe('calculateTimeToRead', () => {

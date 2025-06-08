@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import { fetchPublishedPosts } from '../actions'
+import { fetchPublishedPosts } from './actions'
 
 import * as mdx from '@/lib/mdx'
 import { getMockFiles } from '@/test/mocks/files'

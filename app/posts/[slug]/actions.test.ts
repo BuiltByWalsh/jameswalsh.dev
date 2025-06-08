@@ -1,5 +1,6 @@
-import * as postsActions from '../../actions'
-import { fetchPostBySlug, fetchPreviousPost } from '../actions'
+import * as postsActions from '../actions'
+
+import { fetchPostBySlug, fetchPreviousPost } from './actions'
 
 import * as mdx from '@/lib/mdx'
 import type { Post } from '@/lib/types'
@@ -7,7 +8,7 @@ import { getMockFrontmatter } from '@/test/mocks/frontmatter'
 import { getMockSource } from '@/test/mocks/source'
 
 vi.mock('@/lib/mdx')
-vi.mock('../../actions')
+vi.mock('../actions')
 
 describe('/posts/[slug]/actions', () => {
   describe('fetchPostBySlug', () => {

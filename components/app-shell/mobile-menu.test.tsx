@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node'
 import { useTheme } from 'next-themes'
 import RSS from 'rss'
 
-import { MobileMenu } from '../mobile-menu'
+import { MobileMenu } from './mobile-menu'
 
 import { SITE_MAP_CATEGORIES } from '@/app/rss.xml/constants'
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
