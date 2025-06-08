@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import AboutPage from '../page'
+import AboutPage from './page'
 
 import { GITHUB_REPO_LINK } from '@/lib/constants'
 

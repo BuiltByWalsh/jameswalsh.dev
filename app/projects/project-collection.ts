@@ -12,7 +12,7 @@ export const projectsCollection: Project[] = [
   },
   {
     title: 'Tomo TrueRate',
-    description: `Early stage contributor to what would become TrueRate. TrueRate helps you compare lenders with numbers that speak for themselves.`,
+    description: `Early stage contributor to what would become TrueRate. TrueRate helps you compare mortgage lenders with numbers that speak for themselves.`,
     externalLink: {
       title: 'tomo.com/mortgage',
       href: 'https://tomo.com/mortgage/interest-rates-today',

@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react'
 
-import AboutMe from '../about-me'
+import AboutMe from './about-me'
 
 describe('about/AboutMe', () => {
   it('displays an accordion', () => {

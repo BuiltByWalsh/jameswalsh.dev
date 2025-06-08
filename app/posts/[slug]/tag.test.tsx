@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import { Tag } from '../tag'
+import { Tag } from './tag'
 
 describe('posts/[slug]/tag', () => {
   it.each([

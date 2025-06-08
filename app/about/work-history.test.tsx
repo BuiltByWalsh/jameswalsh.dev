@@ -1,6 +1,6 @@
 import { render, screen, act, within } from '@testing-library/react'
 
-import WorkflowHistory, { type CVItem, cvItems } from '../work-history'
+import WorkflowHistory, { type CVItem, cvItems } from './work-history'
 
 const mockPresentYear = 2024
 

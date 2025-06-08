@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { usePathname } from 'next/navigation'
 
-import { TopNavbar } from '../top-nav'
+import { TopNavbar } from './top-nav'
 
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 
