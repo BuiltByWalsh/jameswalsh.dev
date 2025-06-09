@@ -54,7 +54,7 @@
     "next": "15.3.2",
     "next-mdx-remote": "5.0.0",
     "next-themes": "0.4.6",
-    "posthog-js": "1.245.1",
+    "posthog-js": "1.249.5",
     "posthog-node": "4.17.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
