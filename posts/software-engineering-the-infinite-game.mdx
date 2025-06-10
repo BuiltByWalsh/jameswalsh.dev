@@ -1,0 +1,153 @@
+---
+title: Software Engineering, The Infinite Game
+description: Software engineering is not analogous to building a home. It’s probably more like… gardening.
+thumbnail: /blog-thumbnails/software-engineering-the-infinite-game.jpeg
+status: 'published'
+publishedAt: 2025-06-09
+lastModified: 2025-06-09
+brief: Software engineering is not analogous to building a home. It’s probably more like… gardening.
+tags:
+  - software engineering
+  - infinite game
+  - gardening
+  - management
+  - ai
+  - burnout
+  - llms
+---
+
+## The Cost of Bad Analogies
+
+Too often I see the analogy of building a house used to describe writing software. I’ve realized this is a mostly useless analogy. Homes are projects which get completed, sold, and the team behind them then takes off, typically never to be seen again. These projects have a fixed set of rules, and a very clear start and end date _(even if the estimation for build time is off)_. Sure there is complexity I’m glossing over. Sometimes flood planes get re-mapped. Homes require upkeep, and eventually get remodeled. Some things go smoothly, other things will go wrong... But by and large you can break ground on a new development. Finish the work, sell the house, finish the project, and profit. 
+
+<br />
+
+**Hot take**: software engineering is not analogous to building a home. Unless you like the home below. It’s probably
+more like… gardening.
+
+<br />
+
+![Bad Architecture House](/blog-images/infinite-game/bad-house-analogy.jpg)
+
+<br />
+
+## The Infinite Game
+
+Having recently been introduced to the work of Simon Sinek, I’ve been captivated by the idea that software development is _“playing an infinite game”_. But according to Simon some teams are playing finite games, and others are playing the infinite game. So what's the difference?
+
+In order for a game to be finite rather than infinite, there are a few rules:
+
+1. There needs to be at least two players.
+2. The rules are established at the very beginning.
+3. There is a start, an end, a winner, and a loser.
+
+Simple enough. In an infinite game however, everything is different.
+
+1. No one wins an infinite game. The goal is not to "win". The goal is to get to **_keep playing the game as long as possible_**.
+2. During each turn of the game you define new rules by which the game must be played. Therefore every action you take makes it easier or harder to continue advancing to the next round.
+
+Every business is playing an infinite game, whether they recognize it or not. There's an adage in index fund investing circles that says more or less that
+
+> _"the median stock price for most companies over a 150 year period is zero"_.
+
+And that's mostly true. Not many companies that existed 200 years ago exist today in their same shape. They were bought & sold, transformed, swallowed up by a disruptor or slowly faded out of public consciousness. The game kept going without them, though they played as long as they could.
+
+It's also true that businesses don't "beat" other businesses. They capture some market share during some period of time. But just because you beat Q4 earnings and your competitor didn't doesn't mean you won.
+
+**Example** - Remember how the best way to message your friends in the early 2000's was MSN messenger? Huh. Weird. What happened to that thing?
+
+<br />
+
+## Software Engineering & The infinite game
+
+I'll challenge you with this thought experiment. What happens at the end of shipping this next batch of features? _Well..._ there are **more features of course**.
+
+In reality you are more like a software gardener. There is lots of weeding, and maintenance, and waiting around for some of those fruit trees in the corner to actually produce something worth selling.
+
+<br />
+
+![Software Gardening](/blog-images/infinite-game/gardening.jpg)
+
+<br />
+
+When you’re spinning up a new team it can be easy to feel like you’re building that house I was talking about earlier.
+
+> “Okay, I guess we need a kitchen. And a living room over here… okay let’s go! We’re gonna ship this thing!”
+
+But this narrative enforces that what's being built will be **entropic**. It will start to feel like a house where rooms were added on adhoc, and the layout becomes confusing and disjointed.
+
+<br />
+
+You don’t win the game when you ship a new feature. You simply advance to the next round.
+
+<br />
+
+But it’s actually infinitely more complicated than that. Because in software specifically, the new RULES you introduce during each round have compounding side effects for how the game must be played next. And in worst case scenarios, the complexity and entropy involved in earlier decision making can grind engineering teams to a screeching halt, and decisions become increasingly impossible to understand and reason through.
+
+<br />
+
+## Managing Burnout
+
+All of us have lived this at one point in time. There is a sense of emergency to get something done. Not wanting to disappoint the people around you, you simply GO. To be honest, that feels good in the short term. You'll feel like a firefighter on the front lines. You’re likely met at the end of one of these release cycles with a pat on the back, a kudos, and the business "ooh'ing and ahh'ing" over the end result that was produced. If you have ADHD _(like many software engineers do)_ you get the instant dopamine hit of praise from peers & leaders, and the promise of getting to instantly move along to the next shiny new feature. A beautiful new trail of uncut wilderness, leaving the thing you just shipped long behind you. It keeps things interesting. You keep on moving. “Yes! Progress is being made!” you think to yourself.
+
+<br />
+
+But you don't fully understand the architecture you just laid down. There were a few nasty `useEffect` hooks running a few extra times, but the user won't notice! "this is fine", you think to yourself. But unless you are careful, you’ll be totally unaware of all the new rules you just added to the game you are playing. And in codebase’s like the one I’m describing above, complexity and side effects grow and cascade. Eventually the thing that enabled you to go as fast as possible eventually grinds you to a halt... Eventually, inevitably, the sparkle of working this way will wear off, and engineering teams raise their hands and begin to demand _a rewrite_, or some kind of new upfront architecture.
+
+Even worse yet, you may not be in a company culture where time can be spent going back and negotiating cleaning up the cumbersome rulesets that were made earlier. So you march on. It’s time for the next turn in this game. Te ideas aren’t slowing down either, they’re speeding up.
+
+The team moves forward, some folks burnout and leave. New hires will be left holding the bag, wondering why decisions got made certain ways, but the engineers they could ask are gone. These new hires wade through the ambiguity and eventually develop understanding. But it took longer. It was much harder. And the new engineers will secretly yearn for the same rewrite the old engineers were fighting for.
+
+<br />
+I’ve been on both ends of this formula. There isn’t a winner or a loser, just complexity as the game continues into the
+next round. It can be easy to fall for the trap that _“well this is just how things work in the space we are in”_.
+
+I was joking with a friend the other day about how the career track from Principal Engineer to Woodworker or Homesteader is typically a short straight line. I’ve actually seen it before. The player is finally ready to flip the monopoly board over, the complexity and cognitive load is so high that the costs outweigh playing one more round. 
+
+To me, this is heartbreaking. Most engineers I know are the most **intrinsically motivated** people you’ll meet. They love coding. They have side projects. They’re reading technical articles, learning new tech stacks just for the fun of it. They’re jazzed to open their editor and make something really cool that people can use.  They’re excited to communicate about technical problems, try new things, and they WANT to build something cool. Otherwise they wouldn’t be there.
+
+Now it's the moment in the article where we have to talk about it. AI. You hear that Google web crawlers? I said AI! Are you ready to index me properly now?
+
+I believe having an infinite mindset is recognizing to yourself that all code is technical debt. Bit of a hot take, I can hear the comments coming. Let me clarify. I'm not saying: "every line of code you've ever written is bad". Not at all. What I am saying is code is a liability, not an asset. Well-crafted code is a liability too. A a safer, easier liability to manage, but a liability nonetheless. The asset from the business perspective is the outcome, regardless of how it's written. So if code is a liability, but the outcome is the asset, it would stand to reason that:
+
+1. We want as little code as possible to achieve an outcome.
+2. We want the code to contain the smallest footprint for complexity that we can muster, within reason.
+3. We want a suite of tests that can act as double entry book keeping, that can back up that the software does what we say its supposed to do while we maintain and manage it.
+4. We want code that is easily understandable by us and our peers. It's a liability, so we're managing the maintenance costs as well as we can for said liability.
+
+Point's number 3 and 4 are still valid in a world where LLMs generate more and more code every second. Because at the end of the day, a human, somewhere, in some role is responsible for the site being up or being down. There is a human at the end of the loop, and that human needs to keep things running, or manage the resources that are keeping it running.
+
+### Vibe Coding, The Good & The Bad
+
+Look, I use LLMs. Every day. I'm now at a point where I can confidently say you will pull cursor from my cold dead hands. I love it. It's made me more productive, and moving back to a standard editor feels like driving a go-kart after you've daily driving a G-wagon.
+
+But I spar with it. Contend with it. Striving, even if the goal is somewhat asymptotic, for the least amount of liability each time I open the editor.
+
+The problem with LLMs, vibe coding, and the culture around it so far is that I hear a lot of talk around "I used an LLM and it auto generated 10,000 lines of code for me", "Devin generated this entire UI in just one week" or something to that effect. Typically I nod my head and smile along. But in the narrative alone, we're striving for the maximum amount of liability we can generate in the shortest period of time. More code is not necessarily a good thing. And how well do we understand the internals around what was produced?
+
+![Vibe Debugging](/blog-images/infinite-game/vibe-debugging.webp)
+
+<br />
+
+I think less code, and more thoughtful code would be preferred if we are playing an infinite game. The LLM is a really sharp knife. Sharp knives are awesome when used by a competent chef who knows to curl the ends of their fingers when chopping vegetables.
+
+<br />
+
+### Managing Burnout
+
+This sensation around burnout, entropy, and complexity growing in a system can be controlled. There are two sets of dials you can turn that can increase optimism and diminish these feelings.
+
+1. Adopt Simon Sinek's infinite game mindset. When we understand we're in this thing for the long haul, instead of looking for the quickest win, or wasting time, energy, and cognitive load trying to pressurize magic into a deadline, instead ensure the team is always focused on the singular most important thing they could be doing. Period. If it’s not important, why are we wasting time on it. I had a previous leader describe this as "focusing on being effective rather than being predictable". Boom. Narratives are everything. And Conway's law teaches us that software always resembles a teams underlying communication structure. Fix the communication structure first, and the way we think about and prioritize work, and the effects downstream will lead to positive outcomes, less burnout, and and codebases that are ready for the test of time.
+
+2. As we’re focused on the most important thing, leave space, time, and energy for reducing complexity, and making sure the team understands that how we choose to go forward is just as important as what we’re doing. Kent Beck famously popularized the term _"tidy as we go"_. Having grown up in scouting I always saw this as "leave no trace", and viewed the software engineers that came after me as the next batch of campers. It helped me bake empathy into what I'm writing, knowing I wont be the only one who works on this thing. And by operating this way we commit to ourselves and our team that we really want things to run well, not just tomorrow but for as long as possible. We’re not only working on how to ship the next big thing, instead we’re actually increasing the sensation that we can go faster over time because we’re being careful every step of the way. It’s the digital equivalent of “taking care of your tools so that they take care of you”.
+3. Know your value, and stop tracking vanity metrics. Value does not equate to number of lines of code produced, number of PRs merged, or even the next feature. The value is in the outcome, and the ability to continue producing solid outcome as long as possible. I'm not saying it's not important to ship it, because it definitely is. Rather what I am saying is that features change. You're working with a big ball of clay. Features get removed and re-added, enhanced, re-worked, and sometimes disrupted and replaced by something hopefully better. Right now as we all stumble into a new era where AI can help us produce infinite lines of code at record speed, remember this next line... The asset you're providing isn't each line of code. It's that big beautiful brain. It's the how you work with others, it's your ability to adapt, and it's your ability to craft a codebase that can be flexible and adaptable while asymptotically striving for the least amount of liability as the team advances to the next round.
+
+## Be Effective, Not Predictable
+
+This is gonna be a hot take. I can see and feel the comments coming as I type this. But it’s true. Two of the most productive, profitable, energizing teams I’ve ever been on haven’t had hard show-stopping deadlines. Full stop. It didn't mean they could sit on their hands and never act. They still set aggressive goals, and asked themselves the question "what is the most effective use of our time right now".  Interestingly, I also got the most done of my career on these teams. These teams shipped wonderful products with a bar for quality that was high, and loved it. It was absolute creative lightning in a bottle. We felt trusted, in control of our destiny, and as a side effect, users responded well. Rather than focusing on the highest amount of value we could extract from the system at a regular interval, instead every single morning we made sure we were working on the single most important thing. And that singular thing was always negotiable among a group that had each other’s backs. These teams would not always reach for the "quickest win", but would make bets, and be pragmatic about level of effort involved to see a bet play out. These teams would equally weight what we need to get done today, but also all the excruciating work that we need to do that help us KEEP GOING without burnout, mountains of unpaid technical debt, employee churn, and with careful considerations to ensure the work doesn't grind to a halt. These teams were playing the infinite game. Not this week’s game. Not next months game. There was a sense that we wanted to win 1 year out, instead of focusing solely on this Friday.
+
+## Cycles, not sprints
+
+ By recognizing we’re playing the infinite game, not a finite one, we can actually weigh the costs of what we’re doing thoughtfully during each turn. It will be slower in the beginning, but it will be faster over the long ark, with all the enthusiasm in the world to continue playing. Nobody sprints at full speed for 4 years.
+
+So no. You’re not building a house brick by brick. You are a gardener. You're planting, weeding, pruning, introducing soil amendments. Sometimes the best thing a gardener can do is quit planting new things, and simply tend to the garden.
