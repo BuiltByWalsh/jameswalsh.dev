@@ -25,7 +25,7 @@ To start the development server:
 pnpm i && pnpm dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) and take a look around.
+Open [http://localhost:3000](http://localhost:3000) and take a look around.
 
 ## Testing
 

@@ -44,7 +44,7 @@ export default async function HomePage() {
                 <AspectRatio ratio={16 / 9}>
                   <Image className="rounded-lg" fill src={post.thumbnail} alt={`${post.title} cover image`} />
                 </AspectRatio>
-                <CardTitle>{post.title}</CardTitle>
+                <CardTitle className="mt-2">{post.title}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
                 <span className="text-muted-foreground flex items-center">
