@@ -4,10 +4,10 @@ import { Tag } from './tag'
 
 describe('posts/[slug]/tag', () => {
   it.each([
-    ['jessica', 'blue'],
-    ['ted', 'fuchsia'],
-    ['rowan', 'violet'],
-    ['james', 'emerald'],
+    ['jessica', 'fuchsia'],
+    ['ted', 'cyan'],
+    ['rowan', 'blue'],
+    ['james', 'violet'],
   ])(`displays tag when text='%s' with %s color`, async (text, expectedColor) => {
     render(<Tag text={text} />)
 
@@ -17,6 +17,6 @@ describe('posts/[slug]/tag', () => {
   // cspell:disable-next-line
   it.each(['theo', 'THEO', 'tHeO'])('always displays the same color for the same text (%s)', (text) => {
     render(<Tag text={text} />)
-    expect(screen.getByText(`#${text}`)).toHaveClass(`bg-emerald-900`)
+    expect(screen.getByText(`#${text}`)).toHaveClass(`bg-blue-900`)
   })
 })
