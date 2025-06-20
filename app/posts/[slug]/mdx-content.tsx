@@ -7,7 +7,6 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import { HighlighterCoreOptions, getSingletonHighlighter } from 'shiki'
 
-import { buttonVariants } from '@/components/ui/button'
 import { TypographyBlockquote, TypographyH1, TypographyH2, TypographyH3, TypographyP } from '@/components/ui/typography'
 import { cn } from '@/lib/utils'
 
@@ -34,7 +33,7 @@ const components: MDXRemoteProps['components'] = {
   pre: ({ className, ...rest }: HTMLAttributes<HTMLElement>) => (
     <pre className={cn(className, 'my-5 whitespace-pre-wrap', '[&>code:nth-child(1)]:p-3')} {...rest} />
   ),
-  a: (props: PropsWithChildren) => <a className={cn(buttonVariants({ variant: 'link' }), 'text-md p-0')} {...props} />,
+  a: (props: PropsWithChildren) => <a className="text-md p-0 underline underline-offset-2" {...props} />,
 }
 const options: MDXRemoteProps['options'] = {
   mdxOptions: {
