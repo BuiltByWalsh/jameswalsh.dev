@@ -17,14 +17,14 @@ export default async function HomePage() {
     <>
       <div className="mb-10 flex flex-col items-center">
         <div className="flex max-w-prose flex-col items-center gap-2 text-center">
-          <TypographyH1 className="my-6 text-4xl md:my-3 md:text-6xl">Hey 👋🏻 I&apos;m James</TypographyH1>
+          <TypographyH1>
+            <span className="from-primary inline-block bg-linear-to-r via-fuchsia-600 to-red-400 bg-clip-text text-5xl text-transparent">
+              Hey 👋🏻
+            </span>
+            &nbsp;I&apos;m James
+          </TypographyH1>
           <TypographyP className="my-3 text-lg">
             I&apos;m a full-stack Software Engineer, UI/UX enthusiast, tinkerer, & self-proclaimed developer advocate.
-            I&apos;m currently dedicated to enhancing personalized learning for every student at{' '}
-            <Link href="https://schoolai.com" className="text-primary mr-0.5 hover:underline">
-              SchoolAI
-            </Link>
-            .
           </TypographyP>
           <TypographyP>
             I&apos;m interested in full-stack, front-end focused web frameworks like{' '}
