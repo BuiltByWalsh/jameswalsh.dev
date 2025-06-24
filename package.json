@@ -85,7 +85,7 @@
     "eslint-import-resolver-typescript": "3.10.1",
     "eslint-plugin-import": "2.31.0",
     "git-cz": "4.9.0",
-    "happy-dom": "17.6.3",
+    "happy-dom": "18.0.1",
     "husky": "8.0.3",
     "msw": "2.8.4",
     "postcss": "8.5.6",
