@@ -66,6 +66,8 @@
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.6.0",
+    "@eslint/eslintrc": "3.3.1",
+    "@next/eslint-plugin-next": "15.3.4",
     "@playwright/test": "1.53.0",
     "@tailwindcss/postcss": "4.1.7",
     "@testing-library/jest-dom": "6.6.3",
@@ -84,6 +86,7 @@
     "eslint-config-next": "15.3.2",
     "eslint-import-resolver-typescript": "3.10.1",
     "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-react-hooks": "5.2.0",
     "git-cz": "4.9.0",
     "happy-dom": "18.0.1",
     "husky": "8.0.3",
