@@ -1,7 +1,6 @@
 import './globals.css'
 
 import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import { Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
 
@@ -29,7 +28,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html
       lang="en"
-      className={cn(`${GeistSans.className} ${GeistMono.className}`, 'scroll-smooth')}
+      className={cn(`${GeistMono.className}`, 'scroll-smooth')}
       suppressHydrationWarning // @see https://ui.shadcn.com/docs/dark-mode/next
     >
       <meta charSet="utf-8" />

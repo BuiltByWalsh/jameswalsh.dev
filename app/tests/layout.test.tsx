@@ -9,11 +9,6 @@ vi.mock('geist/font/mono', () => ({
     variable: '--geist-font-sans ',
   })),
 }))
-vi.mock('geist/font/sans', () => ({
-  GeistSans: vi.fn(() => ({
-    variable: '--geist-font-sans ',
-  })),
-}))
 vi.mock('next/navigation', () => ({
   ...vi.importActual('next/navigation'),
   usePathname: vi.fn(),
