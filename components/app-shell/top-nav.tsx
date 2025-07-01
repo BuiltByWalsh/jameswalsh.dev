@@ -11,15 +11,14 @@ import { MobileMenu } from './mobile-menu'
 import { ModeToggleMenu } from './mode-toggle-menu'
 
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
-import { cn } from '@/lib/utils'
 
 const topNavVariants = cva(
-  'inline-block border-transparent mx-1 h-8 border-b-2 px-5 text-center opacity-80 transition-colors duration-200',
+  'inline-block border-transparent mx-1 h-8 border-b-2 text-center text-lg opacity-80 transition-colors duration-200',
   {
     variants: {
       variant: {
-        default: 'hover:border-b-2 hover:border-muted-foreground transition duration-300 ease-in',
-        current: 'border-b-2 border-primary opacity-100',
+        default: 'transition duration-150 ease-in hover:text-primary opacity-80',
+        current: 'opacity-100 text-primary',
         ghost: '',
       },
     },
@@ -33,11 +32,11 @@ export function TopNavbar() {
 
   return (
     <>
-      <nav className="pointer-events-auto mt-8 hidden h-12 md:flex md:flex-row md:justify-between md:gap-8">
-        <ul className="flex flex-row items-center text-sm font-medium">
+      <nav className="pointer-events-auto mt-6 hidden h-12 w-full md:flex md:max-w-[1100px] md:flex-row md:justify-between">
+        <ul className="flex flex-row items-center gap-x-8 text-sm font-medium">
           <li>
-            <Link href="/" className={cn(topNavVariants({ variant: pathname === '/' ? 'current' : 'default' }))}>
-              Home
+            <Link href="/" className={topNavVariants({ variant: pathname === '/' ? 'current' : 'default' })}>
+              ~/
             </Link>
           </li>
           {SITE_NAVIGATIONAL_ITEMS.map((item) => {
@@ -45,8 +44,8 @@ export function TopNavbar() {
 
             return (
               <li key={item.href} data-testid={`${item.value.toLowerCase()}-nav-item`}>
-                <Link href={item.href} className={cn(topNavVariants({ variant }))}>
-                  {item.value}
+                <Link href={item.href} className={topNavVariants({ variant })}>
+                  {variant === 'current' ? `/ ${item.value}` : `> ${item.value}`}
                 </Link>
               </li>
             )
@@ -57,7 +56,7 @@ export function TopNavbar() {
             <ModeToggleMenu />
           </li>
           <li data-testid="rss-feed-nav-item">
-            <Link href="/rss.xml" className={cn(topNavVariants({ variant: 'ghost' }))}>
+            <Link href="/rss.xml" className={topNavVariants({ variant: 'ghost' })}>
               <TooltipProvider>
                 <Tooltip delayDuration={250}>
                   <TooltipTrigger className="hover:cursor-pointer">

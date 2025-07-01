@@ -53,7 +53,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const previousPost = await fetchPreviousPost(slug)
 
   return (
-    <div className="py-10">
+    <div className="mx-20 my-10 flex flex-col items-center">
       <AspectRatio ratio={16 / 9}>
         <Image src={post.thumbnail} alt="Article cover image" className="rounded-xl border-2" priority fill />
       </AspectRatio>

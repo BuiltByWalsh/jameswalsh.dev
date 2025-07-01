@@ -38,10 +38,10 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         content="91e1441f7228c69eeb9367bfbbda2c6284d19816253d8178d9087f42f95ab801"
       />
       <AnalyticsProvider>
-        <body className="flex flex-col md:items-center">
+        <body className="flex flex-col px-6 md:items-center md:px-8">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <TopNavbar />
-            <main className="mt-4 flex flex-col px-6 py-10 sm:px-4 md:w-[768px]">{children}</main>
+            <main className="mt-4 flex w-full flex-col py-10 sm:px-4 md:max-w-[1100px]">{children}</main>
             <Footer />
           </ThemeProvider>
         </body>

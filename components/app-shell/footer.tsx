@@ -1,5 +1,5 @@
 import { formatDate } from 'date-fns/format'
-import { Rss } from 'lucide-react'
+import { Copyright, Rss } from 'lucide-react'
 import Link from 'next/link'
 
 import { LinkedIn, Github, BlueSky } from '@/components/icons'
@@ -55,7 +55,8 @@ export default function Footer() {
         </ul>
       </div>
       <div className="my-4 flex flex-row items-center justify-center">
-        ©&nbsp;{formatDate(new Date(), 'yyyy')}&nbsp;James Walsh
+        <Copyright className="h-4 w-4" />
+        &nbsp;{formatDate(new Date(), 'yyyy')}&nbsp;James Walsh
       </div>
     </footer>
   )
