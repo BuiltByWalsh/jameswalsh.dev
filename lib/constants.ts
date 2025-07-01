@@ -9,7 +9,7 @@ export const EMAIL = 'jameswalsh@hey.com'
 export const SITE_NAVIGATIONAL_ITEMS = [
   { href: '/posts', value: 'posts' },
   { href: '/about', value: 'about' },
-  { href: '/stack', value: 'tech' },
+  { href: '/tech', value: 'tech' },
 ]
 
 export const GITHUB_REPO_LINK = 'https://github.com/BuiltByWalsh/jameswalsh.dev'

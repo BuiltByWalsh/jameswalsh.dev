@@ -2,10 +2,10 @@ import { Clock, MapPin, Terminal } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Tag } from './posts/[slug]/tag' // TODO: move this into a module.
 import { fetchPublishedPosts } from './posts/actions'
 import { ReadMore } from './posts/read-more'
 
+import { Tag } from '@/components/tag'
 import { Time } from '@/components/time'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { calculateTimeToRead } from '@/lib/utils'

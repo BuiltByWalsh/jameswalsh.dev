@@ -7,3 +7,13 @@ export interface TimelineItem {
 }
 
 export type TimelineCollectionRecord = Record<TimelineTypes, TimelineItem[]>
+
+export interface Project {
+  title: string
+  description: string
+  externalLink: {
+    title: string
+    href: string
+  }
+  imageLink: string
+}
