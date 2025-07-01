@@ -7,9 +7,9 @@ import { fetchPublishedPosts } from '../actions'
 
 import { fetchPostBySlug, fetchPreviousPost } from './actions'
 import MDXContent from './mdx-content'
-import { Tag } from './tag'
 import TimeInformation from './time-information'
 
+import { Tag } from '@/components/tag'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyH1 } from '@/components/ui/typography'
