@@ -28,7 +28,7 @@ describe('posts/PostsIndexPage', () => {
   it('displays page heading', async () => {
     render(await PostsIndexPage())
 
-    expect(screen.getByRole('heading', { name: /latest blog posts/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /posts/i })).toBeInTheDocument()
   })
 
   it('displays a link card to each blog post', async () => {

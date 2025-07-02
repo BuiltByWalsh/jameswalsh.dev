@@ -40,8 +40,8 @@ export default function AboutPage() {
           </TypographyP>
         </div>
         <Image
-          src="/portraits/side-profile.webp"
-          alt="Picture of James Side Profile"
+          src="/portraits/side-profile-pic-sticker.webp"
+          alt="Illustration of James Side Profile"
           width={416}
           height={416}
           className="col-span-12 mr-auto mb-8 rounded-lg shadow-xl md:col-span-5 md:rotate-3"

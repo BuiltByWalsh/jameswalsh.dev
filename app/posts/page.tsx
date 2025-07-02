@@ -20,7 +20,7 @@ export default async function PostsIndexPage() {
 
   return (
     <>
-      <TypographyH1>Latest Blog Posts</TypographyH1>
+      <TypographyH1>Latest Posts</TypographyH1>
       <div className="grid grid-cols-4 gap-8 md:grid-cols-8">
         {posts.map((post) => (
           <Link key={post.title} href={`/posts/${post.slug}`} className="col-span-4 w-full">

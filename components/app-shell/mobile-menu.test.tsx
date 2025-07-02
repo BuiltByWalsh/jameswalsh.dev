@@ -63,10 +63,9 @@ describe('components/app-shell/MobileMenu', () => {
 
   it.each([
     { dataTestId: 'home-nav-item', expectedText: /home/i },
-    { dataTestId: 'blog-nav-item', expectedText: /blog/i },
+    { dataTestId: 'posts-nav-item', expectedText: /posts/i },
     { dataTestId: 'about-nav-item', expectedText: /about/i },
-    { dataTestId: 'stack-nav-item', expectedText: /stack/i },
-    { dataTestId: 'portfolio-nav-item', expectedText: /portfolio/i },
+    { dataTestId: 'tech-nav-item', expectedText: /tech/i },
     { dataTestId: 'rss-feed-text-nav-item', expectedText: /get rss feed/i },
     { dataTestId: 'mode-toggle-text-nav-item', expectedText: /toggle light mode|toggle dark mode/i },
   ])('displays nav item for $expectedText', async ({ dataTestId, expectedText }) => {
