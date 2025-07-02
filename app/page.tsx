@@ -30,7 +30,6 @@ export default async function HomePage() {
             <h1 className="from-primary inline-block bg-linear-to-r via-fuchsia-600 to-red-400 bg-clip-text text-2xl font-semibold text-transparent">
               James Walsh
             </h1>
-            {/* | UI/UX enthusiast | Developer Advocate */}
             <h2 className="font-semibold text-fuchsia-600">Sr Software Engineer</h2>
             <p className="flex flex-row gap-2 font-medium">
               <MapPin className="h-5 w-5" />
@@ -50,7 +49,7 @@ export default async function HomePage() {
       <div>
         <div className="flex flex-row gap-4">
           <Terminal className="text-primary h-10 w-10" />
-          <h2 className="text-primary mb-8 text-4xl" id="latest-blog-posts">
+          <h2 className="text-primary mb-8 text-4xl md:mb-10" id="latest-blog-posts">
             posts
           </h2>
         </div>
