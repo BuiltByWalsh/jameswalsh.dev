@@ -3,8 +3,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { projectsCollection } from './project-collection'
-import { stackCollection } from './stack-collection'
+import { projectsCollection, stackCollection } from './static-data'
 
 import { Timeline, TimelineItem, TimelineLeftElement, TimelineRightElement } from '@/components/timeline'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,54 +16,23 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   const sectionTitleMap: Record<string, string> = {
-    frontend: 'Front end',
-    backend: 'Full Stack / Back end',
-    databases: 'Databases',
-    eventing: 'Data Events',
-    devtools: 'Dev Tools',
-    principles: 'Practices & Principles',
+    frontend: 'front-end',
+    backend: 'full-stack & back-end',
+    databases: 'databases',
+    eventing: 'data events',
+    devtools: 'dev tools',
+    principles: 'practices & principles',
   }
 
   return (
-    <>
-      <TypographyH1>Skills</TypographyH1>
-      <Timeline>
-        {Object.entries(stackCollection).map(([key, items]) => (
-          <TimelineItem key={key}>
-            <TimelineLeftElement>
-              <TypographyH2>{sectionTitleMap[key]}</TypographyH2>
-            </TimelineLeftElement>
-            <TimelineRightElement>
-              <ul className="flex flex-col gap-6" data-testid={`${key}-list`}>
-                {items.map((item) => (
-                  <li className="w-full" key={item.title}>
-                    <div className="flex flex-row items-center gap-4">
-                      <Image
-                        className="rounded-md"
-                        width={36}
-                        height={36}
-                        src={item.imageLink}
-                        alt={`technology logo for ${item.title}`}
-                      />
-                      <TypographyH3>{item.title}</TypographyH3>
-                    </div>
-                    <TypographyP data-testid={`${item.title}-text`}>{item.description}</TypographyP>
-                  </li>
-                ))}
-              </ul>
-            </TimelineRightElement>
-          </TimelineItem>
-        ))}
-      </Timeline>
-      <TypographyH1>
-        Things I&apos;ve Helped Build That&nbsp;
-        <span className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
-          Make Me Smile
-        </span>
+    <div className="flex flex-col gap-8">
+      <TypographyH1 className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
+        projects
       </TypographyH1>
-      <p>
-        I&apos;ve enjoyed contributing to many projects over the years, but the following is my professional highlight
-        reel. A couple of them are open-source, if you&apos;d like to learn more.
+      <hr />
+      <p className="font-medium">
+        i&apos;ve enjoyed contributing to many projects over the years, but the following is my professional highlight
+        reel. a couple of them are <b>OSS</b> if you&apos;d like to learn more.
       </p>
       <div className="mt-8 grid w-full gap-8 sm:grid-cols-1 md:grid-cols-2">
         {projectsCollection.map((project) => (
@@ -91,6 +59,41 @@ export default function StackPage() {
           </Link>
         ))}
       </div>
-    </>
+      <TypographyH2 className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
+        skills
+      </TypographyH2>
+      <p className="font-medium">how i like to ship 🚀.</p>
+      <hr />
+      <Timeline>
+        {Object.entries(stackCollection).map(([key, items]) => (
+          <TimelineItem key={key}>
+            <TimelineLeftElement>
+              <TypographyH2>{sectionTitleMap[key]}</TypographyH2>
+            </TimelineLeftElement>
+            <TimelineRightElement>
+              <ul className="flex flex-col gap-6" data-testid={`${key}-list`}>
+                {items.map((item) => (
+                  <li className="w-full" key={item.title}>
+                    <div className="flex flex-row items-center gap-4">
+                      <Image
+                        className="rounded-md"
+                        width={36}
+                        height={36}
+                        src={item.imageLink}
+                        alt={`technology logo for ${item.title}`}
+                      />
+                      <TypographyH3>{item.title}</TypographyH3>
+                    </div>
+                    <TypographyP data-testid={`${item.title}-text`} className="text-sm">
+                      {item.description}
+                    </TypographyP>
+                  </li>
+                ))}
+              </ul>
+            </TimelineRightElement>
+          </TimelineItem>
+        ))}
+      </Timeline>
+    </div>
   )
 }

@@ -30,8 +30,8 @@ describe('about/AboutPage', () => {
   it('displays profile image', async () => {
     render(await AboutPage())
 
-    const profileImage = screen.getByAltText(/picture of james side profile/i)
-    const encodedUriImageSrc = encodeURIComponent('/portraits/side-profile.webp')
+    const profileImage = screen.getByAltText(/illustration of james side profile/i)
+    const encodedUriImageSrc = encodeURIComponent('/portraits/side-profile-pic-sticker.webp')
 
     expect(profileImage).toBeInTheDocument()
     expect(profileImage.getAttribute('src')).toContain(encodedUriImageSrc)
