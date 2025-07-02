@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         <body className="flex flex-col px-6 md:items-center md:px-8">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <TopNavbar />
-            <main className="mt-4 flex w-full flex-col py-10 sm:px-4 md:max-w-[1100px]">{children}</main>
+            <main className="mt-4 flex w-full flex-col px-4 py-10 sm:px-0 md:max-w-[1100px]">{children}</main>
             <Footer />
           </ThemeProvider>
         </body>
