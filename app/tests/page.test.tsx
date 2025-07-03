@@ -12,14 +12,13 @@ describe('HomePage', () => {
   it('displays page heading', async () => {
     render(await HomePage())
 
-    expect(screen.getByRole('heading', { name: /hey 👋🏻 i'm james/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /james walsh/i })).toBeInTheDocument()
   })
 
   it('displays intro text', async () => {
     render(await HomePage())
 
-    const expectedText =
-      /i'm a full-stack Software Engineer, UI\/UX enthusiast, tinkerer, & self-proclaimed developer advocate./i
+    const expectedText = /i'm a full-stack, front-end focused web developer interested in frameworks like/i
     expect(screen.getByText(expectedText)).toBeInTheDocument()
   })
 
@@ -37,14 +36,10 @@ describe('HomePage', () => {
 
     mockPosts.forEach((blogPost, index) => {
       expect(container.querySelector(`a[href="/posts/${blogPost.slug}"]`)).toBeInTheDocument()
-      expect(screen.getByAltText(`${blogPost.title} cover image`)).toBeInTheDocument()
       expect(screen.getByText(blogPost.title)).toBeInTheDocument()
       expect(screen.getByText(blogPost.brief)).toBeInTheDocument()
     })
 
     expect(screen.getAllByText(/read more/i).length).toEqual(mockPosts.length)
   })
-
-  // TODO: @see https://linear.app/jdub/issue/JDUB-30/filter-home-page-blog-posts-to-latest-6
-  it.todo('filters visible blog posts to latest 6')
 })

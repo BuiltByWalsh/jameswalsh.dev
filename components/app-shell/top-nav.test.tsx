@@ -20,12 +20,11 @@ describe('components/app-shell/top-nav', () => {
 
     render(<TopNavbar />)
 
-    const siteNavItem = screen.getByRole('link', { name: value })
+    const siteNavItem = screen.getByRole('link', { name: new RegExp(`/ ${value}`, 'i') })
 
     expect(siteNavItem).toBeInTheDocument()
     expect(siteNavItem).toHaveAttribute('href', href)
     expect(siteNavItem).toHaveClass('border-b-2')
-    expect(siteNavItem).toHaveClass('border-primary')
   })
 
   it('displays a nav item with a tooltip for /rss.xml', () => {

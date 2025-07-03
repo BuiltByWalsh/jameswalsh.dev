@@ -16,14 +16,14 @@ import { useTheme } from 'next-themes'
 import { type ReactNode } from 'react'
 
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
 const navItemIcons: Record<string, ReactNode> = {
-  blog: <BookTypeIcon className="mr-2 h-4 w-4" />,
+  posts: <BookTypeIcon className="mr-2 h-4 w-4" />,
   about: <BadgeInfoIcon className="mr-2 h-4 w-4" />,
-  stack: <SquareTerminalIcon className="mr-2 h-4 w-4" />,
+  tech: <SquareTerminalIcon className="mr-2 h-4 w-4" />,
   portfolio: <FolderGit2Icon className="mr-2 h-4 w-4" />,
 }
 
@@ -39,6 +39,10 @@ export function MobileMenu() {
         />
       </SheetTrigger>
       <SheetContent>
+        <SheetHeader>
+          {/*cspell:disable-next-line*/}
+          <SheetTitle>jameswalsh.dev</SheetTitle>
+        </SheetHeader>
         <ul className="mt-8 flex flex-col gap-6">
           <li className="h-full w-full" data-testid="home-nav-item">
             <SheetClose asChild>
@@ -46,8 +50,7 @@ export function MobileMenu() {
                 href="/"
                 className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
               >
-                <HomeIcon className="mr-2 h-4 w-4" />
-                Home
+                <HomeIcon className="mr-2 h-4 w-4" />/ home
               </Link>
             </SheetClose>
           </li>
@@ -59,8 +62,7 @@ export function MobileMenu() {
                     href={navItem.href}
                     className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
                   >
-                    {navItemIcons[navItem.value.toLowerCase()]}
-                    {navItem.value}
+                    {navItemIcons[navItem.value.toLowerCase()]}/ {navItem.value}
                   </Link>
                 </SheetClose>
               </li>
@@ -73,8 +75,7 @@ export function MobileMenu() {
                 href="/rss.xml"
                 className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
               >
-                <RssIcon className="mr-2 h-4 w-4" />
-                Get RSS Feed
+                <RssIcon className="mr-2 h-4 w-4" />/ get rss feed
               </Link>
             </SheetClose>
           </li>
@@ -88,12 +89,11 @@ export function MobileMenu() {
                 {theme === 'dark' ? (
                   <>
                     <Sun className="mr-2 h-4 w-4" />
-                    Toggle Light Mode
+                    toggle light mode
                   </>
                 ) : (
                   <>
-                    <Moon className="mr-2 h-4 w-4" />
-                    Toggle Dark Mode
+                    <Moon className="mr-2 h-4 w-4" />/ toggle dark mode
                   </>
                 )}
               </Button>

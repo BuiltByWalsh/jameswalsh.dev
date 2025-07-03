@@ -1,7 +1,6 @@
 import './globals.css'
 
 import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import { Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
 
@@ -29,7 +28,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html
       lang="en"
-      className={cn(`${GeistSans.className} ${GeistMono.className}`, 'scroll-smooth')}
+      className={cn(`${GeistMono.className}`, 'scroll-smooth')}
       suppressHydrationWarning // @see https://ui.shadcn.com/docs/dark-mode/next
     >
       <meta charSet="utf-8" />
@@ -39,10 +38,10 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         content="91e1441f7228c69eeb9367bfbbda2c6284d19816253d8178d9087f42f95ab801"
       />
       <AnalyticsProvider>
-        <body className="flex flex-col md:items-center">
+        <body className="flex flex-col px-6 md:items-center md:px-8">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <TopNavbar />
-            <main className="mt-4 flex flex-col px-6 py-10 sm:px-4 md:w-[768px]">{children}</main>
+            <main className="mt-4 flex w-full flex-col px-2 py-10 sm:px-0 md:max-w-[1100px] md:px-4">{children}</main>
             <Footer />
           </ThemeProvider>
         </body>

@@ -33,7 +33,7 @@ const components: MDXRemoteProps['components'] = {
   pre: ({ className, ...rest }: HTMLAttributes<HTMLElement>) => (
     <pre className={cn(className, 'my-5 whitespace-pre-wrap', '[&>code:nth-child(1)]:p-3')} {...rest} />
   ),
-  a: (props: PropsWithChildren) => <a className="text-md p-0 underline underline-offset-2" {...props} />,
+  a: (props: PropsWithChildren) => <a className="text-md text-primary p-0 underline underline-offset-2" {...props} />,
 }
 const options: MDXRemoteProps['options'] = {
   mdxOptions: {

@@ -7,9 +7,9 @@ import { fetchPublishedPosts } from '../actions'
 
 import { fetchPostBySlug, fetchPreviousPost } from './actions'
 import MDXContent from './mdx-content'
-import { Tag } from './tag'
 import TimeInformation from './time-information'
 
+import { Tag } from '@/components/tag'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyH1 } from '@/components/ui/typography'
@@ -53,12 +53,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const previousPost = await fetchPreviousPost(slug)
 
   return (
-    <div className="py-10">
+    <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
       <AspectRatio ratio={16 / 9}>
         <Image src={post.thumbnail} alt="Article cover image" className="rounded-xl border-2" priority fill />
       </AspectRatio>
       <TypographyH1>{post.title}</TypographyH1>
-      <div className="flex w-full flex-col gap-4">
+      <div className="flex w-full flex-col items-center gap-4">
         <span className="flex flex-row flex-wrap gap-2">
           {post.tags.map((tag) => (
             <Tag key={tag} text={tag} />

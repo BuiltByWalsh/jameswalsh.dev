@@ -5,21 +5,19 @@ import { cn } from '@/lib/utils'
 export type TypographyProps = PropsWithChildren & React.HtmlHTMLAttributes<HTMLElement>
 
 export function TypographyH1({ className, ...rest }: TypographyProps) {
-  return (
-    <h1 className={cn('my-8 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl', className)} {...rest} />
-  )
+  return <h1 className={cn('my-8 scroll-m-20 text-4xl font-extrabold lg:text-5xl', className)} {...rest} />
 }
 
 export function TypographyH2({ className, ...rest }: TypographyProps) {
-  return <h2 className={cn('my-6 scroll-m-20 text-3xl font-semibold tracking-tight', className)} {...rest} />
+  return <h2 className={cn('my-6 scroll-m-20 text-3xl font-semibold', className)} {...rest} />
 }
 
 export function TypographyH3({ className, ...rest }: TypographyProps) {
-  return <h3 className={cn('my-5 scroll-m-20 text-2xl font-semibold tracking-tight', className)} {...rest} />
+  return <h3 className={cn('my-5 scroll-m-20 text-2xl font-semibold', className)} {...rest} />
 }
 
 export function TypographyH4({ className, ...rest }: TypographyProps) {
-  return <h4 className={cn('my-4 scroll-m-20 text-xl font-semibold tracking-tight', className)} {...rest} />
+  return <h4 className={cn('my-4 scroll-m-20 text-xl font-semibold', className)} {...rest} />
 }
 
 export function TypographyP({ className, ...rest }: TypographyProps) {

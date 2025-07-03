@@ -7,10 +7,9 @@ export const SITE_DESCRIPTION = 'Software Engineer, UI/UX Enthusiast, Developer 
 export const EMAIL = 'jameswalsh@hey.com'
 
 export const SITE_NAVIGATIONAL_ITEMS = [
-  { href: '/posts', value: 'Blog' },
-  { href: '/about', value: 'About' },
-  { href: '/stack', value: 'Stack' },
-  { href: '/projects', value: 'Portfolio' },
+  { href: '/posts', value: 'posts' },
+  { href: '/about', value: 'about' },
+  { href: '/tech', value: 'tech' },
 ]
 
 export const GITHUB_REPO_LINK = 'https://github.com/BuiltByWalsh/jameswalsh.dev'
