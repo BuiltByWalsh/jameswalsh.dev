@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <div className="mt-8 grid grid-cols-12 gap-10">
+      <div className="mt-8 grid grid-cols-12 gap-y-4 md:gap-10">
         <div className="col-span-12 flex flex-col justify-start md:col-span-7">
           <TypographyH1 className="mb-12">
             <span className="from-primary inline-block bg-linear-to-r via-fuchsia-600 to-red-400 bg-clip-text text-4xl text-transparent lg:text-5xl">
@@ -28,13 +28,13 @@ export default function AboutPage() {
             </span>
             &nbsp;I&apos;m James
           </TypographyH1>
-          <TypographyP className="my-3 text-xl break-normal">
+          <TypographyP className="my-3 text-base break-normal md:text-xl">
             I live in SLC, UT where I write software & enjoy the outdoors.
           </TypographyP>
-          <TypographyP className="my-3 text-xl break-normal">
+          <TypographyP className="my-3 text-base break-normal md:text-xl">
             In my free-time I love tinkering with home automations, riding my mountain bike & playing video games.
           </TypographyP>
-          <TypographyP className="my-3 text-xl break-normal">
+          <TypographyP className="my-3 w-full text-base text-wrap break-normal md:text-xl">
             I&apos;m a coffee nut. From espresso, french-press, to pour-over, some of my favorite moments in life are
             looking out at a crisp morning with a hot cup in my hand.
           </TypographyP>
