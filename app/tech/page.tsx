@@ -16,23 +16,22 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   const sectionTitleMap: Record<string, string> = {
-    frontend: 'front-end',
-    backend: 'full-stack & back-end',
-    databases: 'databases',
-    eventing: 'data events',
-    devtools: 'dev tools',
-    principles: 'practices & principles',
+    web: 'Web Development',
+    databases: 'Databases',
+    eventing: 'Data events',
+    devtools: 'Dev Tools',
+    principles: 'Practices & Principles',
   }
 
   return (
     <div className="flex flex-col gap-8">
       <TypographyH1 className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
-        projects
+        Projects
       </TypographyH1>
       <hr />
       <p className="font-medium">
-        i&apos;ve enjoyed contributing to many projects over the years, but the following is my professional highlight
-        reel. a couple of them are <b>OSS</b> if you&apos;d like to learn more.
+        I&apos;ve enjoyed contributing to many projects over the years, but the following is my professional highlight
+        reel. A couple of them are <b>OSS</b> if you&apos;d like to learn more.
       </p>
       <div className="mt-8 grid w-full gap-8 sm:grid-cols-1 md:grid-cols-2">
         {projectsCollection.map((project) => (
@@ -60,9 +59,9 @@ export default function StackPage() {
         ))}
       </div>
       <TypographyH2 className="to-primary inline-block bg-linear-to-r from-fuchsia-600 via-red-400 bg-clip-text text-5xl text-transparent">
-        skills
+        Skills
       </TypographyH2>
-      <p className="font-medium">how i like to ship 🚀.</p>
+      <p className="font-medium">How I like to ship 🚀.</p>
       <hr />
       <Timeline>
         {Object.entries(stackCollection).map(([key, items]) => (
