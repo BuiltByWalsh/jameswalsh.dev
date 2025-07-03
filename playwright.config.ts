@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const PORT = process.env.CI ? 3000 : 3001
-const baseURL = `http://127.0.0.1:${PORT}`
+const PORT = 3000
+const BASE_URL = `http://127.0.0.1:${PORT}`
 
 export default defineConfig({
   testDir: './e2e',
@@ -12,11 +12,11 @@ export default defineConfig({
   reporter: process.env.CI ? 'github' : 'line',
   webServer: {
     command: process.env.CI ? 'pnpm preview' : 'pnpm dev',
-    url: baseURL,
+    url: BASE_URL,
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL,
+    baseURL: BASE_URL,
     trace: 'retry-with-trace',
   },
 
