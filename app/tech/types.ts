@@ -1,4 +1,4 @@
-export type TimelineTypes = 'frontend' | 'backend' | 'databases' | 'eventing' | 'devtools' | 'principles'
+export type TimelineTypes = 'web' | 'databases' | 'eventing' | 'devtools' | 'principles'
 
 export interface TimelineItem {
   title: string

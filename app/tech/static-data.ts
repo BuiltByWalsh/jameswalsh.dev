@@ -67,109 +67,107 @@ export const projectsCollection: Project[] = [
 ]
 
 export const stackCollection: TimelineCollectionRecord = {
-  frontend: [
+  web: [
     {
-      title: 'typescript',
+      title: 'Typescript',
       description: `Strong type systems improve code quality, refactoring ability, and readability. I'm a strong advocate for static analysis and compile-time safety.`,
       imageLink: '/logos/tech/typescript.webp',
     },
     {
-      title: 'react',
+      title: 'React',
       description: `Still the GOAT for me. This site is built with React. I love its composability, JSX, and expressiveness for building user interfaces.`,
       imageLink: '/logos/tech/react.webp',
     },
-  ],
-  backend: [
     {
-      title: 'next.js',
+      title: 'Next.js',
       description: `Full-stack React with SSR and RSC. Perfect for indie developers who want everything they need with frontend-first thinking. This portfolio uses Next.js.`,
       imageLink: '/logos/tech/nextjs.webp',
     },
     {
-      title: 'node.js / express',
+      title: 'Node.js / Express',
       description: `Great for avoiding context switching between frontend and backend. Lightweight and productive for building network layers.`,
       imageLink: '/logos/tech/nodejs.webp',
     },
     {
-      title: 'ruby on rails',
+      title: 'Ruby on Rails',
       description: `My first professional stack. Expressive and productive for MVPs, though I don't miss ActiveRecord or the MVC model much.`,
       imageLink: '/logos/tech/rails.webp',
     },
   ],
   databases: [
     {
-      title: 'postgres',
+      title: 'PostgreSQL',
       description: `Flexible database that handles SQL, JSON, normalized and denormalized data. My go-to for professional teams.`,
       imageLink: '/logos/tech/postgres.webp',
     },
     {
-      title: 'turso',
+      title: 'Turso',
       description: `Proves SQLite can scale without hefty costs. Great for edge computing and rapid prototyping with simple setup.`,
       imageLink: '/logos/tech/turso.webp',
     },
     {
-      title: 'planet-scale',
+      title: 'PlanetScale',
       description: `MySQL-based with git-style branching and generous free tier. Perfect for indie projects and quick iteration.`,
       imageLink: '/logos/tech/planetscale-white.webp',
     },
   ],
   eventing: [
     {
-      title: 'rabbit-mq',
+      title: 'RabbitMQ',
       description: `Perfect for microservices and eventual consistency. Works great with Node.js's event loop architecture.`,
       imageLink: '/logos/tech/rabbitmq.webp',
     },
     {
-      title: 'kafka',
+      title: 'Kafka',
       description: `Where RabbitMQ struggles, Kafka excels. Consumers can re-read history and power real-time analytics.`,
       imageLink: '/logos/tech/kafka.webp',
     },
     {
-      title: 'aws sqs',
+      title: 'AWS Simple Queue Service',
       description: `My favorite for simple pub/sub. Lightweight and easiest to get started with as a hosted solution.`,
       imageLink: '/logos/tech/sqs.webp',
     },
   ],
   devtools: [
     {
-      title: 'neovim + lazy vim',
+      title: 'Neovim + LazyVim',
       description: `Everything I need with fraction of CPU/RAM cost of the industry-standard electron counterparts. Configurable and great for remote pairing with LiveShare.`,
       imageLink: '/logos/tech/neovim.webp',
     },
     {
-      title: 'oh my zsh',
+      title: 'OhMyZSH',
       description: `ZSH supercharged with custom configurations, aliases, and plugins. Makes terminal work feel premium.`,
       imageLink: '/logos/tech/ohmyzsh.webp',
     },
     {
-      title: 'ghostty',
+      title: 'Ghostty',
       description: `Modern terminal that doesn't get in your way, track you, or require login. Tried, true, and stable.`,
       imageLink: '/logos/tech/ghostty.webp',
     },
     {
-      title: 'table plus',
+      title: 'TablePlus',
       description: `Compatible with all major databases. Simple interface that puts SQL data front and center.`,
       imageLink: '/logos/tech/tableplus.webp',
     },
     {
-      title: 'bruno',
+      title: 'Bruno',
       description: `Free, open-source API management tool that can be checked into git. Gets you back to coding quickly.`,
       imageLink: '/logos/tech/bruno.webp',
     },
   ],
   principles: [
     {
-      title: 'linear',
+      title: 'Linear',
       description: `Reduce waste and cut through agile cruft. The most powerful, simple project management tool I've used.`,
       imageLink: '/logos/tech/linear-app-logo.webp',
     },
     {
-      title: 'atomic design principles',
+      title: 'Atomic Design Principles',
       description: `Brad Frost's principles for building scalable design systems with stellar developer experience.`,
       imageLink: '/logos/tech/atomic-design.webp',
     },
     {
-      title: 'test-driven development',
+      title: 'Test-Driven Development',
       description: `Discipline that improves code quality and helps think through features at the smallest level. Non-negotiable for me.`,
       imageLink: '/logos/tech/tdd.webp',
     },

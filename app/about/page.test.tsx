@@ -14,7 +14,7 @@ describe('about/AboutPage', () => {
   it('displays bio text', async () => {
     render(await AboutPage())
 
-    expect(screen.getByText(/i live in utah where I write software & enjoy the outdoors./i)).toBeInTheDocument()
+    expect(screen.getByText(/i live in slc, ut where i write software & enjoy the outdoors./i)).toBeInTheDocument()
     expect(
       screen.getByText(
         /in my free-time I love tinkering with home automations, riding my mountain bike & playing video games./i,
@@ -22,7 +22,7 @@ describe('about/AboutPage', () => {
     ).toBeInTheDocument()
     expect(
       screen.getByText(
-        /i'm a coffee nut. from espresso, french-press, to pour over, some of my favorite moments in life are looking out at a crisp morning with a hot cup in my hand./i,
+        /i'm a coffee nut. from espresso, french-press, to pour-over, some of my favorite moments in life are looking out at a crisp morning with a hot cup in my hand./i,
       ),
     ).toBeInTheDocument()
   })
@@ -53,8 +53,7 @@ describe('about/AboutPage', () => {
   it('displays subscribe CTA', async () => {
     render(await AboutPage())
 
-    // TODO: should be hooked up to subscription URL via https://linear.app/jdub/issue/JDUB-29/spike-newsletter
-    expect(screen.getByRole('link', { name: /subscribe/i })).toHaveAttribute('href', '/#publications')
+    expect(screen.getByRole('button', { name: /subscribe/i }))
   })
 
   it('displays work history', async () => {
