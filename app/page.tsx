@@ -38,7 +38,7 @@ export default async function HomePage() {
           </div>
         </div>
         <hr />
-        <p className="w-[300px] text-sm text-balance">
+        <p className="w-full text-sm text-pretty md:w-[300px] md:text-balance">
           I&apos;m a full-stack, front-end focused web developer interested in frameworks like{' '}
           <code className="gray-300 rounded-sm bg-gray-300 px-1 py-0.5 text-xs dark:bg-gray-600">Next.js</code> &{' '}
           <code className="gray-300 mr-0.5 rounded-sm bg-gray-300 px-0.5 py-0.5 text-xs dark:bg-gray-600">Remix</code>.
