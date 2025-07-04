@@ -139,8 +139,8 @@ importers:
         specifier: 3.1.4
         version: 3.1.4(vitest@3.1.4(@types/debug@4.1.12)(@types/node@22.7.5)(happy-dom@18.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(msw@2.10.2(@types/node@22.7.5)(typescript@5.8.3))(yaml@2.8.0))
       commitlint:
-        specifier: 19.6.0
-        version: 19.6.0(@types/node@22.7.5)(typescript@5.8.3)
+        specifier: 19.8.1
+        version: 19.8.1(@types/node@22.7.5)(typescript@5.8.3)
       cspell:
         specifier: 8.15.1
         version: 8.15.1
@@ -2434,8 +2434,8 @@ packages:
     resolution: {integrity: sha512-bKw/r35jR3HGt5PEPm1ljsQQGyCrR8sFGNiN5L+ykDHdpO8Smxkrkla9Yi6NkQyUrb8V54PGhfMs6NrIwtxtdw==}
     engines: {node: '>= 6'}
 
-  commitlint@19.6.0:
-    resolution: {integrity: sha512-0gOMRBSpnCw3Su0rfVeDqCe4ck/fkhGGC9UxVDeSyyCemFXs4U3BDuwMWvYcw4qsEAkPuDjQNoU8KWyPtHBq/w==}
+  commitlint@19.8.1:
+    resolution: {integrity: sha512-j7jojdmHrVOZ16gnjK2nbQuzdwA9TpxS9iNb9Q9QS3ytgt3JZVIGmsNbCuhmnsJWGspotlQ34yH8n1HvIKImiQ==}
     engines: {node: '>=v18'}
     hasBin: true
 
@@ -7258,7 +7258,7 @@ snapshots:
       has-own-prop: 2.0.0
       repeat-string: 1.6.1
 
-  commitlint@19.6.0(@types/node@22.7.5)(typescript@5.8.3):
+  commitlint@19.8.1(@types/node@22.7.5)(typescript@5.8.3):
     dependencies:
       '@commitlint/cli': 19.8.1(@types/node@22.7.5)(typescript@5.8.3)
       '@commitlint/types': 19.8.1
