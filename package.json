@@ -12,6 +12,10 @@
       "path": "./node_modules/git-cz"
     }
   },
+  "lint-staged": {
+    "!(*app).{ts,tsx}": ["eslint --fix", "pnpm format"],
+    "app/**/*.{ts,tsx}": ["next lint --fix", "pnpm format"]
+  },
   "scripts": {
     "dev": "next dev --port=3000",
     "dev:force": "rm -rf .next && pnpm dev",
@@ -21,7 +25,7 @@
     "format:check": "prettier --check .",
     "lint": "next lint",
     "lint:fix": "pnpm lint --fix",
-    "precommit": "pnpm spell && pnpm lint && pnpm format",
+    "precommit": "pnpm spell && pnpm lint-staged",
     "prepush": "pnpm typecheck && vitest --run",
     "prepare": "husky install",
     "preview": "pnpm build && pnpm start",
@@ -84,12 +88,14 @@
     "cspell": "8.15.1",
     "eslint": "9.27.0",
     "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "10.1.5",
     "eslint-import-resolver-typescript": "3.10.1",
     "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-prettier": "5.5.1",
     "eslint-plugin-react-hooks": "5.2.0",
-    "git-cz": "4.9.0",
     "happy-dom": "18.0.1",
     "husky": "8.0.3",
+    "lint-staged": "16.1.2",
     "msw": "2.8.4",
     "postcss": "8.5.6",
     "prettier": "3.5.3",
