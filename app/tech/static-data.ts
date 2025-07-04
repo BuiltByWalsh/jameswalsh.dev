@@ -131,7 +131,7 @@ export const stackCollection: TimelineCollectionRecord = {
   devtools: [
     {
       title: 'Neovim + LazyVim',
-      description: `Everything I need with fraction of CPU/RAM cost of the industry-standard electron counterparts. Configurable and great for remote pairing with LiveShare.`,
+      description: `Everything I need with fraction of CPU/RAM cost of the industry-standard electron counterparts. All without ever leaving the terminal.`,
       imageLink: '/logos/tech/neovim.webp',
     },
     {
@@ -141,7 +141,7 @@ export const stackCollection: TimelineCollectionRecord = {
     },
     {
       title: 'Ghostty',
-      description: `Modern terminal that doesn't get in your way, track you, or require login. Tried, true, and stable.`,
+      description: `Modern terminal emulator with super simple configuration. Ghostty doesn't get in your way, track you, or require a login.`,
       imageLink: '/logos/tech/ghostty.webp',
     },
     {
