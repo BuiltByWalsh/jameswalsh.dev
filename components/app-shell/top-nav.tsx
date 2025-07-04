@@ -1,14 +1,11 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
-import { RssIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
-
+import { ModeToggleButton, RssFeedButton } from './action-buttons'
 import { MobileMenu } from './mobile-menu'
-import { ModeToggleMenu } from './mode-toggle-menu'
 
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 
@@ -51,23 +48,12 @@ export function TopNavbar() {
             )
           })}
         </ul>
-        <ul className="flex items-center text-sm font-medium">
-          <li data-testid="mode-toggle-menu" className="h-full">
-            <ModeToggleMenu />
+        <ul className="flex items-center gap-2 text-sm font-medium">
+          <li data-testid="mode-toggle-nav-item" className="h-full">
+            <ModeToggleButton />
           </li>
-          <li data-testid="rss-feed-nav-item">
-            <Link href="/rss.xml" className={topNavVariants({ variant: 'ghost' })}>
-              <TooltipProvider>
-                <Tooltip delayDuration={250}>
-                  <TooltipTrigger className="hover:cursor-pointer">
-                    <RssIcon />
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom">
-                    <p>Get the RSS Feed</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </Link>
+          <li data-testid="rss-feed-nav-item" className="h-full">
+            <RssFeedButton />
           </li>
         </ul>
       </nav>
