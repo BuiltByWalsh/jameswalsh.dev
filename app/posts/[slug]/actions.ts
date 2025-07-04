@@ -23,11 +23,13 @@ export async function fetchPostBySlug(slug: string): Promise<Post> {
   }
 }
 
-export async function fetchPreviousPost(slug: string): Promise<Post | undefined> {
+export async function fetchPreviousPostSlug(slug: string): Promise<string | undefined> {
   const publishedPosts = await fetchPublishedPosts()
   const postIndex = publishedPosts.findIndex((post) => post.slug === slug)
 
   if (postIndex === publishedPosts.length - 1) return undefined
 
-  return publishedPosts[postIndex + 1]
+  const previousPost = publishedPosts.at(postIndex + 1)
+
+  return previousPost && previousPost.slug
 }
