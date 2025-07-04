@@ -41,8 +41,7 @@ test.describe('when toggling the theme', () => {
       await page.locator('data-testid=mobile-menu-trigger').click()
       await page.getByText('Toggle Dark Mode').click()
     } else {
-      await page.locator('data-testid=mode-toggle-menu').click()
-      await page.getByRole('menuitem', { name: 'Dark' }).click()
+      await page.locator('data-testid=mode-toggle-nav-item').click()
     }
   })
 })
@@ -51,7 +50,6 @@ test.describe('when toggling color scheme on desktop', () => {
   test('provides a menu item to toggle the system theme', async ({ page, isMobile }) => {
     if (isMobile) return
 
-    await page.locator('data-testid=mode-toggle-menu').click()
-    await page.getByRole('menuitem', { name: 'System' }).click()
+    await page.locator('data-testid=mode-toggle-nav-item').click()
   })
 })

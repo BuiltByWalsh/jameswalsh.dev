@@ -41,7 +41,7 @@ describe('components/app-shell/top-nav', () => {
 
     render(<TopNavbar />)
 
-    const modeToggle = screen.getByTestId('mode-toggle-menu')
+    const modeToggle = screen.getByTestId('mode-toggle-nav-item')
     expect(modeToggle).toBeInTheDocument()
   })
 })
