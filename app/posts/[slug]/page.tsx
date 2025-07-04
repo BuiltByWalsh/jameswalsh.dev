@@ -24,6 +24,8 @@ export async function generateStaticParams() {
   }))
 }
 
+export const dynamicParams = false
+
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
   const { slug } = await params
   const post = await fetchPostBySlug(slug)
