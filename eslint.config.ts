@@ -5,7 +5,12 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'plugin:import/recommended', 'plugin:import/typescript'),
+  ...compat.extends(
+    'next/core-web-vitals',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:prettier/recommended',
+  ),
   {
     rules: {
       'import/no-cycle': [2, { maxDepth: 2 }],
