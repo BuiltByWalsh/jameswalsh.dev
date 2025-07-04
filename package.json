@@ -13,8 +13,8 @@
     }
   },
   "lint-staged": {
-    "!(*app).{ts,tsx}": ["eslint --fix", "pnpm format"],
-    "app/**/*.{ts,tsx}": ["next lint --fix", "pnpm format"]
+    "*.{ts,tsx}": ["next lint --fix", "pnpm format"],
+    "*.md": "prettier --list-different"
   },
   "scripts": {
     "dev": "next dev --port=3000",
