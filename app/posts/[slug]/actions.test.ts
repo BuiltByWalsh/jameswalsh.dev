@@ -1,6 +1,6 @@
 import * as postsActions from '../actions'
 
-import { fetchPostBySlug, fetchPreviousPost } from './actions'
+import { fetchPostBySlug, fetchPreviousPostSlug } from './actions'
 
 import * as mdx from '@/lib/mdx'
 import type { Post } from '@/lib/types'
@@ -57,7 +57,7 @@ describe('/posts/[slug]/actions', () => {
     })
   })
 
-  describe('fetchPreviousPost', () => {
+  describe('fetchPreviousPostBySlug', () => {
     const mockPosts: Post[] = [
       { slug: 'slug-1', ...getMockFrontmatter(), source: getMockSource() },
       { slug: 'slug-2', ...getMockFrontmatter(), source: getMockSource() },
@@ -66,15 +66,14 @@ describe('/posts/[slug]/actions', () => {
     it('returns the next index of results returned from fetchPublishedPosts()', async () => {
       vi.mocked(postsActions.fetchPublishedPosts).mockResolvedValue(mockPosts)
 
-      const actual = await fetchPreviousPost('slug-1')
-      expect(actual).toBeTruthy()
-      expect(actual?.slug).toEqual('slug-2')
+      const actual = await fetchPreviousPostSlug('slug-1')
+      expect(actual).toEqual('slug-2')
     })
 
     it('returns undefined when the bottom of the list is reached', async () => {
       vi.mocked(postsActions.fetchPublishedPosts).mockResolvedValue(mockPosts)
 
-      const actual = await fetchPreviousPost('slug-2')
+      const actual = await fetchPreviousPostSlug('slug-2')
       expect(actual).toBeUndefined()
     })
   })
