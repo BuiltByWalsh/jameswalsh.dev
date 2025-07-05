@@ -1,12 +1,11 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Metadata } from 'next'
+import { ChevronLeft } from 'lucide-react'
+import { type Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { fetchPublishedPosts } from '../actions'
 
-import { fetchPostBySlug, fetchPreviousPostSlug } from './actions'
-import MDXContent from './mdx-content'
+import { fetchPostBySlug } from './actions'
 import TimeInformation from './time-information'
 
 import { Tag } from '@/components/tag'
@@ -19,8 +18,8 @@ import { cn } from '@/lib/utils'
 export async function generateStaticParams() {
   const publishedPosts = await fetchPublishedPosts()
 
-  return publishedPosts.map((post) => ({
-    slug: post.slug,
+  return publishedPosts.map(({ slug }) => ({
+    slug,
   }))
 }
 
@@ -51,7 +50,9 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [post, previousPostSlug] = await Promise.all([fetchPostBySlug(slug), fetchPreviousPostSlug(slug)])
+  const post = await fetchPostBySlug(slug)
+
+  const { default: Post } = await import(`@/posts/${slug}.mdx`)
 
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
@@ -68,22 +69,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <TimeInformation metadata={{ publishedAt: post.publishedAt, source: post.source }} />
       </div>
       <article className="mt-8">
-        <MDXContent source={post.source} />
+        <Post />
       </article>
       <div className="border-color mt-8 flex w-full flex-row justify-center gap-4 border-t pt-8">
         <Link href="/posts" className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}>
           <ChevronLeft width={16} height={16} />
           &nbsp;All posts
         </Link>
-        {previousPostSlug && (
-          <Link
-            href={`/posts/${previousPostSlug}`}
-            className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}
-          >
-            <ChevronRight width={16} height={16} />
-            &nbsp;Next
-          </Link>
-        )}
       </div>
     </div>
   )
