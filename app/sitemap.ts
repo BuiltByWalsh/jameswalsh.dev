@@ -34,16 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${PRODUCTION_URL}/projects`,
+      url: `${PRODUCTION_URL}/tech`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
-    },
-    {
-      url: `${PRODUCTION_URL}/stack`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.1,
     },
   ]
 }
