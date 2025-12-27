@@ -1,6 +1,6 @@
 import { getMockSource } from './source'
 
-import { Post } from '@/lib/types'
+import { Post } from '@/services/types'
 
 export function getMockPost(overrides: Partial<Post> = {}): Post {
   return {

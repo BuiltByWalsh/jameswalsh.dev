@@ -2,16 +2,16 @@ import { Clock, MapPin, Terminal } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { fetchPublishedPosts } from './posts/actions'
 import { ReadMore } from './posts/read-more'
 
 import { Tag } from '@/components/tag'
 import { Time } from '@/components/time'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { calculateTimeToRead } from '@/lib/utils'
+import { getAllPublishedPosts } from '@/services/post'
 
 export default async function HomePage() {
-  const posts = await fetchPublishedPosts()
+  const posts = await getAllPublishedPosts()
 
   return (
     <div className="mt-16 mb-6 flex w-full flex-col gap-8 md:mt-0 md:flex-row">

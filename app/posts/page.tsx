@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { fetchPublishedPosts } from './actions'
 import { ReadMore } from './read-more'
 
 import { Time } from '@/components/time'
@@ -9,6 +8,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { TypographyH1, TypographyP } from '@/components/ui/typography'
 import { calculateTimeToRead } from '@/lib/utils'
+import { getAllPublishedPosts } from '@/services/post'
 
 export const metadata = {
   title: 'Articles - James Walsh',
@@ -16,7 +16,7 @@ export const metadata = {
 }
 
 export default async function PostsIndexPage() {
-  const posts = await fetchPublishedPosts()
+  const posts = await getAllPublishedPosts()
 
   return (
     <>

@@ -4,24 +4,14 @@ import * as dateFnsFormat from 'date-fns/format'
 import { err, ok } from 'neverthrow'
 import type { PropsWithChildren } from 'react'
 
-import { fetchPublishedPosts } from '../actions'
-
-import { fetchPreviousPost } from './actions'
 import PostPage, { generateMetadata, generateStaticParams } from './page'
 
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
-import { getPost } from '@/lib/posts/get-post'
 import { ResultError } from '@/lib/result'
+import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
-vi.mock('../actions', () => ({
-  fetchPublishedPosts: vi.fn(() => Promise.resolve([])),
-}))
-vi.mock('@/lib/posts/get-post')
-vi.mock('./actions', () => ({
-  fetchPostBySlug: vi.fn(),
-  fetchPreviousPost: vi.fn(() => Promise.resolve(undefined)),
-}))
+vi.mock('@/services/post')
 vi.mock('./mdx-content', () => ({
   __esModule: true,
   default: vi.fn(({ children }: PropsWithChildren) => <div>{children}</div>),
@@ -101,7 +91,7 @@ describe('posts/[slug]/PostPage', () => {
     const mockPreviousPostSlug = 'previous-post-slug'
     const mockPreviousPost = getMockPost({ slug: mockPreviousPostSlug })
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
-    vi.mocked(fetchPreviousPost).mockResolvedValue(mockPreviousPost)
+    vi.mocked(getPreviousPost).mockResolvedValue(mockPreviousPost)
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -176,7 +166,7 @@ describe('posts/[slug]/PostPage', () => {
 
   describe('#generateStaticParams', () => {
     it('returns all available post slugs', async () => {
-      vi.mocked(fetchPublishedPosts).mockResolvedValue([
+      vi.mocked(getAllPublishedPosts).mockResolvedValue([
         getMockPost({ slug: 'slug-1' }),
         getMockPost({ slug: 'slug-2' }),
         getMockPost({ slug: 'slug-3' }),
