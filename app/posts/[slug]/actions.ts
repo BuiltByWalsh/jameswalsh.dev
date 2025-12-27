@@ -9,8 +9,22 @@ import { fetchPublishedPosts } from '../actions'
 import { getPostFromMDX } from '@/lib/mdx'
 import type { Post } from '@/lib/types'
 
+const POSTS_ROOT = path.join(process.cwd(), 'posts')
+const SLUG_PATTERN = /^[a-zA-Z0-9_-]+$/
+
 export async function fetchPostBySlug(slug: string): Promise<Post> {
-  const filePath = path.join(process.cwd(), 'posts', `${slug}.mdx`)
+  // Validate slug to avoid path traversal and invalid filenames
+  if (!SLUG_PATTERN.test(slug)) {
+    notFound()
+  }
+
+  const candidatePath = path.join(POSTS_ROOT, `${slug}.mdx`)
+  const filePath = path.resolve(candidatePath)
+
+  // Ensure the resolved path stays within the posts root directory
+  if (!filePath.startsWith(POSTS_ROOT + path.sep)) {
+    notFound()
+  }
 
   try {
     return await getPostFromMDX(filePath)
