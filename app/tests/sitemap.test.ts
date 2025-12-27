@@ -1,12 +1,11 @@
-import { fetchPublishedPosts } from '../posts/actions'
 import sitemap from '../sitemap'
 
 import { PRODUCTION_URL } from '@/lib/constants'
-import { Post } from '@/lib/types'
+import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
-vi.mock('@/app/posts/actions', () => ({
-  fetchPublishedPosts: vi.fn().mockResolvedValue([]),
+vi.mock('@/services/post', () => ({
+  getAllPublishedPosts: vi.fn().mockResolvedValue([]),
 }))
 
 describe('sitemap', () => {
@@ -64,8 +63,8 @@ describe('sitemap', () => {
         lastModified: '2024-09-16',
         publishedAt: '2024-09-16',
       }),
-    ] as Post[]
-    vi.mocked(fetchPublishedPosts).mockResolvedValue(mockPublishedPosts)
+    ]
+    vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPublishedPosts)
 
     const sitemapList = await sitemap()
 

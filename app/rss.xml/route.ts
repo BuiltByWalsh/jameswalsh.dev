@@ -2,8 +2,8 @@ import RSS from 'rss'
 
 import { SITE_MAP_CATEGORIES } from './constants'
 
-import { fetchPublishedPosts } from '@/app/posts/actions'
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
+import { getAllPublishedPosts } from '@/services/post'
 
 export async function GET() {
   const feed = new RSS({
@@ -19,7 +19,8 @@ export async function GET() {
     categories: SITE_MAP_CATEGORIES,
   })
 
-  const publishedPosts = await fetchPublishedPosts()
+  const publishedPosts = await getAllPublishedPosts()
+
   publishedPosts.forEach((post) => {
     feed.item({
       title: post.title,

@@ -3,16 +3,16 @@
 import { SITE_MAP_CATEGORIES } from './constants'
 import { GET } from './route'
 
-import { fetchPublishedPosts } from '@/app/posts/actions'
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
+import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
-vi.mock('@/app/posts/actions', () => ({
-  fetchPublishedPosts: vi.fn().mockResolvedValue([]),
+vi.mock('@/services/post', () => ({
+  getAllPublishedPosts: vi.fn().mockResolvedValue([]),
 }))
 
 describe('rss.xml', () => {
-  describe('GET', () => {
+  describe('#GET', () => {
     const mockDateTime = new Date(Date.UTC(2024, 9, 31, 0, 0, 0)) // happy halloween 🎃
 
     beforeAll(() => {
@@ -52,7 +52,7 @@ describe('rss.xml', () => {
         getMockPost({ title: 'blog post 1', slug: 'slug-1', thumbnail: '/blog-thumbnails/post-1-thumbnail.webp' }),
         getMockPost({ title: 'blog post 2', slug: 'slug-2', thumbnail: '/blog-thumbnails/post-2-thumbnail.webp' }),
       ]
-      vi.mocked(fetchPublishedPosts).mockResolvedValue(mockPosts)
+      vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
       const response = await GET()
       const blob = await response.blob()
       const text = await blob.text()

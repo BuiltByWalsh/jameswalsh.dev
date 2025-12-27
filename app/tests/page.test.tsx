@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react'
 
 import HomePage from '../page'
-import { fetchPublishedPosts } from '../posts/actions'
 
+import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
-vi.mock('../posts/actions', () => ({
-  fetchPublishedPosts: vi.fn().mockResolvedValue([]),
+vi.mock('@/services/post', () => ({
+  getAllPublishedPosts: vi.fn().mockResolvedValue([]),
 }))
+
 describe('HomePage', () => {
   it('displays page heading', async () => {
     render(await HomePage())
@@ -30,7 +31,7 @@ describe('HomePage', () => {
       getMockPost({ slug: 'slug-4', title: 'Title 4', brief: 'this is brief 4', publishedAt: '2020-01-05' }),
       getMockPost({ slug: 'slug-5', title: 'Title 5', brief: 'this is brief 5', publishedAt: '2020-01-06' }),
     ]
-    vi.mocked(fetchPublishedPosts).mockResolvedValue(mockPosts)
+    vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
 
     const { container } = render(await HomePage())
 

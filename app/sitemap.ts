@@ -1,10 +1,10 @@
 import { MetadataRoute } from 'next'
 
-import { fetchPublishedPosts } from '@/app/posts/actions'
 import { PRODUCTION_URL } from '@/lib/constants'
+import { getAllPublishedPosts } from '@/services/post'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const publishedPosts = await fetchPublishedPosts()
+  const publishedPosts = await getAllPublishedPosts()
 
   const blogPostSiteMaps: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
     url: `${PRODUCTION_URL}/posts/${post.slug}`,

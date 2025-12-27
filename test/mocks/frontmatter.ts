@@ -1,4 +1,4 @@
-import { PostFrontmatter } from '@/lib/types'
+import { PostFrontmatter } from '@/services/types'
 
 export function getMockFrontmatter(overrides: Partial<PostFrontmatter> = {}): PostFrontmatter {
   return {
