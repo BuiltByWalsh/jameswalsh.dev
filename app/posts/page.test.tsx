@@ -42,6 +42,6 @@ describe('posts/PostsIndexPage', () => {
       expect(screen.getAllByRole('time')[index]).toHaveAttribute('datetime', blogPost.publishedAt)
     })
 
-    expect(screen.getAllByText(/read more/i).length).toEqual(mockPosts.length)
+    expect(screen.getAllByText(/read more/i).length).toStrictEqual(mockPosts.length)
   })
 })

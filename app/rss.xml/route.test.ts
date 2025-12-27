@@ -1,3 +1,5 @@
+// @vitest-environment node
+
 import { SITE_MAP_CATEGORIES } from './constants'
 import { GET } from './route'
 
@@ -28,7 +30,7 @@ describe('rss.xml', () => {
       const text = await blob.text()
 
       expect(response.ok).toBeTruthy()
-      expect(blob.type).toEqual('application/atom+xml; charset=utf-8')
+      expect(blob.type).toStrictEqual('application/atom+xml;charset=utf-8')
       expect(text).toContain(`<title><![CDATA[${JAMES_WALSH}]]></title>`)
       expect(text).toContain(`<description><![CDATA[${SITE_DESCRIPTION}]]></description>`)
       expect(text).toContain(`<link>${PRODUCTION_URL}</link>`)

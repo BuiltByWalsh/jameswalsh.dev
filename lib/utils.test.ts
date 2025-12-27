@@ -14,16 +14,16 @@ describe('lib/utils', () => {
       /* cspell:enable */
       const fourMinTestCase = `${twoMinTestCase} ${twoMinTestCase}`
 
-      expect(calculateTimeToRead(twoMinTestCase)).toEqual(2)
-      expect(calculateTimeToRead(fourMinTestCase)).toEqual(4)
+      expect(calculateTimeToRead(twoMinTestCase)).toStrictEqual(2)
+      expect(calculateTimeToRead(fourMinTestCase)).toStrictEqual(4)
     })
 
     it('handles empty text gracefully', () => {
-      expect(calculateTimeToRead('')).toEqual(0)
+      expect(calculateTimeToRead('')).toStrictEqual(0)
     })
 
     it('rounds up to the nearest minute', () => {
-      expect(calculateTimeToRead('This would only take a few moments to read')).toEqual(1)
+      expect(calculateTimeToRead('This would only take a few moments to read')).toStrictEqual(1)
     })
   })
 

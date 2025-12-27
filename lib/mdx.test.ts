@@ -1,4 +1,6 @@
-import path from 'path'
+// @vitest-environment node
+
+import path from 'node:path'
 
 import * as fm from 'front-matter'
 
@@ -26,19 +28,19 @@ describe('lib/mdx', () => {
 
     it('retrieves the posts slug based on filename', async () => {
       const actual = await getPostFromMDX(filePath)
-      expect(actual.slug).toEqual(slug)
+      expect(actual.slug).toStrictEqual(slug)
     })
 
     it('retrieves the body of the article using fm', async () => {
       const actual = await getPostFromMDX(filePath)
-      expect(actual.source).toEqual(mockBody)
+      expect(actual.source).toStrictEqual(mockBody)
     })
 
     it('spreads frontmatter into returned post', async () => {
       const actual = await getPostFromMDX(filePath)
       const { slug, source, ...frontmatter } = actual
 
-      expect(frontmatter).toEqual(mockFrontmatter)
+      expect(frontmatter).toStrictEqual(mockFrontmatter)
     })
   })
 })

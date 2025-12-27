@@ -1,5 +1,7 @@
-import fs from 'fs/promises'
-import path from 'path'
+// @vitest-environment node
+
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 import { fetchPublishedPosts } from './actions'
 
@@ -8,7 +10,7 @@ import { getMockFiles } from '@/test/mocks/files'
 import { getMockFrontmatter } from '@/test/mocks/frontmatter'
 import { getMockSource } from '@/test/mocks/source'
 
-vi.mock('fs/promises')
+vi.mock('node:fs/promises')
 vi.mock('@/lib/mdx')
 
 describe('/posts/actions', () => {
@@ -16,7 +18,6 @@ describe('/posts/actions', () => {
     const mockFiles = getMockFiles()
 
     beforeEach(() => {
-      vi.mocked(fs.readdir).mockResolvedValue(mockFiles)
       vi.mocked(mdx.getPostFromMDX).mockImplementation(async (filePath) => ({
         slug: path.basename(filePath, path.extname(filePath)),
         ...getMockFrontmatter({ status: 'published' }),
@@ -25,6 +26,7 @@ describe('/posts/actions', () => {
     })
 
     it('reads from the /posts directory', async () => {
+      vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
       const expectedFilePath = path.join(process.cwd(), 'posts')
 
       await fetchPublishedPosts()
@@ -43,7 +45,7 @@ describe('/posts/actions', () => {
 
       const actual = await fetchPublishedPosts()
 
-      expect(actual.length).toEqual(mockFilesWithNonMDXFile.length - 2)
+      expect(actual.length).toStrictEqual(mockFilesWithNonMDXFile.length - 2)
     })
 
     it('filters out draft blog posts', async () => {
