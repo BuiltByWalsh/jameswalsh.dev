@@ -83,7 +83,7 @@
     "@types/rss": "0.0.32",
     "@typescript-eslint/parser": "8.33.1",
     "@vitejs/plugin-react": "4.6.0",
-    "@vitest/coverage-istanbul": "3.1.4",
+    "@vitest/coverage-istanbul": "4.0.16",
     "commitlint": "19.8.1",
     "cspell": "8.15.1",
     "eslint": "9.38.0",
@@ -109,7 +109,7 @@
     "tailwindcss-animate": "1.0.7",
     "tw-animate-css": "1.3.0",
     "typescript": "5.8.3",
-    "vite-tsconfig-paths": "5.1.4",
-    "vitest": "3.1.4"
+    "vite-tsconfig-paths": "6.0.3",
+    "vitest": "4.0.16"
   }
 }

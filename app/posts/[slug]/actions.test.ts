@@ -1,3 +1,5 @@
+// @vitest-environment node
+
 import * as postsActions from '../actions'
 
 import { fetchPostBySlug, fetchPreviousPost } from './actions'
@@ -68,7 +70,7 @@ describe('/posts/[slug]/actions', () => {
 
       const actual = await fetchPreviousPost('slug-1')
       expect(actual).toBeTruthy()
-      expect(actual?.slug).toEqual('slug-2')
+      expect(actual?.slug).toStrictEqual('slug-2')
     })
 
     it('returns undefined when the bottom of the list is reached', async () => {

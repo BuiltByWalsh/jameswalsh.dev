@@ -1,5 +1,5 @@
-import { Dirent } from 'fs'
-import path from 'path'
+import { Dirent } from 'node:fs'
+import path from 'node:path'
 
 export function getMockFiles(overrides: string[] = []): Dirent[] {
   return [

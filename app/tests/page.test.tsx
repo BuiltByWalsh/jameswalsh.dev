@@ -40,6 +40,6 @@ describe('HomePage', () => {
       expect(screen.getByText(blogPost.brief)).toBeInTheDocument()
     })
 
-    expect(screen.getAllByText(/read more/i).length).toEqual(mockPosts.length)
+    expect(screen.getAllByText(/read more/i).length).toStrictEqual(mockPosts.length)
   })
 })
