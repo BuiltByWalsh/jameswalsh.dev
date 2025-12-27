@@ -33,9 +33,17 @@ describe('lib/posts/get-post', () => {
     })
 
     describe('error cases', () => {
-      it('returns INVALID_SLUG error result when passed invalid slug string', async () => {
+      it('returns INVALID error result when passed invalid slug string', async () => {
         const invalidSlug = '../../some-hacking/to/get/other-things.exe'
         const postErrResult = await getPost(invalidSlug)
+
+        expect(postErrResult.isErr()).toBe(true)
+        expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.INVALID)
+      })
+
+      it('returns INVALID error result when slug contains path separators', async () => {
+        const suspectSlug = '../some/hacker/doing/nonsense/my-cool-slug'
+        const postErrResult = await getPost(suspectSlug)
 
         expect(postErrResult.isErr()).toBe(true)
         expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.INVALID)

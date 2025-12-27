@@ -17,13 +17,7 @@ export async function getPost(slug: string): Promise<Result<Post, ResultError>> 
     return err(ResultError.INVALID)
   }
 
-  const candidatePath = path.join(BLOG_POST_DIR, `${slug}.mdx`)
-  const filePath = path.resolve(candidatePath)
-
-  // Ensure the resolved path stays within the posts root directory
-  if (!filePath.startsWith(BLOG_POST_DIR + path.sep)) {
-    return err(ResultError.NOT_FOUND)
-  }
+  const filePath = path.join(BLOG_POST_DIR, `${slug}.mdx`)
 
   try {
     const post = await getPostFromMDX(filePath)

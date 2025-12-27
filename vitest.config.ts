@@ -23,6 +23,7 @@ export default defineConfig({
         './**/mdx-content.tsx', // ignore next-mdx-remote component
         '*.config.*',
         './**/constants.*',
+        './test/**', // ignore all test setup files.
         ...coverageConfigDefaults.exclude,
       ],
     },
