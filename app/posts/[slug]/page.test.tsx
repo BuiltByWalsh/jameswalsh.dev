@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import * as dateFns from 'date-fns'
 import * as dateFnsFormat from 'date-fns/format'
-import { ok } from 'neverthrow'
+import { err, ok } from 'neverthrow'
 import type { PropsWithChildren } from 'react'
 
 import { fetchPublishedPosts } from '../actions'
@@ -11,6 +11,7 @@ import PostPage, { generateMetadata, generateStaticParams } from './page'
 
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
 import { getPost } from '@/lib/posts/get-post'
+import { ResultError } from '@/lib/result'
 import { getMockPost } from '@/test/mocks/post'
 
 vi.mock('../actions', () => ({
@@ -110,7 +111,24 @@ describe('posts/[slug]/PostPage', () => {
     expect(linkToPreviousPost).toHaveAttribute('href', `/posts/${mockPreviousPost.slug}`)
   })
 
-  describe('generateMetadata', () => {
+  describe('error cases', () => {
+    it('calls notFound when no blog post can be found', async () => {
+      const serializedNextNotFound = 'NEXT_HTTP_ERROR_FALLBACK;404'
+      vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
+
+      await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
+        serializedNextNotFound,
+      )
+    })
+
+    it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(`throws an error when result is='%s'`, async (error) => {
+      vi.mocked(getPost).mockResolvedValue(err(error))
+
+      await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(error)
+    })
+  })
+
+  describe('#generateMetadata', () => {
     it('generates page metadata based on current post slug', async () => {
       vi.mocked(getPost).mockResolvedValue(ok(mockPost))
       const metadata = await generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })
@@ -133,9 +151,30 @@ describe('posts/[slug]/PostPage', () => {
         },
       })
     })
+
+    describe('error cases', () => {
+      it('calls notFound when no blog post can be found', async () => {
+        const serializedNextNotFound = 'NEXT_HTTP_ERROR_FALLBACK;404'
+        vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
+        await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
+          serializedNextNotFound,
+        )
+      })
+
+      it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(
+        `throws an error when result is='%s'`,
+        async (error) => {
+          vi.mocked(getPost).mockResolvedValue(err(error))
+
+          await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
+            error,
+          )
+        },
+      )
+    })
   })
 
-  describe('generateStaticParams', () => {
+  describe('#generateStaticParams', () => {
     it('returns all available post slugs', async () => {
       vi.mocked(fetchPublishedPosts).mockResolvedValue([
         getMockPost({ slug: 'slug-1' }),
