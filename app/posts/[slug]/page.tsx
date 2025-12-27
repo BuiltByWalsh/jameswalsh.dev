@@ -2,10 +2,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 import { fetchPublishedPosts } from '../actions'
 
-import { fetchPostBySlug, fetchPreviousPost } from './actions'
+import { fetchPreviousPost } from './actions'
 import MDXContent from './mdx-content'
 import TimeInformation from './time-information'
 
@@ -14,6 +15,8 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyH1 } from '@/components/ui/typography'
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
+import { getPost } from '@/lib/posts/get-post'
+import { ResultError } from '@/lib/result'
 import { cn } from '@/lib/utils'
 
 export async function generateStaticParams() {
@@ -26,7 +29,16 @@ export async function generateStaticParams() {
 
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
   const { slug } = await params
-  const post = await fetchPostBySlug(slug)
+  const postResult = await getPost(slug)
+  if (postResult.isErr()) {
+    if (postResult.error === ResultError.NOT_FOUND) {
+      notFound()
+    }
+
+    throw postResult.error
+  }
+
+  const post = postResult.value
 
   return {
     title: post.title,
@@ -49,8 +61,16 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await fetchPostBySlug(slug)
-  const previousPost = await fetchPreviousPost(slug)
+  const [postResult, previousPost] = await Promise.all([getPost(slug), fetchPreviousPost(slug)])
+
+  if (postResult.isErr()) {
+    if (postResult.error === ResultError.NOT_FOUND) {
+      notFound()
+    } else {
+      throw postResult.error
+    }
+  }
+  const post = postResult.value
 
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
