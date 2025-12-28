@@ -59,7 +59,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const [postResult, previousPost] = await Promise.all([getPost(slug), getPreviousPost(slug)])
+  const [postResult, previousPostResult] = await Promise.all([getPost(slug), getPreviousPost(slug)])
 
   if (postResult.isErr()) {
     if (postResult.error === ResultError.NOT_FOUND) {
@@ -68,7 +68,27 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       throw postResult.error
     }
   }
-  const post = postResult.value
+
+  const post = postResult.match(
+    (ok) => ok,
+    (err) => {
+      if (err === ResultError.NOT_FOUND) {
+        return notFound()
+      }
+
+      throw err
+    },
+  )
+  const previousPostSlug = previousPostResult.match(
+    (ok) => ok?.slug,
+    (err) => {
+      if (err === ResultError.NOT_FOUND) {
+        return notFound()
+      }
+
+      throw err
+    },
+  )
 
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
@@ -92,9 +112,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <ChevronLeft width={16} height={16} />
           &nbsp;All posts
         </Link>
-        {!!previousPost && (
+        {previousPostSlug && (
           <Link
-            href={`/posts/${previousPost.slug}`}
+            href={`/posts/${previousPostSlug}`}
             className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}
           >
             <ChevronRight width={16} height={16} />

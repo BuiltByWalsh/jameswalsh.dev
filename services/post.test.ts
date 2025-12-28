@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import { ok } from 'neverthrow'
+import { err, ok } from 'neverthrow'
 
 import { ResultError } from '../lib/result'
 
@@ -84,28 +84,39 @@ describe('services/post', () => {
       }))
     })
 
-    it('returns the next index of results returned from getAllPublishedPosts()', async () => {
+    it('returns the next index result returned from published posts', async () => {
       const mockFiles = getMockFiles([
         path.join(process.cwd(), 'posts', 'slug-1.mdx'),
         path.join(process.cwd(), 'posts', 'slug-2.mdx'),
       ])
       vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
 
-      const actual = await getPreviousPost('slug-1')
+      const previousPostResult = await getPreviousPost('slug-1')
 
-      expect(actual).toBeTruthy()
-      expect(actual?.slug).toStrictEqual('slug-2')
+      expect(previousPostResult.isOk()).toBe(true)
+      expect(previousPostResult._unsafeUnwrap()?.slug).toStrictEqual('slug-2')
     })
 
-    it('returns undefined when the bottom of the list is reached', async () => {
+    it('returns undefined result when the bottom of the list is reached', async () => {
       const mockFiles = getMockFiles([
         path.join(process.cwd(), 'posts', 'slug-1.mdx'),
         path.join(process.cwd(), 'posts', 'slug-2.mdx'),
       ])
       vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
 
-      const actual = await getPreviousPost('slug-2')
-      expect(actual).toBeUndefined()
+      const previousPostResult = await getPreviousPost('slug-2')
+
+      expect(previousPostResult).toStrictEqual(ok(undefined))
+    })
+
+    it('returns an err result when previous post cannot be found', async () => {
+      const mockFiles = getMockFiles()
+
+      vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
+
+      const previousPostResult = await getPreviousPost('some-totally-bogus-slug')
+
+      expect(previousPostResult).toStrictEqual(err(ResultError.NOT_FOUND))
     })
   })
 

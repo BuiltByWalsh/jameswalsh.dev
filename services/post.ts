@@ -35,13 +35,20 @@ export async function getPost(slug: string): Promise<Result<Post, ResultError>> 
   }
 }
 
-export async function getPreviousPost(slug: string): Promise<Post | undefined> {
+export async function getPreviousPost(slug: string): Promise<Result<Post | undefined, ResultError>> {
   const publishedPosts = await getAllPublishedPosts()
   const postIndex = publishedPosts.findIndex((post) => post.slug === slug)
 
-  if (postIndex === publishedPosts.length - 1) return undefined
+  if (postIndex === -1) {
+    return err(ResultError.NOT_FOUND)
+  }
 
-  return publishedPosts[postIndex + 1]
+  if (postIndex === publishedPosts.length - 1) {
+    return ok(undefined)
+  }
+
+  const previousPost = publishedPosts[postIndex + 1]
+  return ok(previousPost)
 }
 
 export async function getAllPublishedPosts(): Promise<Post[]> {
