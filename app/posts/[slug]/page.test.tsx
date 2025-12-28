@@ -35,7 +35,6 @@ describe('posts/[slug]/PostPage', () => {
 
   afterEach(() => {
     vi.useRealTimers()
-    vi.restoreAllMocks()
   })
 
   it('renders H1 for blog post', async () => {

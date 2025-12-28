@@ -19,10 +19,6 @@ describe('posts/PostsIndexPage', () => {
     vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
   })
 
-  afterEach(() => {
-    vi.restoreAllMocks()
-  })
-
   it('displays page heading', async () => {
     render(await PostsIndexPage())
 

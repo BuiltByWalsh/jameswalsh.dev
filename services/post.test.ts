@@ -19,10 +19,6 @@ vi.mock('node:fs/promises')
 vi.mock('@/services/mdx')
 
 describe('services/post', () => {
-  beforeEach(() => {
-    vi.restoreAllMocks()
-  })
-
   describe('#getPost', () => {
     const slug = 'project-hail-mary'
     const mockPost: Post = {
@@ -80,18 +76,34 @@ describe('services/post', () => {
   })
 
   describe('#getPreviousPost', () => {
-    // const mockPosts: Post[] = [
-    //   { slug: 'slug-1', ...getMockFrontmatter(), source: getMockSource() },
-    //   { slug: 'slug-2', ...getMockFrontmatter(), source: getMockSource() },
-    // ]
+    beforeEach(() => {
+      vi.mocked(getPostFromMDX).mockImplementation(async (filePath) => ({
+        slug: path.basename(filePath, path.extname(filePath)),
+        ...getMockFrontmatter({ status: 'published' }),
+        source: getMockSource(),
+      }))
+    })
 
     it('returns the next index of results returned from getAllPublishedPosts()', async () => {
+      const mockFiles = getMockFiles([
+        path.join(process.cwd(), 'posts', 'slug-1.mdx'),
+        path.join(process.cwd(), 'posts', 'slug-2.mdx'),
+      ])
+      vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
+
       const actual = await getPreviousPost('slug-1')
+
       expect(actual).toBeTruthy()
       expect(actual?.slug).toStrictEqual('slug-2')
     })
 
     it('returns undefined when the bottom of the list is reached', async () => {
+      const mockFiles = getMockFiles([
+        path.join(process.cwd(), 'posts', 'slug-1.mdx'),
+        path.join(process.cwd(), 'posts', 'slug-2.mdx'),
+      ])
+      vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
+
       const actual = await getPreviousPost('slug-2')
       expect(actual).toBeUndefined()
     })
