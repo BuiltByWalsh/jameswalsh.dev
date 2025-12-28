@@ -20,10 +20,9 @@ export function unwrapOrThrow<T, E>(result: Result<T, E>): T {
     (value) => value,
     (error) => {
       if (error === ResultError.NOT_FOUND) {
-        notFound() // This throws an internal Next.js error
+        notFound()
       }
 
-      // Fallback for other error types
       throw error instanceof Error ? error : new Error(String(error))
     },
   )
