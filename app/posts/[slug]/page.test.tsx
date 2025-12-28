@@ -39,6 +39,7 @@ describe('posts/[slug]/PostPage', () => {
 
   it('renders H1 for blog post', async () => {
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -47,6 +48,7 @@ describe('posts/[slug]/PostPage', () => {
 
   it('renders the blog thumbnail image', async () => {
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
     const articleImage = screen.getByAltText('Article cover image')
@@ -58,6 +60,7 @@ describe('posts/[slug]/PostPage', () => {
 
   it('renders all the blog tags', async () => {
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -70,6 +73,7 @@ describe('posts/[slug]/PostPage', () => {
     vi.mocked(dateFns.formatDistanceToNow).mockReturnValue('1 month')
     vi.mocked(dateFnsFormat.formatDate).mockReturnValue('Oct 31, 2024')
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -80,6 +84,7 @@ describe('posts/[slug]/PostPage', () => {
 
   it('renders a link to all posts', async () => {
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -90,7 +95,7 @@ describe('posts/[slug]/PostPage', () => {
     const mockPreviousPostSlug = 'previous-post-slug'
     const mockPreviousPost = getMockPost({ slug: mockPreviousPostSlug })
     vi.mocked(getPost).mockResolvedValue(ok(mockPost))
-    vi.mocked(getPreviousPost).mockResolvedValue(mockPreviousPost)
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(mockPreviousPost))
 
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
@@ -104,6 +109,7 @@ describe('posts/[slug]/PostPage', () => {
     it('calls notFound when no blog post can be found', async () => {
       const serializedNextNotFound = 'NEXT_HTTP_ERROR_FALLBACK;404'
       vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
+      vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
       await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
         serializedNextNotFound,
@@ -112,6 +118,7 @@ describe('posts/[slug]/PostPage', () => {
 
     it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(`throws an error when result is='%s'`, async (error) => {
       vi.mocked(getPost).mockResolvedValue(err(error))
+      vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
       await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(error)
     })
@@ -145,6 +152,8 @@ describe('posts/[slug]/PostPage', () => {
       it('calls notFound when no blog post can be found', async () => {
         const serializedNextNotFound = 'NEXT_HTTP_ERROR_FALLBACK;404'
         vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
+        vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
+
         await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
           serializedNextNotFound,
         )
@@ -154,6 +163,7 @@ describe('posts/[slug]/PostPage', () => {
         `throws an error when result is='%s'`,
         async (error) => {
           vi.mocked(getPost).mockResolvedValue(err(error))
+          vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
           await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
             error,
@@ -165,11 +175,9 @@ describe('posts/[slug]/PostPage', () => {
 
   describe('#generateStaticParams', () => {
     it('returns all available post slugs', async () => {
-      vi.mocked(getAllPublishedPosts).mockResolvedValue([
-        getMockPost({ slug: 'slug-1' }),
-        getMockPost({ slug: 'slug-2' }),
-        getMockPost({ slug: 'slug-3' }),
-      ])
+      vi.mocked(getAllPublishedPosts).mockResolvedValue(
+        ok([getMockPost({ slug: 'slug-1' }), getMockPost({ slug: 'slug-2' }), getMockPost({ slug: 'slug-3' })]),
+      )
       const staticParams = await generateStaticParams()
 
       expect(staticParams).toEqual([{ slug: 'slug-1' }, { slug: 'slug-2' }, { slug: 'slug-3' }])

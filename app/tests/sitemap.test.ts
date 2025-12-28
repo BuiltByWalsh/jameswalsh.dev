@@ -1,3 +1,5 @@
+import { ok } from 'neverthrow'
+
 import sitemap from '../sitemap'
 
 import { PRODUCTION_URL } from '@/lib/constants'
@@ -5,7 +7,7 @@ import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
 vi.mock('@/services/post', () => ({
-  getAllPublishedPosts: vi.fn().mockResolvedValue([]),
+  getAllPublishedPosts: vi.fn().mockResolvedValue(ok([])),
 }))
 
 describe('sitemap', () => {
@@ -33,6 +35,7 @@ describe('sitemap', () => {
     ['posts', { url: `${PRODUCTION_URL}/posts`, lastModified: mockDateTime, changeFrequency: 'weekly', priority: 0.8 }],
   ])('contains sitemap record for /%s', async () => {
     const sitemapList = await sitemap()
+
     expect(sitemapList.find((sm) => sm.url.includes('/about'))).toEqual({
       url: `${PRODUCTION_URL}/about`,
       lastModified: mockDateTime,
@@ -43,6 +46,7 @@ describe('sitemap', () => {
 
   it('contains sitemap record for index', async () => {
     const sitemapList = await sitemap()
+
     expect(sitemapList[0]).toEqual({
       url: PRODUCTION_URL,
       lastModified: mockDateTime,
@@ -64,7 +68,7 @@ describe('sitemap', () => {
         publishedAt: '2024-09-16',
       }),
     ]
-    vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPublishedPosts)
+    vi.mocked(getAllPublishedPosts).mockResolvedValue(ok(mockPublishedPosts))
 
     const sitemapList = await sitemap()
 

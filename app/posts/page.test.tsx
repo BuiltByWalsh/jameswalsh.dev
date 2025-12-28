@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { ok } from 'neverthrow'
 
 import PostsIndexPage from './page'
 
@@ -16,7 +17,7 @@ describe('posts/PostsIndexPage', () => {
     getMockPost({ slug: 'slug-5', title: 'Title 5', brief: 'this is brief 5', publishedAt: '2020-01-06' }),
   ]
   beforeEach(() => {
-    vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
+    vi.mocked(getAllPublishedPosts).mockResolvedValue(ok(mockPosts))
   })
 
   it('displays page heading', async () => {

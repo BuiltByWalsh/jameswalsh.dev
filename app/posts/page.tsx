@@ -7,6 +7,7 @@ import { Time } from '@/components/time'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { TypographyH1, TypographyP } from '@/components/ui/typography'
+import { unwrapOrThrow } from '@/lib/result'
 import { calculateTimeToRead } from '@/lib/utils'
 import { getAllPublishedPosts } from '@/services/post'
 
@@ -16,7 +17,8 @@ export const metadata = {
 }
 
 export default async function PostsIndexPage() {
-  const posts = await getAllPublishedPosts()
+  const postsResult = await getAllPublishedPosts()
+  const posts = unwrapOrThrow(postsResult)
 
   return (
     <>

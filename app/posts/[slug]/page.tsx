@@ -2,7 +2,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 
 import MDXContent from './mdx-content'
 import TimeInformation from './time-information'
@@ -12,12 +11,13 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyH1 } from '@/components/ui/typography'
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
-import { ResultError } from '@/lib/result'
+import { unwrapOrThrow } from '@/lib/result'
 import { cn } from '@/lib/utils'
 import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
 
 export async function generateStaticParams() {
-  const publishedPosts = await getAllPublishedPosts()
+  const publishedPostsResult = await getAllPublishedPosts()
+  const publishedPosts = unwrapOrThrow(publishedPostsResult)
 
   return publishedPosts.map((post) => ({
     slug: post.slug,
@@ -27,15 +27,7 @@ export async function generateStaticParams() {
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
   const { slug } = await params
   const postResult = await getPost(slug)
-  if (postResult.isErr()) {
-    if (postResult.error === ResultError.NOT_FOUND) {
-      notFound()
-    }
-
-    throw postResult.error
-  }
-
-  const post = postResult.value
+  const post = unwrapOrThrow(postResult)
 
   return {
     title: post.title,
@@ -59,16 +51,10 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const [postResult, previousPost] = await Promise.all([getPost(slug), getPreviousPost(slug)])
+  const [postResult, previousPostResult] = await Promise.all([getPost(slug), getPreviousPost(slug)])
 
-  if (postResult.isErr()) {
-    if (postResult.error === ResultError.NOT_FOUND) {
-      notFound()
-    } else {
-      throw postResult.error
-    }
-  }
-  const post = postResult.value
+  const post = unwrapOrThrow(postResult)
+  const previousPostSlug = unwrapOrThrow(previousPostResult)?.slug
 
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
@@ -92,9 +78,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <ChevronLeft width={16} height={16} />
           &nbsp;All posts
         </Link>
-        {!!previousPost && (
+        {previousPostSlug && (
           <Link
-            href={`/posts/${previousPost.slug}`}
+            href={`/posts/${previousPostSlug}`}
             className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}
           >
             <ChevronRight width={16} height={16} />

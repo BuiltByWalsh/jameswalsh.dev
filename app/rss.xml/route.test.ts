@@ -1,5 +1,7 @@
 // @vitest-environment node
 
+import { ok } from 'neverthrow'
+
 import { SITE_MAP_CATEGORIES } from './constants'
 import { GET } from './route'
 
@@ -8,7 +10,7 @@ import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
 vi.mock('@/services/post', () => ({
-  getAllPublishedPosts: vi.fn().mockResolvedValue([]),
+  getAllPublishedPosts: vi.fn().mockResolvedValue(ok([])),
 }))
 
 describe('rss.xml', () => {
@@ -52,7 +54,7 @@ describe('rss.xml', () => {
         getMockPost({ title: 'blog post 1', slug: 'slug-1', thumbnail: '/blog-thumbnails/post-1-thumbnail.webp' }),
         getMockPost({ title: 'blog post 2', slug: 'slug-2', thumbnail: '/blog-thumbnails/post-2-thumbnail.webp' }),
       ]
-      vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
+      vi.mocked(getAllPublishedPosts).mockResolvedValue(ok(mockPosts))
       const response = await GET()
       const blob = await response.blob()
       const text = await blob.text()
