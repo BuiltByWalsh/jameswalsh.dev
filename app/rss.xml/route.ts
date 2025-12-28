@@ -3,6 +3,7 @@ import RSS from 'rss'
 import { SITE_MAP_CATEGORIES } from './constants'
 
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
+import { unwrapOrThrow } from '@/lib/result'
 import { getAllPublishedPosts } from '@/services/post'
 
 export async function GET() {
@@ -19,7 +20,8 @@ export async function GET() {
     categories: SITE_MAP_CATEGORIES,
   })
 
-  const publishedPosts = await getAllPublishedPosts()
+  const publishedPostsResults = await getAllPublishedPosts()
+  const publishedPosts = unwrapOrThrow(publishedPostsResults)
 
   publishedPosts.forEach((post) => {
     feed.item({
