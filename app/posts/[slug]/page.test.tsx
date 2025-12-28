@@ -175,11 +175,9 @@ describe('posts/[slug]/PostPage', () => {
 
   describe('#generateStaticParams', () => {
     it('returns all available post slugs', async () => {
-      vi.mocked(getAllPublishedPosts).mockResolvedValue([
-        getMockPost({ slug: 'slug-1' }),
-        getMockPost({ slug: 'slug-2' }),
-        getMockPost({ slug: 'slug-3' }),
-      ])
+      vi.mocked(getAllPublishedPosts).mockResolvedValue(
+        ok([getMockPost({ slug: 'slug-1' }), getMockPost({ slug: 'slug-2' }), getMockPost({ slug: 'slug-3' })]),
+      )
       const staticParams = await generateStaticParams()
 
       expect(staticParams).toEqual([{ slug: 'slug-1' }, { slug: 'slug-2' }, { slug: 'slug-3' }])
