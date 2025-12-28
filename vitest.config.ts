@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     globals: true,
+    clearMocks: true,
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'json-summary', 'json'],

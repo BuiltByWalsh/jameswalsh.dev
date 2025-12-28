@@ -1,13 +1,11 @@
 import { render, screen } from '@testing-library/react'
 
-import { fetchPublishedPosts } from './actions'
 import PostsIndexPage from './page'
 
+import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
-vi.mock('./actions', () => ({
-  fetchPublishedPosts: vi.fn(),
-}))
+vi.mock('@/services/post')
 
 describe('posts/PostsIndexPage', () => {
   const mockPosts = [
@@ -18,11 +16,7 @@ describe('posts/PostsIndexPage', () => {
     getMockPost({ slug: 'slug-5', title: 'Title 5', brief: 'this is brief 5', publishedAt: '2020-01-06' }),
   ]
   beforeEach(() => {
-    vi.mocked(fetchPublishedPosts).mockResolvedValue(mockPosts)
-  })
-
-  afterEach(() => {
-    vi.restoreAllMocks()
+    vi.mocked(getAllPublishedPosts).mockResolvedValue(mockPosts)
   })
 
   it('displays page heading', async () => {

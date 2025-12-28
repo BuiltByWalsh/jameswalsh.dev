@@ -4,9 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { fetchPublishedPosts } from '../actions'
-
-import { fetchPreviousPost } from './actions'
 import MDXContent from './mdx-content'
 import TimeInformation from './time-information'
 
@@ -15,12 +12,12 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
 import { TypographyH1 } from '@/components/ui/typography'
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
-import { getPost } from '@/lib/posts/get-post'
 import { ResultError } from '@/lib/result'
 import { cn } from '@/lib/utils'
+import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
 
 export async function generateStaticParams() {
-  const publishedPosts = await fetchPublishedPosts()
+  const publishedPosts = await getAllPublishedPosts()
 
   return publishedPosts.map((post) => ({
     slug: post.slug,
@@ -61,7 +58,8 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const [postResult, previousPost] = await Promise.all([getPost(slug), fetchPreviousPost(slug)])
+
+  const [postResult, previousPost] = await Promise.all([getPost(slug), getPreviousPost(slug)])
 
   if (postResult.isErr()) {
     if (postResult.error === ResultError.NOT_FOUND) {

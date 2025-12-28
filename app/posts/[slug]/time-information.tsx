@@ -3,8 +3,8 @@
 import { formatDistanceToNow } from 'date-fns'
 
 import { Time } from '@/components/time'
-import { type Post } from '@/lib/types'
 import { calculateTimeToRead } from '@/lib/utils'
+import { type Post } from '@/services/types'
 
 interface TimeInformationProps {
   metadata: Pick<Post, 'publishedAt' | 'source'>
