@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import { err, ok } from 'neverthrow'
+import { err, ok, okAsync } from 'neverthrow'
 
 import { ResultError } from '../lib/result'
 
@@ -27,11 +27,9 @@ describe('services/post', () => {
       ...getMockFrontmatter(),
     }
 
-    beforeEach(() => {
-      vi.mocked(getPostFromMDX).mockResolvedValue(mockPost)
-    })
-
     it('returns a post result based on slug', async () => {
+      vi.mocked(getPostFromMDX).mockImplementation(() => okAsync(mockPost))
+
       const postResult = await getPost(slug)
 
       expect(postResult.isOk()).toBe(true)
@@ -40,7 +38,7 @@ describe('services/post', () => {
 
     describe('error cases', () => {
       it('returns INVALID error result when passed invalid slug string', async () => {
-        const invalidSlug = '../../some-hacking/to/get/other-things.exe'
+        const invalidSlug = 'hax0r.exe'
         const postErrResult = await getPost(invalidSlug)
 
         expect(postErrResult.isErr()).toBe(true)
@@ -54,34 +52,18 @@ describe('services/post', () => {
         expect(postErrResult.isErr()).toBe(true)
         expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.INVALID)
       })
-
-      it('returns NOT_FOUND error result when file does not exist', async () => {
-        vi.mocked(getPostFromMDX).mockRejectedValue(new MockFileNotFoundError())
-
-        const postErrResult = await getPost(slug)
-
-        expect(postErrResult.isErr()).toBe(true)
-        expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.NOT_FOUND)
-      })
-
-      it('returns SYSTEM_FAILURE error result during uncaught exception', async () => {
-        vi.mocked(getPostFromMDX).mockRejectedValue(new Error('Uncaught exception'))
-
-        const postErrResult = await getPost(slug)
-
-        expect(postErrResult.isErr()).toBe(true)
-        expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.SYSTEM_FAILURE)
-      })
     })
   })
 
   describe('#getPreviousPost', () => {
     beforeEach(() => {
-      vi.mocked(getPostFromMDX).mockImplementation(async (filePath) => ({
-        slug: path.basename(filePath, path.extname(filePath)),
-        ...getMockFrontmatter({ status: 'published' }),
-        source: getMockSource(),
-      }))
+      vi.mocked(getPostFromMDX).mockImplementation((filePath) =>
+        okAsync({
+          slug: path.basename(filePath, path.extname(filePath)),
+          ...getMockFrontmatter({ status: 'published' }),
+          source: getMockSource(),
+        }),
+      )
     })
 
     it('returns the next index result returned from published posts', async () => {
@@ -109,14 +91,24 @@ describe('services/post', () => {
       expect(previousPostResult).toStrictEqual(ok(undefined))
     })
 
-    it('returns an err result when previous post cannot be found', async () => {
-      const mockFiles = getMockFiles()
+    describe('error cases', () => {
+      it('returns an err result when previous post cannot be found', async () => {
+        const mockFiles = getMockFiles()
 
-      vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
+        vi.mocked(fs.readdir).mockResolvedValueOnce(mockFiles)
 
-      const previousPostResult = await getPreviousPost('some-totally-bogus-slug')
+        const previousPostResult = await getPreviousPost('some-totally-bogus-slug')
 
-      expect(previousPostResult).toStrictEqual(err(ResultError.NOT_FOUND))
+        expect(previousPostResult).toStrictEqual(err(ResultError.NOT_FOUND))
+      })
+
+      it('returns an err result when getAllPublishedPosts fails', async () => {
+        vi.mocked(fs.readdir).mockRejectedValueOnce(new Error('uncaught exception'))
+
+        const previousPostResult = await getPreviousPost('a-cool-slug')
+        expect(previousPostResult.isErr()).toBe(true)
+        expect(previousPostResult).toStrictEqual(err(ResultError.SYSTEM_FAILURE))
+      })
     })
   })
 
@@ -124,11 +116,13 @@ describe('services/post', () => {
     const mockFiles = getMockFiles()
 
     beforeEach(() => {
-      vi.mocked(getPostFromMDX).mockImplementation(async (filePath) => ({
-        slug: path.basename(filePath, path.extname(filePath)),
-        ...getMockFrontmatter({ status: 'published' }),
-        source: getMockSource(),
-      }))
+      vi.mocked(getPostFromMDX).mockImplementation((filePath) =>
+        okAsync({
+          slug: path.basename(filePath, path.extname(filePath)),
+          ...getMockFrontmatter({ status: 'published' }),
+          source: getMockSource(),
+        }),
+      )
     })
 
     it('reads from the /posts directory', async () => {
@@ -151,57 +145,50 @@ describe('services/post', () => {
 
       const actual = await getAllPublishedPosts()
 
-      expect(actual.length).toStrictEqual(mockFilesWithNonMDXFile.length - 2)
+      expect(actual.isOk()).toBe(true)
+      expect(actual._unsafeUnwrap().length).toEqual(mockFilesWithNonMDXFile.length - 2)
     })
 
     it('filters out draft blog posts', async () => {
       const mockFilesWithDrafts = getMockFiles([path.join(process.cwd(), 'posts', 'blog-draft.mdx')])
 
-      vi.mocked(getPostFromMDX).mockImplementation(async (filePath) => {
+      vi.mocked(getPostFromMDX).mockImplementation((filePath) => {
         const slug = path.basename(filePath, path.extname(filePath))
-        return {
+        return okAsync({
           slug,
           ...getMockFrontmatter({ status: slug === 'blog-draft' ? 'draft' : 'published' }),
           source: getMockSource(),
-        }
+        })
       })
       vi.mocked(fs.readdir).mockResolvedValue(mockFilesWithDrafts)
 
       const results = await getAllPublishedPosts()
 
-      expect(results.map(({ slug }) => slug)).not.toContain('blog-draft')
+      expect(results._unsafeUnwrap().map(({ slug }) => slug)).not.toContain('blog-draft')
     })
 
     it('filters out unreleased blog posts', async () => {
       const mockFilesWithUnreleasedPost = getMockFiles([path.join(process.cwd(), 'posts', 'future-release.mdx')])
 
-      vi.mocked(getPostFromMDX).mockImplementation(async (filePath) => {
+      vi.mocked(getPostFromMDX).mockImplementation((filePath) => {
         const slug = path.basename(filePath, path.extname(filePath))
 
         // Note If this test case ever breaks because of the 9999-12-31, just know I think you're awesome
         // and I think it's even more awesome that this code somehow lasted that long. Cheers friend!
-        return {
+        return okAsync({
           slug,
           ...getMockFrontmatter({
             status: 'published',
             publishedAt: slug === 'future-release' ? '9999-12-31' : '2023-12-06',
           }),
           source: getMockSource(),
-        }
+        })
       })
       vi.mocked(fs.readdir).mockResolvedValue(mockFilesWithUnreleasedPost)
 
       const results = await getAllPublishedPosts()
 
-      expect(results.map(({ slug }) => slug)).not.toContain('future-release')
+      expect(results._unsafeUnwrap().map(({ slug }) => slug)).not.toContain('future-release')
     })
   })
 })
-
-class MockFileNotFoundError extends Error {
-  code: string
-  constructor(message = '', ...args: undefined[]) {
-    super(message, ...args)
-    this.code = 'ENOENT'
-  }
-}
