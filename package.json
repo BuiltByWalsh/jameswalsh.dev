@@ -97,7 +97,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.5.1",
     "eslint-plugin-react-hooks": "5.2.0",
-    "happy-dom": "20.0.11",
+    "happy-dom": "20.8.8",
     "husky": "8.0.3",
     "lint-staged": "16.1.2",
     "msw": "2.10.2",
