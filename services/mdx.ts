@@ -8,7 +8,6 @@ import { ResultError } from '@/lib/result'
 
 import type { Post } from './types'
 
-// ? NOTE: Matches the leading `export const metadata = { ... }` block so reading time only counts the article body.
 const METADATA_EXPORT_PATTERN = /^export const metadata = \{[\s\S]*?\n\}\n/
 
 export function getPostFromMDX(filePath: string): ResultAsync<Post, ResultError> {

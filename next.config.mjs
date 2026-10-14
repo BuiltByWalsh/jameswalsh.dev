@@ -8,7 +8,6 @@ const nextConfig = {
   },
 }
 
-// ? NOTE: Turbopack requires remark/rehype plugins to be referenced by name with serializable options.
 const withMDX = createMDX({
   options: {
     remarkPlugins: ['remark-gfm'],

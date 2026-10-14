@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import { defineConfig, coverageConfigDefaults } from 'vitest/config'
 
 export default defineConfig({
-  // ? NOTE: Compiles .mdx posts in tests. Must run before the React plugin, per the MDX docs.
   plugins: [{ enforce: 'pre', ...mdx() }, react({ include: /\.(jsx|js|mdx|md|tsx|ts)$/ })],
   resolve: {
     tsconfigPaths: true,

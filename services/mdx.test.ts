@@ -21,7 +21,6 @@ describe('lib/mdx', () => {
     const filePath = path.join(process.cwd(), '/test/mocks/posts', `${slug}.mdx`)
     const mockFrontmatter = getMockFrontmatter()
     const mockBody = getMockSource()
-    // ? NOTE: Mirrors real posts, which export their metadata ahead of the article body.
     const mockFileContents = `export const metadata = ${JSON.stringify(mockFrontmatter, null, 2)}\n${mockBody}`
 
     it('retrieves the posts slug based on filename', async () => {
