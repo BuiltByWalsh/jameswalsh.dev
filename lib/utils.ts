@@ -1,12 +1,8 @@
-import { clsx, type ClassValue } from 'clsx'
 import { isFuture } from 'date-fns'
-import { twMerge } from 'tailwind-merge'
 
 import type { Post } from '../services/types'
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+export { cn } from 'cn'
 
 export function calculateTimeToRead(text: string): number {
   if (!text.length) {
