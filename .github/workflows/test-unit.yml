@@ -8,7 +8,7 @@ on:
   - pull_request
 
 jobs:
-  test:
+  test-unit:
     runs-on: ubuntu-latest
 
     permissions:
