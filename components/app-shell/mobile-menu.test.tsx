@@ -5,18 +5,18 @@ import { setupServer } from 'msw/node'
 import { useTheme } from 'next-themes'
 import RSS from 'rss'
 
-import { MobileMenu } from './mobile-menu'
-
 import { SITE_MAP_CATEGORIES } from '@/app/rss.xml/constants'
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
 
-const mockSetTheme = vi.fn()
+import { MobileMenu } from './mobile-menu'
+
+const mockSetTheme = vi.fn<ReturnType<typeof import('next-themes').useTheme>['setTheme']>()
 
 vi.mock('next-themes', () => ({
-  useTheme: vi.fn(),
+  useTheme: vi.fn<typeof import('next-themes').useTheme>(),
 }))
 vi.mock('next/router', () => ({
-  useRouter: vi.fn(),
+  useRouter: vi.fn<typeof import('next/router').useRouter>(),
 }))
 
 const server = setupServer(
@@ -67,7 +67,10 @@ describe('components/app-shell/MobileMenu', () => {
     { dataTestId: 'about-nav-item', expectedText: /about/i },
     { dataTestId: 'tech-nav-item', expectedText: /tech/i },
     { dataTestId: 'rss-feed-text-nav-item', expectedText: /get rss feed/i },
-    { dataTestId: 'mode-toggle-text-nav-item', expectedText: /toggle light mode|toggle dark mode/i },
+    {
+      dataTestId: 'mode-toggle-text-nav-item',
+      expectedText: /toggle light mode|toggle dark mode/i,
+    },
   ])('displays nav item for $expectedText', async ({ dataTestId, expectedText }) => {
     const user = userEvent.setup()
     render(<MobileMenu />)

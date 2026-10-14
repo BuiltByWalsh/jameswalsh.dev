@@ -1,20 +1,45 @@
 import { render, screen } from '@testing-library/react'
 import { ok } from 'neverthrow'
 
-import PostsIndexPage from './page'
-
 import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
+
+import PostsIndexPage from './page'
 
 vi.mock('@/services/post')
 
 describe('posts/PostsIndexPage', () => {
   const mockPosts = [
-    getMockPost({ slug: 'slug-1', title: 'Title 1', brief: 'this is brief 1', publishedAt: '2020-01-02' }),
-    getMockPost({ slug: 'slug-2', title: 'Title 2', brief: 'this is brief 2', publishedAt: '2020-01-03' }),
-    getMockPost({ slug: 'slug-3', title: 'Title 3', brief: 'this is brief 3', publishedAt: '2020-01-04' }),
-    getMockPost({ slug: 'slug-4', title: 'Title 4', brief: 'this is brief 4', publishedAt: '2020-01-05' }),
-    getMockPost({ slug: 'slug-5', title: 'Title 5', brief: 'this is brief 5', publishedAt: '2020-01-06' }),
+    getMockPost({
+      slug: 'slug-1',
+      title: 'Title 1',
+      brief: 'this is brief 1',
+      publishedAt: '2020-01-02',
+    }),
+    getMockPost({
+      slug: 'slug-2',
+      title: 'Title 2',
+      brief: 'this is brief 2',
+      publishedAt: '2020-01-03',
+    }),
+    getMockPost({
+      slug: 'slug-3',
+      title: 'Title 3',
+      brief: 'this is brief 3',
+      publishedAt: '2020-01-04',
+    }),
+    getMockPost({
+      slug: 'slug-4',
+      title: 'Title 4',
+      brief: 'this is brief 4',
+      publishedAt: '2020-01-05',
+    }),
+    getMockPost({
+      slug: 'slug-5',
+      title: 'Title 5',
+      brief: 'this is brief 5',
+      publishedAt: '2020-01-06',
+    }),
   ]
   beforeEach(() => {
     vi.mocked(getAllPublishedPosts).mockResolvedValue(ok(mockPosts))

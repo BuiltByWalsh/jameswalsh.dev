@@ -5,13 +5,13 @@ import { PropsWithChildren } from 'react'
 import RootLayout from '../layout'
 
 vi.mock('geist/font/mono', () => ({
-  GeistMono: vi.fn(() => ({
+  GeistMono: vi.fn<() => { variable: string }>(() => ({
     variable: '--geist-font-sans ',
   })),
 }))
 vi.mock('next/navigation', () => ({
   ...vi.importActual('next/navigation'),
-  usePathname: vi.fn(),
+  usePathname: vi.fn<typeof import('next/navigation').usePathname>(),
 }))
 vi.mock('../providers', () => ({
   ThemeProvider: ({ children }: PropsWithChildren) => children,
@@ -46,7 +46,9 @@ describe('RootLayout', () => {
   })
 
   it('includes ahrefs site verification', async () => {
-    const { container } = render(await RootLayout({ children: <TestComponent /> }), { container: document })
+    const { container } = render(await RootLayout({ children: <TestComponent /> }), {
+      container: document,
+    })
 
     const ahrefsMetaTag = container.querySelector('meta[name="ahrefs-site-verification"]')
     expect(ahrefsMetaTag).toBeInTheDocument()

@@ -6,11 +6,11 @@ import path from 'node:path'
 import { compareDesc } from 'date-fns'
 import { err, ok, ResultAsync, type Result } from 'neverthrow'
 
-import { Post } from './types'
-
 import { ResultError } from '@/lib/result'
 import { isPostReleased } from '@/lib/utils'
 import { getPostFromMDX } from '@/services/mdx'
+
+import { Post } from './types'
 
 const BLOG_POST_DIR = path.join(process.cwd(), 'posts')
 const SLUG_PATTERN = /^[a-zA-Z0-9_-]+$/
@@ -26,7 +26,9 @@ export async function getPost(slug: string): Promise<Result<Post, ResultError>> 
   return getPostFromMDX(filePath)
 }
 
-export async function getPreviousPost(slug: string): Promise<Result<Post | undefined, ResultError>> {
+export async function getPreviousPost(
+  slug: string,
+): Promise<Result<Post | undefined, ResultError>> {
   const postsResult = await getAllPublishedPosts()
 
   if (postsResult.isErr()) {
@@ -51,10 +53,14 @@ export async function getPreviousPost(slug: string): Promise<Result<Post | undef
 export async function getAllPublishedPosts(): Promise<Result<Post[], ResultError>> {
   return ResultAsync.fromPromise(fs.readdir(BLOG_POST_DIR), () => ResultError.SYSTEM_FAILURE)
     .map((filePaths) =>
-      filePaths.filter((file) => path.extname(file) === '.mdx').map((fileName) => path.join(BLOG_POST_DIR, fileName)),
+      filePaths
+        .filter((file) => path.extname(file) === '.mdx')
+        .map((fileName) => path.join(BLOG_POST_DIR, fileName)),
     )
     .andThen((filePaths) => ResultAsync.combine(filePaths.map(getPostFromMDX)))
     .map((allPosts) =>
-      allPosts.filter(isPostReleased).sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))),
+      allPosts
+        .filter(isPostReleased)
+        .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))),
     )
 }

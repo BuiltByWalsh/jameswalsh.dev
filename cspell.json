@@ -24,6 +24,7 @@
     "libsql",
     "maersk",
     "no-brainer",
+    "oxlint",
     "pluralsight",
     "runescape",
     "shalvah",
@@ -36,5 +37,8 @@
     "vergnaud"
   ],
   "files": ["app/**", "posts/**", "components/**", "e2e/**", "lib/**"],
-  "ignoreRegExpList": ["/import\\s+[^'\";]+\\s+from\\s+['\"][^'\"]+['\"]/i", "/\\b\\S+\\.(webp|avif)\\b/"]
+  "ignoreRegExpList": [
+    "/import\\s+[^'\";]+\\s+from\\s+['\"][^'\"]+['\"]/i",
+    "/\\b\\S+\\.(webp|avif)\\b/"
+  ]
 }

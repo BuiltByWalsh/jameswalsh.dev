@@ -36,17 +36,24 @@ describe('tech/page', () => {
       expect(screen.getByRole('heading', { name: /skills/i })).toBeInTheDocument()
     })
 
-    it.each(stackCollectionKeys)('renders a list with all content present for %s', (stackCollectionKey) => {
-      render(<Page />)
+    it.each(stackCollectionKeys)(
+      'renders a list with all content present for %s',
+      (stackCollectionKey) => {
+        render(<Page />)
 
-      const stackKeyList = screen.getByTestId(`${stackCollectionKey}-list`)
-      expect(stackKeyList).toBeInTheDocument()
+        const stackKeyList = screen.getByTestId(`${stackCollectionKey}-list`)
+        expect(stackKeyList).toBeInTheDocument()
 
-      stackCollection[stackCollectionKey].forEach((item) => {
-        expect(within(stackKeyList).getByRole('heading', { name: item.title })).toBeInTheDocument()
-        expect(within(stackKeyList).getByAltText(`technology logo for ${item.title}`)).toBeInTheDocument()
-        expect(within(stackKeyList).getByTestId(`${item.title}-text`)).toBeInTheDocument()
-      })
-    })
+        stackCollection[stackCollectionKey].forEach((item) => {
+          expect(
+            within(stackKeyList).getByRole('heading', { name: item.title }),
+          ).toBeInTheDocument()
+          expect(
+            within(stackKeyList).getByAltText(`technology logo for ${item.title}`),
+          ).toBeInTheDocument()
+          expect(within(stackKeyList).getByTestId(`${item.title}-text`)).toBeInTheDocument()
+        })
+      },
+    )
   })
 })

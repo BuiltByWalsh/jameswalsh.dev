@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ReadMore } from './read-more'
-
 import { Time } from '@/components/time'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -10,6 +8,8 @@ import { TypographyH1, TypographyP } from '@/components/ui/typography'
 import { unwrapOrThrow } from '@/lib/result'
 import { calculateTimeToRead } from '@/lib/utils'
 import { getAllPublishedPosts } from '@/services/post'
+
+import { ReadMore } from './read-more'
 
 export const metadata = {
   title: 'Articles - James Walsh',
@@ -29,7 +29,12 @@ export default async function PostsIndexPage() {
             <Card className="h-full">
               <CardHeader className="gap-6">
                 <AspectRatio ratio={16 / 9}>
-                  <Image className="rounded-lg" fill src={post.thumbnail} alt={`${post.title} cover image`} />
+                  <Image
+                    className="rounded-lg"
+                    fill
+                    src={post.thumbnail}
+                    alt={`${post.title} cover image`}
+                  />
                 </AspectRatio>
                 <CardTitle>{post.title}</CardTitle>
                 <span className="text-muted-foreground">

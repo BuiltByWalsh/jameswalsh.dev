@@ -4,9 +4,9 @@ import path from 'node:path'
 import fm from 'front-matter'
 import { ResultAsync } from 'neverthrow'
 
-import type { Post, PostFrontmatter } from './types'
-
 import { ResultError } from '@/lib/result'
+
+import type { Post, PostFrontmatter } from './types'
 
 export function getPostFromMDX(filePath: string): ResultAsync<Post, ResultError> {
   const slug = path.basename(filePath, path.extname(filePath))

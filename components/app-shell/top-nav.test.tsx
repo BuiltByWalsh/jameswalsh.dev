@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import { usePathname } from 'next/navigation'
 
-import { TopNavbar } from './top-nav'
-
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
+
+import { TopNavbar } from './top-nav'
 
 vi.mock('next/navigation', () => ({
   ...vi.importActual('next/navigation'),
-  usePathname: vi.fn(),
+  usePathname: vi.fn<typeof import('next/navigation').usePathname>(),
 }))
 
 describe('components/app-shell/top-nav', () => {
@@ -15,17 +15,20 @@ describe('components/app-shell/top-nav', () => {
     vi.clearAllMocks()
   })
 
-  it.each(SITE_NAVIGATIONAL_ITEMS)('displays active state for navigation item $href', ({ href, value }) => {
-    vi.mocked(usePathname).mockReturnValueOnce(href)
+  it.each(SITE_NAVIGATIONAL_ITEMS)(
+    'displays active state for navigation item $href',
+    ({ href, value }) => {
+      vi.mocked(usePathname).mockReturnValueOnce(href)
 
-    render(<TopNavbar />)
+      render(<TopNavbar />)
 
-    const siteNavItem = screen.getByRole('link', { name: new RegExp(`/ ${value}`, 'i') })
+      const siteNavItem = screen.getByRole('link', { name: new RegExp(`/ ${value}`, 'i') })
 
-    expect(siteNavItem).toBeInTheDocument()
-    expect(siteNavItem).toHaveAttribute('href', href)
-    expect(siteNavItem).toHaveClass('border-b-2')
-  })
+      expect(siteNavItem).toBeInTheDocument()
+      expect(siteNavItem).toHaveAttribute('href', href)
+      expect(siteNavItem).toHaveClass('border-b-2')
+    },
+  )
 
   it('displays a nav item with a tooltip for /rss.xml', () => {
     vi.mocked(usePathname).mockReturnValueOnce('/')

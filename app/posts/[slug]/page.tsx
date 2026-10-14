@@ -3,9 +3,6 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import MDXContent from './mdx-content'
-import TimeInformation from './time-information'
-
 import { Tag } from '@/components/tag'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { buttonVariants } from '@/components/ui/button'
@@ -14,6 +11,9 @@ import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
 import { unwrapOrThrow } from '@/lib/result'
 import { cn } from '@/lib/utils'
 import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
+
+import MDXContent from './mdx-content'
+import TimeInformation from './time-information'
 
 export async function generateStaticParams() {
   const publishedPostsResult = await getAllPublishedPosts()
@@ -24,7 +24,11 @@ export async function generateStaticParams() {
   }))
 }
 
-export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> => {
   const { slug } = await params
   const postResult = await getPost(slug)
   const post = unwrapOrThrow(postResult)
@@ -59,7 +63,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
       <AspectRatio ratio={16 / 9}>
-        <Image src={post.thumbnail} alt="Article cover image" className="rounded-xl border-2" priority fill />
+        <Image
+          src={post.thumbnail}
+          alt="Article cover image"
+          className="rounded-xl border-2"
+          priority
+          fill
+        />
       </AspectRatio>
       <TypographyH1>{post.title}</TypographyH1>
       <div className="flex w-full flex-col items-center gap-4">
@@ -74,7 +84,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <MDXContent source={post.source} />
       </article>
       <div className="border-color mt-8 flex w-full flex-row justify-center gap-4 border-t pt-8">
-        <Link href="/posts" className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}>
+        <Link
+          href="/posts"
+          className={cn(buttonVariants({ variant: 'outline' }), 'w-2/5 md:w-1/2')}
+        >
           <ChevronLeft width={16} height={16} />
           &nbsp;All posts
         </Link>

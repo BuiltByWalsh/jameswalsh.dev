@@ -4,17 +4,19 @@ import * as dateFnsFormat from 'date-fns/format'
 import { err, ok } from 'neverthrow'
 import type { PropsWithChildren } from 'react'
 
-import PostPage, { generateMetadata, generateStaticParams } from './page'
-
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
 import { ResultError } from '@/lib/result'
 import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
+import PostPage, { generateMetadata, generateStaticParams } from './page'
+
 vi.mock('@/services/post')
 vi.mock('./mdx-content', () => ({
   __esModule: true,
-  default: vi.fn(({ children }: PropsWithChildren) => <div>{children}</div>),
+  default: vi.fn<(props: PropsWithChildren) => React.JSX.Element>(({ children }) => (
+    <div>{children}</div>
+  )),
 }))
 vi.mock('date-fns')
 vi.mock('date-fns/format')
@@ -111,17 +113,22 @@ describe('posts/[slug]/PostPage', () => {
       vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
       vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
-      await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
-        serializedNextNotFound,
-      )
+      await expect(() =>
+        PostPage({ params: Promise.resolve({ slug: mockSlug }) }),
+      ).rejects.toThrowError(serializedNextNotFound)
     })
 
-    it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(`throws an error when result is='%s'`, async (error) => {
-      vi.mocked(getPost).mockResolvedValue(err(error))
-      vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
+    it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(
+      `throws an error when result is='%s'`,
+      async (error) => {
+        vi.mocked(getPost).mockResolvedValue(err(error))
+        vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
-      await expect(() => PostPage({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(error)
-    })
+        await expect(() =>
+          PostPage({ params: Promise.resolve({ slug: mockSlug }) }),
+        ).rejects.toThrowError(error)
+      },
+    )
   })
 
   describe('#generateMetadata', () => {
@@ -154,9 +161,9 @@ describe('posts/[slug]/PostPage', () => {
         vi.mocked(getPost).mockResolvedValue(err(ResultError.NOT_FOUND))
         vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
-        await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
-          serializedNextNotFound,
-        )
+        await expect(() =>
+          generateMetadata({ params: Promise.resolve({ slug: mockSlug }) }),
+        ).rejects.toThrowError(serializedNextNotFound)
       })
 
       it.each([ResultError.INVALID, ResultError.SYSTEM_FAILURE])(
@@ -165,9 +172,9 @@ describe('posts/[slug]/PostPage', () => {
           vi.mocked(getPost).mockResolvedValue(err(error))
           vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
 
-          await expect(() => generateMetadata({ params: Promise.resolve({ slug: mockSlug }) })).rejects.toThrowError(
-            error,
-          )
+          await expect(() =>
+            generateMetadata({ params: Promise.resolve({ slug: mockSlug }) }),
+          ).rejects.toThrowError(error)
         },
       )
     })
@@ -176,7 +183,11 @@ describe('posts/[slug]/PostPage', () => {
   describe('#generateStaticParams', () => {
     it('returns all available post slugs', async () => {
       vi.mocked(getAllPublishedPosts).mockResolvedValue(
-        ok([getMockPost({ slug: 'slug-1' }), getMockPost({ slug: 'slug-2' }), getMockPost({ slug: 'slug-3' })]),
+        ok([
+          getMockPost({ slug: 'slug-1' }),
+          getMockPost({ slug: 'slug-2' }),
+          getMockPost({ slug: 'slug-3' }),
+        ]),
       )
       const staticParams = await generateStaticParams()
 
