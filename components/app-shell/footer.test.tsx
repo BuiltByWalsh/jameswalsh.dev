@@ -22,9 +22,20 @@ describe('components/app-shell/footer', () => {
     expect(siteNavItem).toHaveAttribute('href', href)
   })
 
-  it('displays copyright timestamp', () => {
-    render(<Footer />)
+  describe('copyright', () => {
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['Date'] })
+      vi.setSystemTime(new Date(2031, 5, 15))
+    })
 
-    expect(screen.getByText(/2025 James Walsh/i)).toBeInTheDocument()
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('displays the current year', () => {
+      render(<Footer />)
+
+      expect(screen.getByText(/2031 James Walsh/i)).toBeInTheDocument()
+    })
   })
 })
