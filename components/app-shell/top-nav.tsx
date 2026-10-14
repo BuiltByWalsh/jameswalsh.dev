@@ -4,10 +4,10 @@ import { cva } from 'class-variance-authority'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
+
 import { ModeToggleButton, RssFeedButton } from './action-buttons'
 import { MobileMenu } from './mobile-menu'
-
-import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 
 const topNavVariants = cva(
   'inline-block border-transparent mx-1 h-8 border-b-2 text-center text-lg opacity-80 transition-colors duration-200',
@@ -32,7 +32,10 @@ export function TopNavbar() {
       <nav className="pointer-events-auto mt-6 hidden h-12 w-full md:flex md:max-w-[1100px] md:flex-row md:justify-between">
         <ul className="flex flex-row items-center gap-x-8 text-sm font-medium">
           <li>
-            <Link href="/" className={topNavVariants({ variant: pathname === '/' ? 'current' : 'default' })}>
+            <Link
+              href="/"
+              className={topNavVariants({ variant: pathname === '/' ? 'current' : 'default' })}
+            >
               ~/
             </Link>
           </li>

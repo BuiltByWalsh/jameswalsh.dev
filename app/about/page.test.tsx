@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 
-import AboutPage from './page'
-
 import { GITHUB_REPO_LINK } from '@/lib/constants'
+
+import AboutPage from './page'
 
 describe('about/AboutPage', () => {
   it('displays page heading', async () => {
@@ -14,7 +14,9 @@ describe('about/AboutPage', () => {
   it('displays bio text', async () => {
     render(await AboutPage())
 
-    expect(screen.getByText(/i live in slc, ut where i write software & enjoy the outdoors./i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/i live in slc, ut where i write software & enjoy the outdoors./i),
+    ).toBeInTheDocument()
     expect(
       screen.getByText(
         /in my free-time I love tinkering with home automations, riding my mountain bike & playing video games./i,
@@ -47,13 +49,16 @@ describe('about/AboutPage', () => {
   it('displays link to github repo', async () => {
     render(await AboutPage())
 
-    expect(screen.getByRole('link', { name: /visit github/i })).toHaveAttribute('href', GITHUB_REPO_LINK)
+    expect(screen.getByRole('link', { name: /visit github/i })).toHaveAttribute(
+      'href',
+      GITHUB_REPO_LINK,
+    )
   })
 
   it('displays subscribe CTA', async () => {
     render(await AboutPage())
 
-    expect(screen.getByRole('button', { name: /subscribe/i }))
+    expect(screen.getByRole('button', { name: /subscribe/i })).toBeInTheDocument()
   })
 
   it('displays work history', async () => {

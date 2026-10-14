@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 
-import Footer, { socialLinks } from './footer'
-
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
+
+import Footer, { socialLinks } from './footer'
 
 describe('components/app-shell/footer', () => {
   it.each(socialLinks)('displays a social link for $name', ({ ariaLabel, href }) => {
@@ -13,14 +13,17 @@ describe('components/app-shell/footer', () => {
     expect(socialLink).toHaveAttribute('href', href)
   })
 
-  it.each(SITE_NAVIGATIONAL_ITEMS)('displays a site navigation item for $href', ({ href, value }) => {
-    render(<Footer />)
+  it.each(SITE_NAVIGATIONAL_ITEMS)(
+    'displays a site navigation item for $href',
+    ({ href, value }) => {
+      render(<Footer />)
 
-    const siteNavItem = screen.getByRole('link', { name: value })
+      const siteNavItem = screen.getByRole('link', { name: value })
 
-    expect(siteNavItem).toBeInTheDocument()
-    expect(siteNavItem).toHaveAttribute('href', href)
-  })
+      expect(siteNavItem).toBeInTheDocument()
+      expect(siteNavItem).toHaveAttribute('href', href)
+    },
+  )
 
   describe('copyright', () => {
     beforeEach(() => {

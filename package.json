@@ -2,32 +2,16 @@
   "name": "jameswalsh.dev",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "24.x"
-  },
   "type": "module",
-  "packageManager": "pnpm@10.11.0",
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/git-cz"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "pnpm format"
-    ],
-    "*.md": "prettier --list-different"
-  },
   "scripts": {
     "dev": "next dev --port=3000",
     "dev:force": "rm -rf .next && pnpm dev",
     "db:migrate": "echo 'no migrations yet'",
     "build": "next build",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "lint:fix": "pnpm lint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "precommit": "pnpm spell && pnpm lint-staged",
     "prepush": "pnpm typecheck && vitest --run",
     "prepare": "husky install",
@@ -63,7 +47,6 @@
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.6.0",
-    "@next/eslint-plugin-next": "16.4.0",
     "@playwright/test": "1.57.0",
     "@tailwindcss/postcss": "4.3.3",
     "@testing-library/jest-dom": "6.6.3",
@@ -73,25 +56,17 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@types/rss": "0.0.32",
-    "@typescript-eslint/parser": "8.33.1",
     "@vitejs/plugin-react": "4.6.0",
     "@vitest/coverage-istanbul": "4.0.16",
     "commitlint": "19.8.1",
     "cspell": "8.15.1",
-    "eslint": "9.38.0",
-    "eslint-config-next": "16.4.0",
-    "eslint-config-prettier": "10.1.5",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-prettier": "5.5.1",
-    "eslint-plugin-react-hooks": "7.1.1",
     "happy-dom": "20.8.9",
     "husky": "8.0.3",
     "lint-staged": "16.1.2",
     "msw": "2.10.2",
+    "oxfmt": "0.73.0",
+    "oxlint": "1.88.0",
     "postcss": "8.5.23",
-    "prettier": "3.5.3",
-    "prettier-plugin-tailwindcss": "0.6.12",
     "rehype": "13.0.2",
     "rehype-autolink-headings": "7.1.0",
     "rehype-pretty-code": "0.14.1",
@@ -102,5 +77,17 @@
     "typescript": "5.8.3",
     "vite-tsconfig-paths": "6.0.3",
     "vitest": "4.1.11"
-  }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}": "pnpm run lint"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/git-cz"
+    }
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "pnpm@10.11.0"
 }

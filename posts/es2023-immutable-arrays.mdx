@@ -31,10 +31,10 @@ With the exception of `with()` all of these new methods provide similar function
 The big change here has to do with array mutations. These old-school methods act like stateful object-oriented methods, & mutate the state of the array instance they are called upon.
 
 <br />
-Conversely, each of these new array methods behave as a `Functor` _(you can check out my write-up on functors
-[here](/posts/tenets-of-functional-programming#tenet-5-functors-️))_. The resulting "mutation" always executes on a
-brand new copy of the array returning the new result. No mutations happen to the array instance the function was called
-upon.
+Conversely, each of these new array methods behave as a `Functor` _(you can check out my write-up on
+functors [here](/posts/tenets-of-functional-programming#tenet-5-functors-️))_. The resulting
+"mutation" always executes on a brand new copy of the array returning the new result. No mutations
+happen to the array instance the function was called upon.
 
 <br />
 
@@ -156,12 +156,14 @@ If you need to ship code with an incredibly small footprint to a resource-constr
 or you are dealing with a part of your codebase that's having scaling issues; you could justify a refactor the total opposite direction.
 
 <br />
-But for most of us, the caution here is that premature optimization can cause software rot. Most of the time I'm focused
-on building cool reliable web-based things on modern devices, where we need tons of interactivity with safety baked-in.
-I see these new array methods as the natural progression of what the language should offer, which continues to get us
-closer to feature parody with open source libraries developers have reached for in the past. Until copying lists proves
-to be a problem in a particular codebase, this is my approach. We can always be more cautious as cases arise naturally.
-But for most of us, these new methods solve for bugs caused by bad mutations, with totally manageable trade-offs.
+But for most of us, the caution here is that premature optimization can cause software rot. Most of
+the time I'm focused on building cool reliable web-based things on modern devices, where we need
+tons of interactivity with safety baked-in. I see these new array methods as the natural progression
+of what the language should offer, which continues to get us closer to feature parody with open
+source libraries developers have reached for in the past. Until copying lists proves to be a problem
+in a particular codebase, this is my approach. We can always be more cautious as cases arise
+naturally. But for most of us, these new methods solve for bugs caused by bad mutations, with
+totally manageable trade-offs.
 
 <br />
 Cheers! 🤙

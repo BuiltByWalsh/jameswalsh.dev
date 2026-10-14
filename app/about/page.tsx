@@ -3,14 +3,14 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AboutMe from './about-me'
-import WorkHistory from './work-history'
-
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { TypographyH1, TypographyP } from '@/components/ui/typography'
 import { GITHUB_REPO_LINK } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+
+import AboutMe from './about-me'
+import WorkHistory from './work-history'
 
 export const metadata: Metadata = {
   title: 'About - James Walsh',
@@ -32,11 +32,12 @@ export default function AboutPage() {
             I live in SLC, UT where I write software & enjoy the outdoors.
           </TypographyP>
           <TypographyP className="my-3 text-base break-normal md:text-xl">
-            In my free-time I love tinkering with home automations, riding my mountain bike & playing video games.
+            In my free-time I love tinkering with home automations, riding my mountain bike &
+            playing video games.
           </TypographyP>
           <TypographyP className="my-3 w-full text-base text-wrap break-normal md:text-xl">
-            I&apos;m a coffee nut. From espresso, french-press, to pour-over, some of my favorite moments in life are
-            looking out at a crisp morning with a hot cup in my hand.
+            I&apos;m a coffee nut. From espresso, french-press, to pour-over, some of my favorite
+            moments in life are looking out at a crisp morning with a hot cup in my hand.
           </TypographyP>
         </div>
         <Image
@@ -76,7 +77,9 @@ export default function AboutPage() {
               <CardTitle>Read My Posts</CardTitle>
             </CardHeader>
             <CardContent>
-              <TypographyP>Get notified when I publish new posts, unsubscribe any time.</TypographyP>
+              <TypographyP>
+                Get notified when I publish new posts, unsubscribe any time.
+              </TypographyP>
             </CardContent>
             <CardFooter>
               <Button disabled variant="outline" className="hover:cursor-not-allowed">
@@ -91,8 +94,8 @@ export default function AboutPage() {
               <CardTitle>How I Built This</CardTitle>
             </CardHeader>
             <CardContent>
-              This site was built with Next.js, Typescript, & TailwindCSS. Use the link below to checkout the source
-              code.
+              This site was built with Next.js, Typescript, & TailwindCSS. Use the link below to
+              checkout the source code.
             </CardContent>
             <CardFooter>
               <Link href={GITHUB_REPO_LINK} download className={cn('w-full', buttonVariants())}>

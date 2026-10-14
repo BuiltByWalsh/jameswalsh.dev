@@ -13,5 +13,12 @@ export interface Post {
 
 export type PostFrontmatter = Pick<
   Post,
-  'title' | 'description' | 'thumbnail' | 'status' | 'publishedAt' | 'lastModified' | 'brief' | 'tags'
+  | 'title'
+  | 'description'
+  | 'thumbnail'
+  | 'status'
+  | 'publishedAt'
+  | 'lastModified'
+  | 'brief'
+  | 'tags'
 >

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import * as dateFns from 'date-fns'
 
-import TimeInformation from './time-information'
-
 import * as utils from '@/lib/utils'
+
+import TimeInformation from './time-information'
 
 vi.mock('@/lib/utils')
 vi.mock('date-fns')

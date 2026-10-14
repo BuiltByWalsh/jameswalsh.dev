@@ -16,9 +16,12 @@ describe('components/tag', () => {
   })
 
   // cspell:disable-next-line
-  it.each(['theo', 'THEO', 'tHeO'])('always displays the same color for the same text (%s)', (text) => {
-    render(<Tag text={text} />)
-    expect(screen.getByText(`#${text}`)).toHaveClass(`bg-blue-200`)
-    expect(screen.getByText(`#${text}`)).toHaveClass(`bg-blue-200 dark:bg-blue-900/50`)
-  })
+  it.each(['theo', 'THEO', 'tHeO'])(
+    'always displays the same color for the same text (%s)',
+    (text) => {
+      render(<Tag text={text} />)
+      expect(screen.getByText(`#${text}`)).toHaveClass(`bg-blue-200`)
+      expect(screen.getByText(`#${text}`)).toHaveClass(`bg-blue-200 dark:bg-blue-900/50`)
+    },
+  )
 })

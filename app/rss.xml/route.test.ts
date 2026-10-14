@@ -2,15 +2,17 @@
 
 import { ok } from 'neverthrow'
 
-import { SITE_MAP_CATEGORIES } from './constants'
-import { GET } from './route'
-
 import { EMAIL, JAMES_WALSH, PRODUCTION_URL, SITE_DESCRIPTION } from '@/lib/constants'
 import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
+import { SITE_MAP_CATEGORIES } from './constants'
+import { GET } from './route'
+
 vi.mock('@/services/post', () => ({
-  getAllPublishedPosts: vi.fn().mockResolvedValue(ok([])),
+  getAllPublishedPosts: vi
+    .fn<typeof import('@/services/post').getAllPublishedPosts>()
+    .mockResolvedValue(ok([])),
 }))
 
 describe('rss.xml', () => {
@@ -51,8 +53,16 @@ describe('rss.xml', () => {
 
     it('adds blog posts as xml feed items', async () => {
       const mockPosts = [
-        getMockPost({ title: 'blog post 1', slug: 'slug-1', thumbnail: '/blog-thumbnails/post-1-thumbnail.webp' }),
-        getMockPost({ title: 'blog post 2', slug: 'slug-2', thumbnail: '/blog-thumbnails/post-2-thumbnail.webp' }),
+        getMockPost({
+          title: 'blog post 1',
+          slug: 'slug-1',
+          thumbnail: '/blog-thumbnails/post-1-thumbnail.webp',
+        }),
+        getMockPost({
+          title: 'blog post 2',
+          slug: 'slug-2',
+          thumbnail: '/blog-thumbnails/post-2-thumbnail.webp',
+        }),
       ]
       vi.mocked(getAllPublishedPosts).mockResolvedValue(ok(mockPosts))
       const response = await GET()

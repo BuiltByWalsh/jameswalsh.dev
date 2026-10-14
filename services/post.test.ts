@@ -5,15 +5,14 @@ import path from 'node:path'
 
 import { err, ok, okAsync } from 'neverthrow'
 
-import { ResultError } from '../lib/result'
-
-import { getAllPublishedPosts, getPost, getPreviousPost } from './post'
-
 import { getPostFromMDX } from '@/services/mdx'
 import type { Post } from '@/services/types'
 import { getMockFiles } from '@/test/mocks/files'
 import { getMockFrontmatter } from '@/test/mocks/frontmatter'
 import { getMockSource } from '@/test/mocks/source'
+
+import { ResultError } from '../lib/result'
+import { getAllPublishedPosts, getPost, getPreviousPost } from './post'
 
 vi.mock('node:fs/promises')
 vi.mock('@/services/mdx')
@@ -150,7 +149,9 @@ describe('services/post', () => {
     })
 
     it('filters out draft blog posts', async () => {
-      const mockFilesWithDrafts = getMockFiles([path.join(process.cwd(), 'posts', 'blog-draft.mdx')])
+      const mockFilesWithDrafts = getMockFiles([
+        path.join(process.cwd(), 'posts', 'blog-draft.mdx'),
+      ])
 
       vi.mocked(getPostFromMDX).mockImplementation((filePath) => {
         const slug = path.basename(filePath, path.extname(filePath))
@@ -168,7 +169,9 @@ describe('services/post', () => {
     })
 
     it('filters out unreleased blog posts', async () => {
-      const mockFilesWithUnreleasedPost = getMockFiles([path.join(process.cwd(), 'posts', 'future-release.mdx')])
+      const mockFilesWithUnreleasedPost = getMockFiles([
+        path.join(process.cwd(), 'posts', 'future-release.mdx'),
+      ])
 
       vi.mocked(getPostFromMDX).mockImplementation((filePath) => {
         const slug = path.basename(filePath, path.extname(filePath))
