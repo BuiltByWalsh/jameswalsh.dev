@@ -4,7 +4,7 @@ import { GeistMono } from 'geist/font/mono'
 import { Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
 
-import { AnalyticsProvider, ThemeProvider } from './providers'
+import { ThemeProvider } from './providers'
 
 import Footer from '@/components/app-shell/footer'
 import { TopNavbar } from '@/components/app-shell/top-nav'
@@ -37,15 +37,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         name="ahrefs-site-verification"
         content="91e1441f7228c69eeb9367bfbbda2c6284d19816253d8178d9087f42f95ab801"
       />
-      <AnalyticsProvider>
-        <body className="flex flex-col px-6 md:items-center md:px-8">
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <TopNavbar />
-            <main className="mt-4 flex w-full flex-col px-2 py-10 sm:px-0 md:max-w-[1100px] md:px-4">{children}</main>
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </AnalyticsProvider>
+      <body className="flex flex-col px-6 md:items-center md:px-8">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <TopNavbar />
+          <main className="mt-4 flex w-full flex-col px-2 py-10 sm:px-0 md:max-w-[1100px] md:px-4">{children}</main>
+          <Footer />
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

@@ -1,17 +1,21 @@
-import { FlatCompat } from '@eslint/eslintrc'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import importPlugin from 'eslint-plugin-import'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-})
+const files = ['**/*.{js,jsx,mjs,ts,tsx,mts,cts}']
 
 const eslintConfig = [
-  ...compat.extends(
-    'next/core-web-vitals',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'plugin:prettier/recommended',
-  ),
+  ...nextVitals,
   {
+    files,
+    rules: {
+      ...importPlugin.flatConfigs.recommended.rules,
+      ...importPlugin.flatConfigs.typescript.rules,
+    },
+  },
+  prettierRecommended,
+  {
+    files,
     rules: {
       'import/no-cycle': [2, { maxDepth: 2 }],
       'import/order': [
@@ -36,10 +40,16 @@ const eslintConfig = [
         node: true,
       },
     },
+  },
+  {
     ignores: [
-      '.next',
+      '.next/',
       '.vscode/',
+      'coverage/',
+      'next-env.d.ts',
       'node_modules/',
+      'playwright-report/',
+      'test-results/',
       'package.json',
       'postcss.config.js',
       'pnpm-lock.yaml',

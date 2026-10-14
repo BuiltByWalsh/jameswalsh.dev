@@ -29,7 +29,7 @@ test.describe('when navigating the top nav bar', () => {
 
     await expect(page).toHaveURL('/about')
     await expect(page).toHaveTitle('About - James Walsh')
-    await expect(page.getByText(`I'm James`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: /I'm James/ })).toBeVisible()
   })
 
   test('navigates to /tech', async ({ page, isMobile }) => {
@@ -61,7 +61,7 @@ test.describe('when navigating the footer', () => {
 
     await expect(page).toHaveURL('/about')
     await expect(page).toHaveTitle('About - James Walsh')
-    await expect(page.getByText(`I'm James`)).toBeVisible()
+    await expect(page.getByRole('heading', { name: /I'm James/ })).toBeVisible()
   })
 
   test('navigates to /tech', async ({ page }) => {
