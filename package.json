@@ -62,7 +62,7 @@
     "cspell": "8.15.1",
     "happy-dom": "20.8.9",
     "husky": "8.0.3",
-    "lint-staged": "16.1.2",
+    "lint-staged": "17.6.0",
     "msw": "2.10.2",
     "oxfmt": "0.73.0",
     "oxlint": "1.88.0",
