@@ -1,11 +1,6 @@
-import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc'
+import type { MDXComponents } from 'mdx/types'
 import Image, { ImageProps } from 'next/image'
 import { HTMLAttributes, PropsWithChildren } from 'react'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
-import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
-import { HighlighterCoreOptions, getSingletonHighlighter } from 'shiki'
 
 import {
   TypographyBlockquote,
@@ -16,7 +11,7 @@ import {
 } from '@/components/ui/typography'
 import { cn } from '@/lib/utils'
 
-const components: MDXRemoteProps['components'] = {
+const components: MDXComponents = {
   img: (props: HTMLAttributes<HTMLImageElement>) => (
     <Image
       {...(props as ImageProps)}
@@ -53,45 +48,7 @@ const components: MDXRemoteProps['components'] = {
     </a>
   ),
 }
-const options: MDXRemoteProps['options'] = {
-  mdxOptions: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeSlug,
-      rehypeAutolinkHeadings,
-      [
-        rehypePrettyCode,
-        {
-          theme: 'one-dark-pro',
-          keepBackground: false,
-          getHighlighter: (options: HighlighterCoreOptions) => {
-            return getSingletonHighlighter({
-              ...options,
-              themes: ['one-dark-pro'],
-              langs: [
-                'js',
-                'ts',
-                'jsx',
-                'tsx',
-                'json',
-                'json5',
-                'shell',
-                'bash',
-                'astro',
-                'markdown',
-              ],
-            })
-          },
-        },
-      ],
-    ],
-  },
-}
 
-type MdxContentProps = {
-  source: string
-}
-
-export default function MDXContent({ source }: MdxContentProps) {
-  return <MDXRemote source={source} components={components} options={options} />
+export function useMDXComponents(): MDXComponents {
+  return components
 }

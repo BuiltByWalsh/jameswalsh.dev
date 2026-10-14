@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react'
 import * as dateFns from 'date-fns'
 import * as dateFnsFormat from 'date-fns/format'
 import { err, ok } from 'neverthrow'
-import type { PropsWithChildren } from 'react'
 
 import { JAMES_WALSH, PRODUCTION_URL } from '@/lib/constants'
 import { ResultError } from '@/lib/result'
@@ -12,11 +11,8 @@ import { getMockPost } from '@/test/mocks/post'
 import PostPage, { generateMetadata, generateStaticParams } from './page'
 
 vi.mock('@/services/post')
-vi.mock('./mdx-content', () => ({
-  __esModule: true,
-  default: vi.fn<(props: PropsWithChildren) => React.JSX.Element>(({ children }) => (
-    <div>{children}</div>
-  )),
+vi.mock('@/posts/my-slug.mdx', () => ({
+  default: () => <p>Compiled post content</p>,
 }))
 vi.mock('date-fns')
 vi.mock('date-fns/format')
@@ -46,6 +42,15 @@ describe('posts/[slug]/PostPage', () => {
     render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
 
     expect(screen.getByRole('heading', { name: mockPost.title })).toBeInTheDocument()
+  })
+
+  it('renders the compiled MDX post content', async () => {
+    vi.mocked(getPost).mockResolvedValue(ok(mockPost))
+    vi.mocked(getPreviousPost).mockResolvedValue(ok(undefined))
+
+    render(await PostPage({ params: Promise.resolve({ slug: mockSlug }) }))
+
+    expect(screen.getByText('Compiled post content')).toBeInTheDocument()
   })
 
   it('renders the blog thumbnail image', async () => {
