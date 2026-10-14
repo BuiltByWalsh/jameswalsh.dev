@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=v22.15.0"
+    "node": "24.x"
   },
   "type": "module",
   "packageManager": "pnpm@10.11.0",
@@ -81,7 +81,7 @@
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.7.5",
+    "@types/node": "24.19.2",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.5",
     "@types/rss": "0.0.32",
