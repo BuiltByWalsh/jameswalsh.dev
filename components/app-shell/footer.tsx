@@ -33,6 +33,10 @@ export const socialLinks: SocialLink[] = [
 ]
 
 export default function Footer() {
+  // ? NOTE: Server component, rendered once per request/build, so reading the current date is safe here.
+  // oxlint-disable-next-line react/purity
+  const currentYear = formatDate(new Date(), 'yyyy')
+
   return (
     <footer className="border-border flex w-full flex-col justify-between border-t px-10 py-4 sm:grid-cols-1 md:flex-row">
       <div className="my-4 flex flex-col-reverse items-center justify-center gap-6 md:flex-col md:items-start">
@@ -48,7 +52,11 @@ export default function Footer() {
         </div>
         <ul className="flex flex-row gap-6">
           {SITE_NAVIGATIONAL_ITEMS.map((item) => (
-            <li className="w-full" key={item.value} data-testid={`${item.value.toLowerCase()}-footer-nav-item`}>
+            <li
+              className="w-full"
+              key={item.value}
+              data-testid={`${item.value.toLowerCase()}-footer-nav-item`}
+            >
               <Link href={item.href}>{item.value}</Link>
             </li>
           ))}
@@ -56,7 +64,7 @@ export default function Footer() {
       </div>
       <div className="my-4 flex flex-row items-center justify-center">
         <Copyright className="h-4 w-4" />
-        &nbsp;{formatDate(new Date(), 'yyyy')}&nbsp;James Walsh
+        &nbsp;{currentYear}&nbsp;James Walsh
       </div>
     </footer>
   )

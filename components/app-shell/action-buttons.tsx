@@ -1,8 +1,8 @@
 'use client'
 
 import { Moon, RssIcon, Sun } from 'lucide-react'
-import Link from 'next/link'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'

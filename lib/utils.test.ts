@@ -39,13 +39,19 @@ describe('lib/utils', () => {
     })
 
     it('returns true if the post is in the past', () => {
-      const actual = isPostReleased({ status: 'published', publishedAt: new Date(2024, 7, 24).toString() })
+      const actual = isPostReleased({
+        status: 'published',
+        publishedAt: new Date(2024, 7, 24).toString(),
+      })
 
       expect(actual).toBeTruthy()
     })
 
     it('returns false if post is in the future', () => {
-      const actual = isPostReleased({ status: 'published', publishedAt: new Date(2024, 8, 2).toString() })
+      const actual = isPostReleased({
+        status: 'published',
+        publishedAt: new Date(2024, 8, 2).toString(),
+      })
 
       expect(actual).toBeFalsy()
     })

@@ -1,13 +1,11 @@
 {
   "npm.packageManager": "pnpm",
   "editor.formatOnSave": true,
-  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact", "markdown"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.format.enable": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.oxc": "always"
   },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
-  },
+  }
 }

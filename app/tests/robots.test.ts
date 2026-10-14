@@ -1,6 +1,6 @@
-import robots from '../robots'
-
 import { PRODUCTION_URL } from '@/lib/constants'
+
+import robots from '../robots'
 
 describe('robots', () => {
   it('contains desired robots metadata', () => {

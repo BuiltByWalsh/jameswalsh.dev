@@ -11,12 +11,19 @@ import {
   RssIcon,
   Sun,
 } from 'lucide-react'
-import Link from 'next/link'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
 import { type ReactNode } from 'react'
 
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import { SITE_NAVIGATIONAL_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
@@ -48,7 +55,10 @@ export function MobileMenu() {
             <SheetClose asChild>
               <Link
                 href="/"
-                className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
+                className={cn(
+                  buttonVariants({ variant: 'ghost' }),
+                  'w-full justify-start rounded-none border-b',
+                )}
               >
                 <HomeIcon className="mr-2 h-4 w-4" />/ home
               </Link>
@@ -56,11 +66,18 @@ export function MobileMenu() {
           </li>
           {SITE_NAVIGATIONAL_ITEMS.map((navItem) => {
             return (
-              <li className="w-full" key={navItem.value} data-testid={`${navItem.value.toLowerCase()}-nav-item`}>
+              <li
+                className="w-full"
+                key={navItem.value}
+                data-testid={`${navItem.value.toLowerCase()}-nav-item`}
+              >
                 <SheetClose asChild>
                   <Link
                     href={navItem.href}
-                    className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
+                    className={cn(
+                      buttonVariants({ variant: 'ghost' }),
+                      'w-full justify-start rounded-none border-b',
+                    )}
                   >
                     {navItemIcons[navItem.value.toLowerCase()]}/ {navItem.value}
                   </Link>
@@ -73,7 +90,10 @@ export function MobileMenu() {
               <Link
                 target="_blank"
                 href="/rss.xml"
-                className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
+                className={cn(
+                  buttonVariants({ variant: 'ghost' }),
+                  'w-full justify-start rounded-none border-b',
+                )}
               >
                 <RssIcon className="mr-2 h-4 w-4" />/ get rss feed
               </Link>
@@ -83,7 +103,10 @@ export function MobileMenu() {
             <SheetClose asChild>
               <Button
                 variant="ghost"
-                className={cn(buttonVariants({ variant: 'ghost' }), 'w-full justify-start rounded-none border-b')}
+                className={cn(
+                  buttonVariants({ variant: 'ghost' }),
+                  'w-full justify-start rounded-none border-b',
+                )}
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               >
                 {theme === 'dark' ? (

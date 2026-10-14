@@ -1,13 +1,15 @@
 import { ok } from 'neverthrow'
 
-import sitemap from '../sitemap'
-
 import { PRODUCTION_URL } from '@/lib/constants'
 import { getAllPublishedPosts } from '@/services/post'
 import { getMockPost } from '@/test/mocks/post'
 
+import sitemap from '../sitemap'
+
 vi.mock('@/services/post', () => ({
-  getAllPublishedPosts: vi.fn().mockResolvedValue(ok([])),
+  getAllPublishedPosts: vi
+    .fn<typeof import('@/services/post').getAllPublishedPosts>()
+    .mockResolvedValue(ok([])),
 }))
 
 describe('sitemap', () => {
@@ -23,16 +25,42 @@ describe('sitemap', () => {
   })
 
   it.each([
-    ['about', { url: `${PRODUCTION_URL}/about`, lastModified: mockDateTime, changeFrequency: 'yearly', priority: 0.7 }],
+    [
+      'about',
+      {
+        url: `${PRODUCTION_URL}/about`,
+        lastModified: mockDateTime,
+        changeFrequency: 'yearly',
+        priority: 0.7,
+      },
+    ],
     [
       'projects',
-      { url: `${PRODUCTION_URL}/projects`, lastModified: mockDateTime, changeFrequency: 'yearly', priority: 0.5 },
+      {
+        url: `${PRODUCTION_URL}/projects`,
+        lastModified: mockDateTime,
+        changeFrequency: 'yearly',
+        priority: 0.5,
+      },
     ],
     [
       'stack',
-      { url: `${PRODUCTION_URL}/projects`, lastModified: mockDateTime, changeFrequency: 'yearly', priority: 0.1 },
+      {
+        url: `${PRODUCTION_URL}/projects`,
+        lastModified: mockDateTime,
+        changeFrequency: 'yearly',
+        priority: 0.1,
+      },
     ],
-    ['posts', { url: `${PRODUCTION_URL}/posts`, lastModified: mockDateTime, changeFrequency: 'weekly', priority: 0.8 }],
+    [
+      'posts',
+      {
+        url: `${PRODUCTION_URL}/posts`,
+        lastModified: mockDateTime,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      },
+    ],
   ])('contains sitemap record for /%s', async () => {
     const sitemapList = await sitemap()
 

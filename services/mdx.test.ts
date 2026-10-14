@@ -5,12 +5,12 @@ import path from 'node:path'
 
 import * as fm from 'front-matter'
 
-import { getPostFromMDX } from './mdx'
-import { PostFrontmatter } from './types'
-
 import { ResultError } from '@/lib/result'
 import { getMockFrontmatter } from '@/test/mocks/frontmatter'
 import { getMockSource } from '@/test/mocks/source'
+
+import { getPostFromMDX } from './mdx'
+import { PostFrontmatter } from './types'
 
 vi.mock('front-matter')
 vi.mock('node:fs/promises')
@@ -47,7 +47,7 @@ describe('lib/mdx', () => {
       vi.mocked(fs.readFile).mockResolvedValue(mockBody)
 
       const actual = await getPostFromMDX(filePath)
-      const { slug, source, ...frontmatter } = actual._unsafeUnwrap()
+      const { slug: _slug, source: _source, ...frontmatter } = actual._unsafeUnwrap()
 
       expect(frontmatter).toStrictEqual(mockFrontmatter)
     })

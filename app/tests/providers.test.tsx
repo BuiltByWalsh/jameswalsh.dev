@@ -4,7 +4,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { ThemeProvider } from '../providers'
 
 vi.mock('next-themes', () => ({
-  ThemeProvider: vi.fn(),
+  ThemeProvider: vi.fn<typeof import('next-themes').ThemeProvider>(),
 }))
 
 const TestComponent = () => {

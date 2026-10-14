@@ -7,7 +7,7 @@ import { type HTMLAttributes } from 'react'
 export const BlueSky = (props: HTMLAttributes<SVGElement>) => {
   return (
     <svg
-      role="img"
+      aria-hidden="true"
       width={24}
       height={24}
       viewBox="0 0 24 24"

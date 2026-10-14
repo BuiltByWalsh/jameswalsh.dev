@@ -3,11 +3,16 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { projectsCollection, stackCollection } from './static-data'
-
-import { Timeline, TimelineItem, TimelineLeftElement, TimelineRightElement } from '@/components/timeline'
+import {
+  Timeline,
+  TimelineItem,
+  TimelineLeftElement,
+  TimelineRightElement,
+} from '@/components/timeline'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { TypographyH1, TypographyH2, TypographyH3, TypographyP } from '@/components/ui/typography'
+
+import { projectsCollection, stackCollection } from './static-data'
 
 export const metadata: Metadata = {
   title: 'Tech - James Walsh',
@@ -30,8 +35,9 @@ export default function StackPage() {
       </TypographyH1>
       <hr />
       <p className="font-medium">
-        I&apos;ve enjoyed contributing to many projects over the years, but the following is my professional highlight
-        reel. A couple of them are <b>OSS</b> if you&apos;d like to learn more.
+        I&apos;ve enjoyed contributing to many projects over the years, but the following is my
+        professional highlight reel. A couple of them are <b>OSS</b> if you&apos;d like to learn
+        more.
       </p>
       <div className="mt-8 grid w-full gap-8 sm:grid-cols-1 md:grid-cols-2">
         {projectsCollection.map((project) => (

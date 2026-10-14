@@ -2,14 +2,14 @@ import { Clock, MapPin, Terminal } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ReadMore } from './posts/read-more'
-
 import { Tag } from '@/components/tag'
 import { Time } from '@/components/time'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { unwrapOrThrow } from '@/lib/result'
 import { calculateTimeToRead } from '@/lib/utils'
 import { getAllPublishedPosts } from '@/services/post'
+
+import { ReadMore } from './posts/read-more'
 
 export default async function HomePage() {
   const publishedPostsResult = await getAllPublishedPosts()
@@ -42,10 +42,15 @@ export default async function HomePage() {
         <hr />
         <p className="w-full text-sm text-pretty md:w-[300px] md:text-balance">
           I&apos;m a full-stack, front-end focused web developer interested in frameworks like{' '}
-          <code className="gray-300 rounded-sm bg-gray-300 px-1 py-0.5 text-xs dark:bg-gray-600">Next.js</code> &{' '}
-          <code className="gray-300 mr-0.5 rounded-sm bg-gray-300 px-0.5 py-0.5 text-xs dark:bg-gray-600">Remix</code>.
-          I&apos;m writing blog posts about the things I&apos;m learning along the way. In my free-time I&apos;m also an
-          indie developer, & blogger.
+          <code className="gray-300 rounded-sm bg-gray-300 px-1 py-0.5 text-xs dark:bg-gray-600">
+            Next.js
+          </code>{' '}
+          &{' '}
+          <code className="gray-300 mr-0.5 rounded-sm bg-gray-300 px-0.5 py-0.5 text-xs dark:bg-gray-600">
+            Remix
+          </code>
+          . I&apos;m writing blog posts about the things I&apos;m learning along the way. In my
+          free-time I&apos;m also an indie developer, & blogger.
         </p>
       </div>
       <div>

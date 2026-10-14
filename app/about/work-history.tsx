@@ -2,8 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -33,7 +39,13 @@ export const cvItems: CVItem[] = [
   },
   {
     image: (
-      <Image src="/logos/employers/tomo.webp" width={32} height={32} alt="Tomo company logo" className="rounded-full" />
+      <Image
+        src="/logos/employers/tomo.webp"
+        width={32}
+        height={32}
+        alt="Tomo company logo"
+        className="rounded-full"
+      />
     ),
     company: 'Tomo',
     role: 'Senior Software Engineer',
@@ -103,6 +115,8 @@ export const cvItems: CVItem[] = [
 ]
 
 export default function WorkHistory() {
+  const [currentYear] = useState(() => new Date().getFullYear().toString())
+
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="work-history">
@@ -110,7 +124,11 @@ export default function WorkHistory() {
         <AccordionContent>
           <ul className="mt-4 flex flex-col gap-6">
             {cvItems.map((cvItem) => (
-              <li className="w-full" key={cvItem.company} data-testid={`${cvItem.company.toLowerCase()}-cv-item`}>
+              <li
+                className="w-full"
+                key={cvItem.company}
+                data-testid={`${cvItem.company.toLowerCase()}-cv-item`}
+              >
                 {cvItem.image}
                 <dl className="flex w-full flex-wrap gap-2">
                   <dt className="hidden">Company</dt>
@@ -121,9 +139,7 @@ export default function WorkHistory() {
                   <dd className="font-lighter ml-auto text-xs">
                     <time dateTime={cvItem.startDate}>{cvItem.startDate}</time>
                     <span aria-hidden="true"> — </span>
-                    <time
-                      dateTime={cvItem.endDate === 'Present' ? new Date().getFullYear().toString() : cvItem.endDate}
-                    >
+                    <time dateTime={cvItem.endDate === 'Present' ? currentYear : cvItem.endDate}>
                       {cvItem.endDate}
                     </time>
                   </dd>
