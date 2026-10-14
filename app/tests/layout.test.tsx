@@ -14,11 +14,7 @@ vi.mock('next/navigation', () => ({
   usePathname: vi.fn(),
 }))
 vi.mock('../providers', () => ({
-  AnalyticsProvider: ({ children }: PropsWithChildren) => children,
   ThemeProvider: ({ children }: PropsWithChildren) => children,
-}))
-vi.mock('../PostHogPageView', () => ({
-  default: (_props: unknown) => null,
 }))
 
 const TestComponent = () => {

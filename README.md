@@ -8,14 +8,9 @@ Built with React, Next.js, TailwindCSS, & Typescript.
 
 ## Setup
 
-1. `pnpm i`
-
-1. Create a `.env.local` and add the following:
-
-   ```sh
-   NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-   NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
-   ```
+```sh
+pnpm i
+```
 
 ## Dev
 

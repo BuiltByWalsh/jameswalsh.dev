@@ -18,8 +18,6 @@ export default defineConfig({
       },
       exclude: [
         'components/ui/**', // ignore shadcn directory
-        'app/posthog.ts',
-        'app/PostHogPageView.tsx',
         'app/tech/static-data.ts',
         './**/mdx-content.tsx', // ignore next-mdx-remote component
         '*.config.*',
