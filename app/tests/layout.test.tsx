@@ -16,6 +16,9 @@ vi.mock('next/navigation', () => ({
 vi.mock('../providers', () => ({
   ThemeProvider: ({ children }: PropsWithChildren) => children,
 }))
+vi.mock('@vercel/analytics/next', () => ({
+  Analytics: () => <div data-testid="vercel-analytics" />,
+}))
 
 const TestComponent = () => {
   return <div>Hello World</div>
@@ -47,5 +50,11 @@ describe('RootLayout', () => {
 
     const ahrefsMetaTag = container.querySelector('meta[name="ahrefs-site-verification"]')
     expect(ahrefsMetaTag).toBeInTheDocument()
+  })
+
+  it('includes vercel analytics', async () => {
+    render(await RootLayout({ children: <TestComponent /> }), { container: document })
+
+    expect(screen.getByTestId('vercel-analytics')).toBeInTheDocument()
   })
 })

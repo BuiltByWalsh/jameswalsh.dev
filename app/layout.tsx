@@ -1,5 +1,6 @@
 import './globals.css'
 
+import { Analytics } from '@vercel/analytics/next'
 import { GeistMono } from 'geist/font/mono'
 import { Metadata } from 'next'
 import { type PropsWithChildren } from 'react'
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           <main className="mt-4 flex w-full flex-col px-2 py-10 sm:px-0 md:max-w-[1100px] md:px-4">{children}</main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
