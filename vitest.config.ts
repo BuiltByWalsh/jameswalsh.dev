@@ -1,8 +1,9 @@
+import mdx from '@mdx-js/rollup'
 import react from '@vitejs/plugin-react'
 import { defineConfig, coverageConfigDefaults } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [{ enforce: 'pre', ...mdx() }, react({ include: /\.(jsx|js|mdx|md|tsx|ts)$/ })],
   resolve: {
     tsconfigPaths: true,
   },
@@ -21,7 +22,6 @@ export default defineConfig({
       exclude: [
         'components/ui/**', // ignore shadcn directory
         'app/tech/static-data.ts',
-        './**/mdx-content.tsx', // ignore next-mdx-remote component
         '*.config.*',
         './**/constants.*',
         './test/**', // ignore all test setup files.

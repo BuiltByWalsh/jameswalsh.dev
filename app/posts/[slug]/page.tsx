@@ -12,7 +12,6 @@ import { unwrapOrThrow } from '@/lib/result'
 import { cn } from '@/lib/utils'
 import { getAllPublishedPosts, getPost, getPreviousPost } from '@/services/post'
 
-import MDXContent from './mdx-content'
 import TimeInformation from './time-information'
 
 export async function generateStaticParams() {
@@ -59,6 +58,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const post = unwrapOrThrow(postResult)
   const previousPostSlug = unwrapOrThrow(previousPostResult)?.slug
+  const { default: PostContent } = await import(`@/posts/${post.slug}.mdx`)
 
   return (
     <div className="mx-0 my-10 flex flex-col items-center md:mx-20">
@@ -81,7 +81,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <TimeInformation metadata={{ publishedAt: post.publishedAt, source: post.source }} />
       </div>
       <article className="mt-8">
-        <MDXContent source={post.source} />
+        <PostContent />
       </article>
       <div className="border-color mt-8 flex w-full flex-row justify-center gap-4 border-t pt-8">
         <Link

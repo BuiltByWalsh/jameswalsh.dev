@@ -1,12 +1,14 @@
+import 'server-only'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-import fm from 'front-matter'
 import { ResultAsync } from 'neverthrow'
 
 import { ResultError } from '@/lib/result'
 
-import type { Post, PostFrontmatter } from './types'
+import type { Post } from './types'
+
+const METADATA_EXPORT_PATTERN = /^export const metadata = \{[\s\S]*?\n\}\n/
 
 export function getPostFromMDX(filePath: string): ResultAsync<Post, ResultError> {
   const slug = path.basename(filePath, path.extname(filePath))
@@ -17,13 +19,15 @@ export function getPostFromMDX(filePath: string): ResultAsync<Post, ResultError>
     }
 
     return ResultError.SYSTEM_FAILURE
-  }).map((content) => {
-    const { attributes, body } = fm<PostFrontmatter>(content)
-
-    return {
-      slug,
-      source: body,
-      ...attributes,
-    } as Post
-  })
+  }).andThen((content) =>
+    ResultAsync.fromPromise(import(`@/posts/${slug}.mdx`), () => ResultError.SYSTEM_FAILURE).map(
+      ({ metadata }) => {
+        return {
+          slug,
+          source: content.replace(METADATA_EXPORT_PATTERN, ''),
+          ...metadata,
+        } as Post
+      },
+    ),
+  )
 }
