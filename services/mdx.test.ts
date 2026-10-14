@@ -57,6 +57,17 @@ describe('lib/mdx', () => {
         expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.NOT_FOUND)
       })
 
+      it('returns NOT_FOUND error result when neither the file nor the post module exist', async () => {
+        vi.mocked(fs.readFile).mockRejectedValue(new MockFileNotFoundError())
+
+        const postErrResult = await getPostFromMDX(
+          path.join(process.cwd(), '/test/mocks/posts', 'missing-post.mdx'),
+        )
+
+        expect(postErrResult.isErr()).toBe(true)
+        expect(postErrResult._unsafeUnwrapErr()).toStrictEqual(ResultError.NOT_FOUND)
+      })
+
       it('returns SYSTEM_FAILURE error result for uncaught exceptions', async () => {
         vi.mocked(fs.readFile).mockRejectedValue(new Error('Uncaught exception'))
 
