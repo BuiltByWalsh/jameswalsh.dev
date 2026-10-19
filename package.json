@@ -32,7 +32,7 @@
     "@vercel/analytics": "2.0.1",
     "class-variance-authority": "0.7.1",
     "cn": "0.4.0",
-    "date-fns": "4.1.0",
+    "date-fns": "4.4.0",
     "geist": "1.4.2",
     "lucide-react": "0.562.0",
     "neverthrow": "8.2.0",
