@@ -64,7 +64,7 @@
     "@vitest/coverage-istanbul": "5.0.4",
     "commitlint": "19.8.1",
     "cspell": "8.15.1",
-    "happy-dom": "20.8.9",
+    "happy-dom": "21.0.3",
     "husky": "8.0.3",
     "lint-staged": "17.6.0",
     "msw": "2.10.2",
