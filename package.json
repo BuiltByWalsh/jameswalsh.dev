@@ -62,7 +62,7 @@
     "@types/rss": "0.0.32",
     "@vitejs/plugin-react": "6.1.2",
     "@vitest/coverage-istanbul": "5.0.4",
-    "commitlint": "19.8.1",
+    "commitlint": "21.2.3",
     "cspell": "8.15.1",
     "happy-dom": "20.8.9",
     "husky": "8.0.3",
