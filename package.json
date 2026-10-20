@@ -47,7 +47,7 @@
     "shiki": "3.4.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.8.1",
+    "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "19.6.0",
     "@mdx-js/rollup": "3.1.1",
     "@playwright/test": "1.64.1",
